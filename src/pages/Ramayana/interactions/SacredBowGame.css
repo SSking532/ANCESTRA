@@ -1,0 +1,644 @@
+.sacred-bow-game {
+  --tension: 0;
+  --gold: #dfb974;
+  --gold-soft: #e5ca9a;
+  --cream: #f8edda;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #070604;
+  color: #f5ead5;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+.sacred-bow-game *,
+.sacred-bow-game *::before,
+.sacred-bow-game *::after { box-sizing: border-box; }
+
+/* ---------- impact shake ---------- */
+.sacred-bow-game--impact .sacred-bow-game__scene {
+  animation: sacred-bow-impact-shake 3.3s cubic-bezier(0.2, 0.82, 0.18, 1);
+}
+@keyframes sacred-bow-impact-shake {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  5%   { transform: translate3d(-11px, 4px, 0) scale(1.008); }
+  10%  { transform: translate3d(13px, -6px, 0) scale(1.014); }
+  16%  { transform: translate3d(-15px, -4px, 0) scale(1.02); }
+  23%  { transform: translate3d(13px, 6px, 0) scale(1.016); }
+  31%  { transform: translate3d(-12px, 3px, 0) scale(1.012); }
+  40%  { transform: translate3d(10px, -4px, 0) scale(1.009); }
+  50%  { transform: translate3d(-8px, 3px, 0) scale(1.006); }
+  61%  { transform: translate3d(6px, -2px, 0) scale(1.004); }
+  73%  { transform: translate3d(-4px, 1px, 0) scale(1.002); }
+  86%  { transform: translate3d(2px, 0, 0) scale(1.001); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* ---------- viewport ---------- */
+.sacred-bow-game__scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #070604;
+  isolation: isolate;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.sacred-bow-game__scene:focus-visible {
+  outline: 2px solid rgba(235, 201, 143, 0.9);
+  outline-offset: -5px;
+}
+
+/* ---------- parallax stage + image ---------- */
+.sacred-bow-game__stage {
+  position: absolute;
+  inset: -2%;
+  z-index: 0;
+  transform:
+    translate3d(calc(var(--px, 0) * -14px), calc(var(--py, 0) * -9px), 0)
+    scale(calc(1.02 + var(--tension) * 0.045));
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.sacred-bow-game__image {
+  position: absolute;
+  inset: 2%;
+  z-index: 0;
+  width: 96%;
+  height: 96%;
+  display: block;
+  object-fit: contain; /* generated images are 16:9 — keep full composition */
+  object-position: center;
+  background: #070604;
+  transform-origin: var(--crack-x, 50%) var(--crack-y, 46%);
+  pointer-events: none;
+}
+.sacred-bow-game__image--crack {
+  animation: sacred-bow-crack-zoom 1.4s cubic-bezier(0.18, 0.82, 0.2, 1);
+}
+@keyframes sacred-bow-crack-zoom {
+  0%   { transform: scale(1); }
+  16%  { transform: scale(1.08); }
+  38%  { transform: scale(1.15); }
+  61%  { transform: scale(1.15); }
+  80%  { transform: scale(1.045); }
+  100% { transform: scale(1); }
+}
+
+/* click punch */
+.sacred-bow-game__punch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 46%, rgba(255, 224, 160, 0.24), transparent 55%);
+  animation: sacred-bow-punch 0.38s ease-out;
+}
+@keyframes sacred-bow-punch {
+  0%   { opacity: calc(0.4 + var(--tension) * 0.6); transform: scale(0.96); }
+  100% { opacity: 0; transform: scale(1.08); }
+}
+
+/* ---------- grade, vignettes, strain, rays ---------- */
+.sacred-bow-game__grade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(9, 7, 5, 0.12), transparent 28%, transparent 62%, rgba(4, 3, 2, 0.6));
+}
+.sacred-bow-game__top-vignette,
+.sacred-bow-game__bottom-vignette {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.sacred-bow-game__top-vignette {
+  top: 0;
+  height: 105px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.27), transparent);
+}
+.sacred-bow-game__bottom-vignette {
+  bottom: 0;
+  height: 220px;
+  background: linear-gradient(0deg, rgba(3, 2, 2, 0.86), transparent);
+}
+.sacred-bow-game__strain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: var(--tension);
+  background: radial-gradient(ellipse at center, transparent 48%, rgba(120, 38, 10, 0.55) 100%);
+  box-shadow: inset 0 0 calc(40px + var(--tension) * 140px) rgba(222, 140, 50, 0.28);
+  animation: sacred-bow-heartbeat 1.15s ease-in-out infinite;
+}
+@keyframes sacred-bow-heartbeat {
+  0%, 100% { filter: brightness(1); }
+  18% { filter: brightness(1.45); }
+  32% { filter: brightness(1.05); }
+  46% { filter: brightness(1.3); }
+}
+.sacred-bow-game__rays {
+  position: absolute;
+  inset: -20%;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: calc(0.12 + var(--tension) * 0.38);
+  background: repeating-conic-gradient(from 0deg at 50% 46%, rgba(255, 220, 150, 0.16) 0deg 3deg, transparent 3deg 14deg);
+  -webkit-mask-image: radial-gradient(circle at 50% 46%, #000, transparent 62%);
+  mask-image: radial-gradient(circle at 50% 46%, #000, transparent 62%);
+  animation: sacred-bow-rays 40s linear infinite;
+}
+@keyframes sacred-bow-rays { to { transform: rotate(360deg); } }
+
+/* ---------- WebGL layer + letterbox ---------- */
+.sacred-bow-game__fx {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.sacred-bow-game__fx canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+.sacred-bow-game__letterbox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  height: 2.2%;
+  background: #030201;
+  pointer-events: none;
+}
+.sacred-bow-game__letterbox--top { top: 0; }
+.sacred-bow-game__letterbox--bottom { bottom: 0; }
+
+/* ---------- flowers ---------- */
+.sacred-bow-game__flowers {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.56;
+}
+.sacred-bow-petal {
+  position: absolute;
+  top: -35px;
+  width: var(--petal-size);
+  height: calc(var(--petal-size) * 0.7);
+  border-radius: 65% 35% 70% 30%;
+  opacity: 0.78;
+  transform: rotate(var(--petal-rotation));
+  animation: sacred-bow-petal-fall linear infinite;
+}
+.sacred-bow-petal--0 { background: linear-gradient(135deg, #f4d9c8, #d99b80); }
+.sacred-bow-petal--1 { background: linear-gradient(135deg, #f0cfa3, #c99b55); }
+.sacred-bow-petal--2 { background: linear-gradient(135deg, #efb1ae, #b75b5b); }
+@keyframes sacred-bow-petal-fall {
+  0%   { transform: translate3d(0, -50px, 0) rotate(var(--petal-rotation)) scale(0.8); opacity: 0; }
+  8%   { opacity: 0.82; }
+  50%  { transform: translate3d(30px, 340px, 0) rotate(calc(var(--petal-rotation) + 160deg)) scale(1); }
+  85%  { opacity: 0.78; }
+  100% { transform: translate3d(-25px, 760px, 0) rotate(calc(var(--petal-rotation) + 320deg)) scale(0.85); opacity: 0; }
+}
+
+/* ---------- start panel ---------- */
+.sacred-bow-game__start {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  padding: 24px;
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(37, 27, 16, 0.18), rgba(4, 3, 2, 0.7));
+}
+.sacred-bow-game__royal-mark {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 17px;
+  color: #e1bb75;
+  border: 1px solid rgba(226, 190, 125, 0.42);
+  border-radius: 50%;
+  background: rgba(35, 26, 17, 0.45);
+  box-shadow: 0 0 60px rgba(209, 164, 87, 0.28), inset 0 0 20px rgba(209, 164, 87, 0.15);
+}
+.sacred-bow-game__eyebrow {
+  color: #dbb471;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+.sacred-bow-game__start h1 {
+  margin: 13px 0 0;
+  color: var(--cream);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(48px, 7vw, 79px);
+  font-weight: 500;
+  line-height: 0.82;
+  text-shadow: 0 6px 40px rgba(0, 0, 0, 0.7);
+}
+.sacred-bow-game__start h1 strong {
+  display: block;
+  color: var(--gold);
+  font-weight: 500;
+  background: linear-gradient(100deg, #b8873f, #ffe9b8 45%, #c99a52);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sacred-bow-game__start p {
+  margin: 20px auto 25px;
+  color: rgba(245, 230, 204, 0.82);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+/* ---------- chapter title + gauge ---------- */
+.sacred-bow-game__chapter {
+  position: absolute;
+  top: 24px;
+  left: 26px;
+  z-index: 10;
+  padding-left: 14px;
+  border-left: 1px solid rgba(226, 190, 125, 0.6);
+  pointer-events: none;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.7);
+}
+.sacred-bow-game__chapter small {
+  display: block;
+  color: rgba(223, 184, 117, 0.85);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+.sacred-bow-game__chapter b {
+  display: block;
+  margin-top: 4px;
+  color: #fbeed6;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.sacred-bow-game__gauge {
+  position: absolute;
+  top: 24px;
+  right: 26px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.sacred-bow-game__gauge span {
+  color: rgba(235, 211, 171, 0.7);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+}
+.sacred-bow-game__gauge div {
+  width: 5px;
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(235, 210, 165, 0.14);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.sacred-bow-game__gauge i {
+  width: 100%;
+  height: 100%;
+  transform-origin: bottom;
+  background: linear-gradient(0deg, #c8893e, #ffe2a0 70%, #fff);
+  box-shadow: 0 0 14px rgba(255, 200, 110, 0.9);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sacred-bow-game__gauge em {
+  color: #f5e6c7;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-style: normal;
+}
+
+/* ---------- instruction ---------- */
+.sacred-bow-game__instruction {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 76px;
+  z-index: 9;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 11px 18px;
+  color: rgba(249, 234, 207, 0.94);
+  text-align: center;
+  border-top: 1px solid rgba(224, 187, 116, 0.24);
+  border-bottom: 1px solid rgba(224, 187, 116, 0.18);
+  background: linear-gradient(90deg, transparent, rgba(24, 18, 11, 0.62), transparent);
+  backdrop-filter: blur(3px);
+  pointer-events: none;
+}
+.sacred-bow-game__instruction span {
+  display: block;
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- HUD ---------- */
+.sacred-bow-game__hud {
+  position: absolute;
+  left: 25px;
+  right: 25px;
+  bottom: 16px;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  pointer-events: none;
+}
+.sacred-bow-game__hud-left span {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(235, 211, 171, 0.63);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+}
+.sacred-bow-game__hud-left strong {
+  color: #f5e6c7;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 23px;
+  font-weight: 500;
+}
+.sacred-bow-game__hud-right { min-width: 190px; text-align: right; }
+.sacred-bow-game__hud-right > span {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(235, 211, 171, 0.56);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+.sacred-bow-game__hud-right small {
+  display: block;
+  margin-top: 6px;
+  color: rgba(240, 223, 191, 0.58);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+}
+.sacred-bow-game__segments { display: flex; justify-content: flex-end; gap: 6px; }
+.sacred-bow-game__segments i {
+  width: 32px;
+  height: 4px;
+  display: block;
+  background: rgba(235, 210, 165, 0.17);
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+.sacred-bow-game__segments i.is-filled {
+  background: #dfb66d;
+  transform: scaleY(1.45);
+  box-shadow: 0 0 12px rgba(255, 205, 120, 0.9);
+}
+
+/* ---------- crack focus ---------- */
+.sacred-bow-game__crack-focus { position: absolute; inset: 0; z-index: 11; pointer-events: none; }
+.sacred-bow-game__crack-focus div {
+  position: absolute;
+  left: var(--crack-x, 50%);
+  top: var(--crack-y, 46%);
+  width: 112px;
+  height: 112px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(237, 200, 133, 0.76);
+  border-radius: 50%;
+  box-shadow: 0 0 55px rgba(226, 180, 93, 0.2);
+  animation: sacred-bow-crack-ring 1.4s ease-out;
+}
+.sacred-bow-game__crack-focus span {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 90px;
+  text-align: center;
+  color: #e4bd77;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.23em;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.65);
+}
+@keyframes sacred-bow-crack-ring {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.65); }
+  20%  { opacity: 0.95; transform: translate(-50%, -50%) scale(0.92); }
+  55%  { opacity: 0.58; transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+}
+
+/* ---------- shockwaves + flash ---------- */
+.sacred-bow-game__shockwave {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 8;
+  width: 180px;
+  height: 180px;
+  margin: -90px 0 0 -90px;
+  border: 2px solid rgba(255, 233, 192, 0.92);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.sacred-bow-game__shockwave--one   { box-shadow: 0 0 35px rgba(243, 205, 142, 0.42); }
+.sacred-bow-game__shockwave--two   { box-shadow: 0 0 55px rgba(243, 205, 142, 0.28); }
+.sacred-bow-game__shockwave--three { border-width: 1.5px; box-shadow: 0 0 70px rgba(243, 205, 142, 0.22); }
+.sacred-bow-game__shockwave--four  { border-width: 1px; box-shadow: 0 0 85px rgba(243, 205, 142, 0.17); }
+.sacred-bow-game__flash {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at center, rgba(255, 250, 234, 0.92), rgba(255, 238, 198, 0.52) 30%, rgba(255, 220, 163, 0.15) 55%, transparent 76%);
+}
+
+/* ---------- break title ---------- */
+.sacred-bow-game__break-title {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 50%;
+  z-index: 10;
+  max-width: 760px;
+  margin: 0 auto;
+  transform: translateY(-50%);
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.64);
+}
+.sacred-bow-game__break-title span {
+  display: block;
+  color: #dfb875;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+.sacred-bow-game__break-title h2 {
+  margin: 10px 0 0;
+  color: #fff0d8;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(42px, 6vw, 78px);
+  font-weight: 500;
+  line-height: 0.82;
+}
+.sacred-bow-game__break-title strong { display: block; color: #e1b971; font-weight: 500; }
+
+/* ---------- completion ---------- */
+.sacred-bow-game__complete {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(4, 3, 2, 0.53);
+  backdrop-filter: blur(5px);
+}
+.sacred-bow-game__complete-panel {
+  width: min(100%, 610px);
+  padding: 34px 28px;
+  text-align: center;
+  border: 1px solid rgba(227, 190, 126, 0.27);
+  background: linear-gradient(180deg, rgba(36, 27, 18, 0.94), rgba(19, 14, 9, 0.97));
+  box-shadow: 0 26px 75px rgba(0, 0, 0, 0.4), 0 0 80px rgba(223, 185, 116, 0.08);
+}
+.sacred-bow-game__complete-icon {
+  width: 67px;
+  height: 67px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  color: #e1bc78;
+  border: 1px solid rgba(224, 188, 122, 0.42);
+  border-radius: 50%;
+}
+.sacred-bow-game__complete-panel > span {
+  color: #d9b371;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.21em;
+}
+.sacred-bow-game__complete-panel h2 {
+  margin: 12px 0 0;
+  color: #f8ecd7;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(46px, 6vw, 69px);
+  font-weight: 500;
+  line-height: 0.83;
+}
+.sacred-bow-game__complete-panel h2 strong { display: block; color: var(--gold); font-weight: 500; }
+.sacred-bow-game__complete-panel p {
+  margin: 19px auto 26px;
+  color: rgba(242, 226, 200, 0.72);
+  font-size: 12px;
+}
+.sacred-bow-game__complete-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---------- buttons ---------- */
+.sacred-bow-game__primary,
+.sacred-bow-game__secondary {
+  position: relative;
+  overflow: hidden;
+  min-height: 47px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 21px;
+  font-family: "Inter", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.sacred-bow-game__primary {
+  color: #4c361b;
+  border: 1px solid rgba(238, 210, 158, 0.58);
+  background: linear-gradient(135deg, #efd29a, #c89e56);
+  box-shadow: 0 11px 30px rgba(0, 0, 0, 0.2);
+}
+.sacred-bow-game__primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: sacred-bow-sheen 3.2s ease-in-out infinite;
+}
+@keyframes sacred-bow-sheen { 55%, 100% { transform: translateX(120%); } }
+.sacred-bow-game__secondary {
+  color: var(--gold-soft);
+  border: 1px solid rgba(226, 190, 126, 0.38);
+  background: rgba(225, 188, 122, 0.06);
+}
+.sacred-bow-game__primary:hover,
+.sacred-bow-game__secondary:hover { transform: translateY(-2px); }
+.sacred-bow-game__primary:focus-visible,
+.sacred-bow-game__secondary:focus-visible {
+  outline: 2px solid rgba(236, 202, 143, 0.92);
+  outline-offset: 3px;
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 700px) {
+  .sacred-bow-game__scene { aspect-ratio: 16 / 9; height: auto; }
+  .sacred-bow-game__chapter { top: 14px; left: 14px; }
+  .sacred-bow-game__chapter b { font-size: 16px; }
+  .sacred-bow-game__gauge { top: 14px; right: 14px; }
+  .sacred-bow-game__gauge div { height: 70px; }
+  .sacred-bow-game__instruction { left: 12px; right: 12px; bottom: 70px; max-width: none; padding: 9px 10px; }
+  .sacred-bow-game__instruction span { font-size: 8px; }
+  .sacred-bow-game__hud { left: 14px; right: 14px; bottom: 13px; }
+  .sacred-bow-game__hud-right { min-width: 135px; }
+  .sacred-bow-game__segments i { width: 23px; }
+  .sacred-bow-game__break-title { left: 12px; right: 12px; max-width: none; }
+  .sacred-bow-game__break-title h2 { font-size: clamp(38px, 10vw, 62px); }
+  .sacred-bow-game__complete { padding: 12px; }
+  .sacred-bow-game__complete-panel { padding: 27px 17px; }
+  .sacred-bow-game__complete-actions { flex-direction: column; }
+  .sacred-bow-game__primary,
+  .sacred-bow-game__secondary { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sacred-bow-game *,
+  .sacred-bow-game *::before,
+  .sacred-bow-game *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

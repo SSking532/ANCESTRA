@@ -1,0 +1,5 @@
+.lvi-wrap{position:fixed;inset:0;background:#0b0504;z-index:1000}
+.lvi-frame{width:100%;height:100%;border:0;display:block}
+.lvi-exit{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:34px;height:34px;border-radius:50%;
+  border:1px solid #b5852c;background:#1a0e08cc;color:#f1e6cb;font-size:20px;line-height:1;cursor:pointer;z-index:2}
+.lvi-exit:hover{background:#e8c36e;color:#1c110a}

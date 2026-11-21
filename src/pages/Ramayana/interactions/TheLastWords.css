@@ -1,0 +1,528 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&display=swap');
+
+/* =====================================================================
+   ANCESTRA — THE LAST WORDS
+   No text boxes: captions sit directly on the film, over a soft
+   cinematic shade. Palette: ivory · antique gold · dark brown.
+===================================================================== */
+
+.tlw-root {
+  --ivory: #f3e9d2;
+  --ink: #f3e9d2;
+  --gold: #c9a45c;
+  --gold-soft: rgba(201, 164, 92, 0.55);
+  --brown: #0b0705;
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 10000;
+  overflow: hidden;
+  background: var(--brown);
+  color: var(--ivory);
+  font-family: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tlw-root *,
+.tlw-root *::before,
+.tlw-root *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- full-screen image ---------- */
+
+.tlw-bg,
+.tlw-shot,
+.tlw-parallax,
+.tlw-breath {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* a little bleed so parallax never reveals an edge */
+.tlw-parallax {
+  inset: -20px;
+}
+
+.tlw-breath {
+  inset: 0;
+  will-change: transform;
+}
+
+.tlw-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--pos-d, 50% 35%);
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* ---------- atmosphere layers ---------- */
+
+.tlw-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 38%, var(--veil, transparent) 100%);
+}
+
+.tlw-3d {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.tlw-3d canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.tlw-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 42%, rgba(0, 0, 0, 0) 52%, rgba(8, 4, 2, 0.55) 100%);
+}
+
+.tlw-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 31;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.9  0 0 0 0 0.7  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.tlw-shade-top {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 22%;
+  z-index: 32;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(12, 7, 4, 0.72), rgba(12, 7, 4, 0));
+}
+
+/* the only "backing" the words get: a soft film shade, no edges */
+.tlw-shade-bottom {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 62%;
+  z-index: 32;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(10, 6, 3, 0.92) 0%,
+    rgba(10, 6, 3, 0.74) 26%,
+    rgba(10, 6, 3, 0.38) 56%,
+    rgba(10, 6, 3, 0) 100%
+  );
+}
+
+.tlw-final-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 33;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 55%, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7));
+  opacity: 0;
+  transition: opacity 2.4s ease;
+}
+.tlw-final-veil.is-on {
+  opacity: 1;
+}
+
+.tlw-curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  background: var(--brown);
+  pointer-events: none;
+}
+
+/* ---------- header ---------- */
+
+.tlw-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: max(16px, env(safe-area-inset-top)) clamp(18px, 3.4vw, 48px) 0;
+}
+
+.tlw-brand {
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  font-size: clamp(13px, 1.3vw, 18px);
+  color: var(--ivory);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+.tlw-sub {
+  margin-top: 6px;
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.38em;
+  font-size: clamp(8.5px, 0.72vw, 10.5px);
+  color: var(--gold);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.tlw-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.tlw-count {
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.2em;
+  font-size: clamp(11px, 1vw, 13px);
+  color: var(--ivory);
+  padding-top: 2px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+.tlw-count-total {
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+.tlw-utility {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tlw-dot {
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+.tlw-mini {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 6px 2px;
+  min-height: 28px;
+  cursor: pointer;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: clamp(8px, 0.7vw, 10px);
+  letter-spacing: 0.28em;
+  color: rgba(243, 233, 210, 0.62);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  transition: color 0.3s;
+}
+.tlw-mini:hover {
+  color: var(--ivory);
+}
+.tlw-mini:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.tlw-progress {
+  position: absolute;
+  left: clamp(18px, 3.4vw, 48px);
+  right: clamp(18px, 3.4vw, 48px);
+  top: calc(max(16px, env(safe-area-inset-top)) + clamp(52px, 5vw, 66px));
+  height: 1px;
+  background: rgba(201, 164, 92, 0.22);
+}
+.tlw-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+  transform-origin: left center;
+}
+
+/* ---------- caption: centred, directly on the image ---------- */
+
+.tlw-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 0 clamp(20px, 6vw, 120px) max(clamp(26px, 5.5vh, 60px), env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.tlw-dialogue,
+.tlw-final {
+  width: min(900px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* speaker name, flanked by hairlines */
+.tlw-speaker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(11px, 1vw, 14px);
+  letter-spacing: 0.4em;
+  padding-left: 0.4em; /* optically centres tracked caps */
+  color: var(--gold);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+}
+.tlw-speaker::before,
+.tlw-speaker::after {
+  content: '';
+  width: clamp(20px, 3vw, 44px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-soft));
+}
+.tlw-speaker::after {
+  transform: scaleX(-1);
+}
+.tlw-speaker--narrator {
+  color: #bfae8c;
+}
+.tlw-speaker--ravana {
+  color: #dba26a;
+}
+.tlw-speaker--rama {
+  color: #efdba6;
+}
+
+/* stage direction: the emotion behind the line */
+.tlw-direction {
+  margin-top: 8px;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(13px, 1.05vw, 16px);
+  letter-spacing: 0.05em;
+  color: rgba(243, 233, 210, 0.7);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* the line itself — whole line is laid out from the start so it never reflows */
+.tlw-text {
+  display: grid;
+  width: 100%;
+  margin-top: clamp(10px, 1.6vh, 18px);
+  font-size: clamp(19px, 2.05vw, 30px);
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  text-align: center;
+  text-wrap: balance;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 24px rgba(0, 0, 0, 0.75);
+  transition: color 1.2s ease;
+}
+.tlw-ghost,
+.tlw-live {
+  grid-area: 1 / 1;
+  display: block;
+}
+.tlw-ghost {
+  visibility: hidden;
+}
+.tlw-live {
+  align-self: start;
+}
+.tlw-unspoken {
+  opacity: 0;
+}
+.tlw-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* emotion changes how the words feel */
+.tlw-root[data-emotion='wrath'] .tlw-text {
+  font-weight: 700;
+  letter-spacing: 0.012em;
+}
+.tlw-root[data-emotion='menace'] .tlw-text {
+  letter-spacing: 0.02em;
+}
+.tlw-root[data-emotion='calm'] .tlw-text,
+.tlw-root[data-emotion='sorrow'] .tlw-text {
+  font-weight: 500;
+}
+.tlw-root[data-emotion='pride'] .tlw-text {
+  letter-spacing: 0.012em;
+}
+.tlw-root[data-emotion='finality'] .tlw-text {
+  letter-spacing: 0.03em;
+}
+
+/* ---------- text-only controls (no boxes) ---------- */
+
+.tlw-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 46px;
+  margin-top: clamp(8px, 1.4vh, 16px);
+  pointer-events: auto;
+}
+
+.tlw-link {
+  position: relative;
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 12px 10px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(10.5px, 0.95vw, 13px);
+  letter-spacing: 0.34em;
+  padding-left: calc(10px + 0.34em);
+  color: rgba(243, 233, 210, 0.62);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+  pointer-events: auto;
+  transition: color 0.35s;
+}
+.tlw-link::after {
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 6px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.35;
+  transform: scaleX(0.55);
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+.tlw-link:hover {
+  color: var(--ivory);
+}
+.tlw-link:hover::after {
+  transform: scaleX(1);
+  opacity: 0.9;
+}
+.tlw-link:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 4px;
+}
+.tlw-link--primary {
+  color: var(--ivory);
+}
+.tlw-link--primary::after {
+  opacity: 0.7;
+  transform: scaleX(0.8);
+}
+.tlw-arrow {
+  color: var(--gold);
+  transition: transform 0.35s ease;
+}
+.tlw-link:hover .tlw-arrow {
+  transform: translateX(5px);
+}
+
+/* ---------- closing title ---------- */
+
+.tlw-final {
+  padding-bottom: clamp(4px, 2vh, 24px);
+}
+.tlw-final-title {
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(17px, 2.4vw, 32px);
+  letter-spacing: 0.34em;
+  padding-left: 0.34em;
+  color: var(--ivory);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9);
+}
+.tlw-final-rule {
+  width: 64px;
+  height: 1px;
+  margin: clamp(16px, 2.4vh, 26px) 0 clamp(6px, 1vh, 12px);
+  background: var(--gold);
+  opacity: 0.8;
+}
+.tlw-link--big {
+  font-size: clamp(11px, 1.05vw, 14px);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+  .tlw-img {
+    object-position: var(--pos-m, 50% 35%);
+  }
+  .tlw-shade-bottom {
+    height: 66%;
+  }
+  .tlw-brand {
+    letter-spacing: 0.32em;
+  }
+  .tlw-caption {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .tlw-text {
+    font-size: clamp(17px, 4.8vw, 21px);
+    line-height: 1.45;
+  }
+  .tlw-speaker {
+    gap: 10px;
+    letter-spacing: 0.32em;
+  }
+  .tlw-link {
+    letter-spacing: 0.26em;
+  }
+  .tlw-final-title {
+    letter-spacing: 0.22em;
+    line-height: 1.5;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .tlw-text {
+    font-size: 16px;
+    line-height: 1.38;
+  }
+  .tlw-direction {
+    display: none;
+  }
+  .tlw-shade-bottom {
+    height: 70%;
+  }
+  .tlw-caption {
+    padding-bottom: 12px;
+  }
+  .tlw-actions {
+    min-height: 38px;
+    margin-top: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tlw-3d {
+    display: none;
+  }
+}

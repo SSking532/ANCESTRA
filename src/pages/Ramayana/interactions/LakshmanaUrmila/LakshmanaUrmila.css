@@ -1,0 +1,911 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* =========================================
+   GAME-SPECIFIC MODAL OVERRIDES
+   These rules activate ONLY for Lakshmana-Urmila.
+   InteractionModal.jsx and InteractionModal.css
+   remain completely untouched.
+========================================= */
+
+.interaction-modal:has(.lu-cinema) {
+  padding: 0 !important;
+}
+
+.interaction-modal__window:has(.lu-cinema) {
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  max-height: none !important;
+
+  overflow: hidden !important;
+
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Remove only this game's inherited inner frame */
+.interaction-modal__window:has(.lu-cinema)::before {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+}
+
+/* Remove the inherited decorative glow */
+.interaction-modal__window:has(.lu-cinema)::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Remove the parent's top-centre ornament for this game */
+.interaction-modal__window:has(.lu-cinema) > .interaction-modal__top-line {
+  display: none !important;
+}
+
+/* Remove the parent's rectangular X ESC button for this game */
+.interaction-modal__window:has(.lu-cinema) > .interaction-modal__close {
+  display: none !important;
+}
+
+/* Let this game's own full-screen layout control scrolling */
+.interaction-modal__content:has(.lu-cinema) {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+/* =========================================
+   CINEMATIC EXPERIENCE
+========================================= */
+
+.lu-cinema {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  background: #100d0a;
+  color: #f0e5d2;
+  font-family: 'Inter', sans-serif;
+}
+
+.lu-cinema *,
+.lu-cinema *::before,
+.lu-cinema *::after {
+  box-sizing: border-box;
+}
+
+.lu-cinema__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-size: cover;
+  background-position: center;
+
+  transform: scale(1.015);
+}
+
+.lu-cinema__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(13, 9, 7, 0.88) 0%,
+      rgba(13, 9, 7, 0.65) 42%,
+      rgba(13, 9, 7, 0.22) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(10, 7, 5, 0.88) 0%,
+      transparent 55%,
+      rgba(10, 7, 5, 0.36) 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.lu-cinema__header {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
+  padding: 22px 5.5%;
+}
+
+.lu-cinema__brand {
+  color: #d7b77d;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+}
+
+.lu-cinema__brand span {
+  display: block;
+  margin-top: 7px;
+
+  color: rgba(238, 220, 187, 0.6);
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+}
+
+/* The one and only exit button */
+.lu-cinema__exit {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+  padding: 0;
+
+  color: #e8d9bd;
+  background: rgba(20, 15, 11, 0.3);
+
+  border: 1px solid rgba(218, 188, 136, 0.35);
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.lu-cinema__exit:hover {
+  color: #fff;
+  border-color: #c7a66d;
+  background: rgba(160, 122, 68, 0.2);
+}
+
+/* =========================================
+   MAIN SCENE AREA
+========================================= */
+
+.lu-cinema__scene {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+
+  width: min(1100px, 92%);
+  min-height: 0;
+
+  margin: 0;
+  padding: 20px 0 25px 10%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 166, 108, 0.45) transparent;
+}
+
+.lu-cinema__scene::-webkit-scrollbar {
+  width: 5px;
+}
+
+.lu-cinema__scene::-webkit-scrollbar-thumb {
+  background: rgba(201, 166, 108, 0.45);
+  border-radius: 10px;
+}
+
+.lu-cinema__scene::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lu-cinema__location {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 13px;
+
+  margin-bottom: 25px;
+
+  color: #c9a66c;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  line-height: 1.6;
+}
+
+.lu-cinema__location span {
+  flex: 0 0 auto;
+
+  width: 28px;
+  height: 1px;
+
+  background: rgba(201, 166, 108, 0.7);
+}
+
+/* =========================================
+   DIALOGUE
+========================================= */
+
+.lu-cinema__dialogue {
+  width: 100%;
+  max-width: 850px;
+}
+
+.lu-cinema__speaker {
+  margin: 0 0 14px;
+
+  color: #d1ae73;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+}
+
+.lu-cinema__dialogue h1 {
+  min-height: 0;
+  margin: 0;
+
+  color: #f1e6d4;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 3vw, 50px);
+  font-weight: 400;
+  line-height: 1.13;
+  letter-spacing: -0.025em;
+
+  overflow-wrap: break-word;
+
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.38);
+
+  cursor: pointer;
+}
+
+.lu-cinema__cursor {
+  display: inline-block;
+  margin-left: 5px;
+
+  color: #d4b174;
+
+  animation: lu-cursor-blink 0.8s infinite;
+}
+
+@keyframes lu-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =========================================
+   PLAYER CHOICES
+========================================= */
+
+.lu-cinema__choices {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  width: 100%;
+  max-width: 610px;
+
+  margin-top: 24px;
+
+  animation: lu-choice-reveal 0.7s ease both;
+}
+
+.lu-cinema__choices > p {
+  margin: 0 0 7px;
+
+  color: rgba(218, 190, 148, 0.7);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+}
+
+.lu-cinema__choice {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 12px 15px;
+
+  border: 1px solid rgba(212, 181, 130, 0.22);
+  background: rgba(24, 18, 13, 0.52);
+
+  color: #eadcc6;
+  text-align: left;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+
+  backdrop-filter: blur(8px);
+}
+
+.lu-cinema__choice > span:first-child {
+  color: #c4a16a;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.lu-cinema__choice-label {
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.lu-cinema__choice svg {
+  color: #c4a16a;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lu-cinema__choice:hover,
+.lu-cinema__choice.selected {
+  border-color: rgba(218, 183, 124, 0.75);
+  background: rgba(104, 76, 43, 0.36);
+}
+
+.lu-cinema__choice:hover svg,
+.lu-cinema__choice.selected svg {
+  opacity: 1;
+}
+
+/* =========================================
+   FOOTER AND PROGRESS
+========================================= */
+
+.lu-cinema__footer {
+  position: relative;
+  z-index: 3;
+
+  flex: 0 0 auto;
+  width: 100%;
+
+  padding: 0 5.5% 20px;
+}
+
+.lu-cinema__progress {
+  width: 100%;
+  height: 1px;
+
+  margin-bottom: 16px;
+
+  background: rgba(224, 203, 169, 0.2);
+}
+
+.lu-cinema__progress span {
+  display: block;
+  height: 100%;
+
+  background: #c9a66c;
+
+  transition: width 0.6s ease;
+}
+
+.lu-cinema__footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.lu-cinema__footer-row > span {
+  color: rgba(232, 213, 182, 0.55);
+  font-size: 8px;
+  letter-spacing: 0.24em;
+}
+
+.lu-cinema__footer-row button {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 14px;
+
+  padding: 10px 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #d7b77d;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+
+  cursor: pointer;
+
+  transition: color 0.3s ease;
+}
+
+.lu-cinema__footer-row button:hover {
+  color: #fff0d2;
+}
+
+.lu-cinema__footer-row button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* =========================================
+   ENDING
+========================================= */
+
+.lu-cinema__ending {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 30px;
+
+  text-align: center;
+
+  background: rgba(12, 9, 7, 0.94);
+  backdrop-filter: blur(12px);
+}
+
+.lu-cinema__ending > div {
+  width: 100%;
+  max-width: 700px;
+}
+
+.lu-cinema__ending span {
+  color: #c9a66c;
+  font-size: 9px;
+  letter-spacing: 0.32em;
+}
+
+.lu-cinema__ending h2 {
+  margin: 25px 0;
+
+  color: #f1e5d1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(46px, 6vw, 76px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.lu-cinema__ending p {
+  max-width: 480px;
+  margin: 0 auto;
+
+  color: rgba(232, 215, 188, 0.75);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  line-height: 1.5;
+}
+
+.lu-cinema__ending button {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 38px;
+  padding: 15px 22px;
+
+  border: 1px solid rgba(210, 177, 121, 0.5);
+  background: transparent;
+
+  color: #d9bb88;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.lu-cinema__ending button:hover {
+  background: rgba(172, 133, 77, 0.17);
+  border-color: #d9bb88;
+}
+
+/* =========================================
+   ENTRY CARD IN CHAPTER V
+========================================= */
+
+.lu-entry {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 440px;
+  margin: 90px auto;
+
+  overflow: hidden;
+
+  background: #211912;
+  border: 1px solid rgba(174, 137, 84, 0.3);
+}
+
+.lu-entry__image {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(23, 16, 11, 0.97) 0%,
+      rgba(23, 16, 11, 0.87) 48%,
+      rgba(23, 16, 11, 0.3) 100%
+    ),
+    url("/images/ramayana/interactions/lakshmana-urmila/entry.jpg")
+      center 42% / cover;
+
+  transition: transform 1.2s ease;
+}
+
+.lu-entry:hover .lu-entry__image {
+  transform: scale(1.035);
+}
+
+.lu-entry__content {
+  max-width: 670px;
+  padding: 65px 8%;
+}
+
+.lu-entry__eyebrow {
+  color: #c8a36a;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+}
+
+.lu-entry__number {
+  margin-top: 24px;
+
+  color: rgba(209, 176, 123, 0.45);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+}
+
+.lu-entry h3 {
+  margin: 5px 0 18px;
+
+  color: #f0e3cd;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 57px);
+  font-weight: 400;
+}
+
+.lu-entry p {
+  max-width: 570px;
+
+  color: rgba(231, 215, 190, 0.76);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.lu-entry__ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 160px;
+  margin: 28px 0;
+
+  color: #c8a36a;
+}
+
+.lu-entry__ornament i {
+  flex: 1;
+  height: 1px;
+
+  background: rgba(200, 163, 106, 0.5);
+}
+
+.lu-entry__button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 14px 0;
+
+  border: 0;
+  border-bottom: 1px solid rgba(204, 168, 111, 0.6);
+  background: transparent;
+
+  color: #e0c28f;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+
+  cursor: pointer;
+}
+
+.lu-entry__button span {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.lu-entry__button:hover span {
+  transform: translateX(6px);
+}
+
+.lu-entry small {
+  display: block;
+  margin-top: 24px;
+
+  color: rgba(229, 207, 172, 0.5);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes lu-choice-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   SHORT DESKTOP SCREENS
+========================================= */
+
+@media (max-height: 800px) and (min-width: 701px) {
+  .lu-cinema__header {
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+
+  .lu-cinema__brand {
+    font-size: 22px;
+  }
+
+  .lu-cinema__exit {
+    width: 38px;
+    height: 38px;
+  }
+
+  .lu-cinema__scene {
+    padding-top: 10px;
+    padding-bottom: 14px;
+  }
+
+  .lu-cinema__location {
+    margin-bottom: 17px;
+  }
+
+  .lu-cinema__speaker {
+    margin-bottom: 10px;
+  }
+
+  .lu-cinema__dialogue h1 {
+    font-size: clamp(29px, 2.8vw, 46px);
+    line-height: 1.1;
+  }
+
+  .lu-cinema__choices {
+    margin-top: 17px;
+    gap: 7px;
+  }
+
+  .lu-cinema__choice {
+    padding: 9px 13px;
+    font-size: 16px;
+  }
+
+  .lu-cinema__footer {
+    padding-bottom: 12px;
+  }
+
+  .lu-cinema__progress {
+    margin-bottom: 11px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .lu-cinema__header {
+    padding: 20px 6%;
+  }
+
+  .lu-cinema__brand {
+    font-size: 21px;
+  }
+
+  .lu-cinema__exit {
+    width: 38px;
+    height: 38px;
+  }
+
+  .lu-cinema__scene {
+    width: 94%;
+    padding: 14px 0 20px 7%;
+  }
+
+  .lu-cinema__location {
+    gap: 9px;
+    margin-bottom: 22px;
+
+    font-size: 8px;
+    letter-spacing: 0.2em;
+  }
+
+  .lu-cinema__location span {
+    width: 17px;
+  }
+
+  .lu-cinema__dialogue {
+    max-width: 100%;
+  }
+
+  .lu-cinema__speaker {
+    margin-bottom: 12px;
+    font-size: 9px;
+  }
+
+  .lu-cinema__dialogue h1 {
+    font-size: clamp(29px, 6vw, 43px);
+    line-height: 1.12;
+  }
+
+  .lu-cinema__choices {
+    margin-top: 20px;
+    gap: 8px;
+  }
+
+  .lu-cinema__choice {
+    grid-template-columns: 27px minmax(0, 1fr) 16px;
+    gap: 8px;
+
+    padding: 11px 10px;
+    font-size: 16px;
+  }
+
+  .lu-cinema__footer {
+    padding: 0 6% 15px;
+  }
+
+  .lu-cinema__footer-row > span {
+    font-size: 7px;
+    letter-spacing: 0.15em;
+  }
+
+  .lu-cinema__footer-row button {
+    gap: 8px;
+    font-size: 8px;
+  }
+
+  .lu-entry {
+    min-height: 400px;
+    margin: 55px 12px;
+  }
+
+  .lu-entry__content {
+    padding: 45px 8%;
+  }
+
+  .lu-entry__image {
+    background-position: 60% center;
+  }
+
+  .lu-entry p {
+    font-size: 19px;
+  }
+
+  .interaction-modal__window:has(.lu-cinema) {
+    width: 100vw !important;
+    height: 100dvh !important;
+  }
+}
+
+/* =========================================
+   VERY SHORT SCREENS
+========================================= */
+
+@media (max-height: 600px) {
+  .lu-cinema__header {
+    padding-top: 10px;
+    padding-bottom: 6px;
+  }
+
+  .lu-cinema__brand {
+    font-size: 19px;
+  }
+
+  .lu-cinema__brand span {
+    margin-top: 3px;
+  }
+
+  .lu-cinema__exit {
+    width: 34px;
+    height: 34px;
+  }
+
+  .lu-cinema__scene {
+    padding-top: 6px;
+    padding-bottom: 8px;
+  }
+
+  .lu-cinema__location {
+    margin-bottom: 10px;
+  }
+
+  .lu-cinema__speaker {
+    margin-bottom: 7px;
+  }
+
+  .lu-cinema__dialogue h1 {
+    font-size: clamp(26px, 2.6vw, 38px);
+    line-height: 1.08;
+  }
+
+  .lu-cinema__choices {
+    margin-top: 12px;
+    gap: 5px;
+  }
+
+  .lu-cinema__choice {
+    padding: 7px 10px;
+    font-size: 15px;
+  }
+
+  .lu-cinema__footer {
+    padding-bottom: 8px;
+  }
+
+  .lu-cinema__progress {
+    margin-bottom: 7px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .lu-cinema *,
+  .lu-entry * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,126 @@
+.golden-game {
+  --prog: 0;
+  --draw: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  color: #f4ead4;
+  background: #18271c;
+  font-family: "Inter", sans-serif;
+  user-select: none;
+}
+.golden-game * { box-sizing: border-box; }
+.golden-game__world { position: absolute; inset: 0; }
+.golden-game__world canvas { display: block; width: 100% !important; height: 100% !important; outline: none; }
+.golden-game__vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(5, 9, 6, 0.65) 100%),
+    linear-gradient(180deg, rgba(9, 16, 11, 0.55), transparent 22%);
+}
+.golden-game__grain {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+
+.golden-game__top {
+  position: absolute; z-index: 10; top: 0; left: 0; width: 100%;
+  padding: 22px 4%; display: flex; align-items: center; justify-content: space-between;
+}
+.golden-game__brand { font-family: "Cormorant Garamond", Georgia, serif; font-size: 22px; letter-spacing: 0.3em; color: #fff0c8; }
+.golden-game__actions { display: flex; gap: 10px; }
+.golden-game__actions button {
+  width: 40px; height: 40px; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid rgba(238, 211, 159, 0.35); border-radius: 50%;
+  background: rgba(24, 30, 21, 0.5); color: #f5dfb0; backdrop-filter: blur(8px); transition: 0.25s;
+}
+.golden-game__actions button:hover { background: rgba(233, 199, 126, 0.2); border-color: #e9c77e; }
+.golden-game__actions svg { width: 16px; height: 16px; }
+
+.golden-game__progress {
+  position: absolute; z-index: 8; top: 36px; left: 50%; transform: translateX(-50%);
+  width: min(300px, 50vw); height: 2px; background: rgba(255, 240, 203, 0.2);
+}
+.golden-game__progress i {
+  display: block; height: 100%; width: calc(var(--prog) * 100%);
+  background: linear-gradient(90deg, #9b7137, #fff0b5); box-shadow: 0 0 12px rgba(255, 220, 150, 0.7);
+}
+
+.golden-game__message {
+  position: absolute; z-index: 8; top: 16%; left: 50%; transform: translateX(-50%);
+  width: min(90%, 620px); text-align: center; pointer-events: none;
+  font-family: "Cormorant Garamond", Georgia, serif; font-style: italic;
+  font-size: clamp(20px, 2.6vw, 30px); color: #fff0c8; text-shadow: 0 2px 16px #000;
+}
+.golden-game__hint {
+  position: absolute; z-index: 8; bottom: 8%; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px; white-space: nowrap; pointer-events: none;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 239, 203, 0.85); text-shadow: 0 2px 12px #000;
+}
+.golden-game__hint kbd {
+  padding: 4px 8px; border: 1px solid rgba(233, 199, 126, 0.6); border-radius: 4px;
+  font: inherit; background: rgba(24, 30, 21, 0.5);
+}
+
+/* aiming reticle: always dead-center */
+.golden-game__reticle {
+  position: absolute; z-index: 8; top: 50%; left: 50%; width: 0; height: 0; pointer-events: none;
+}
+.golden-game__reticle b, .golden-game__reticle span { position: absolute; border-radius: 50%; transform: translate(-50%, -50%); }
+.golden-game__reticle b {
+  width: calc(78px - var(--draw) * 46px); height: calc(78px - var(--draw) * 46px);
+  border: 1.5px solid rgba(255, 233, 170, calc(0.45 + var(--draw) * 0.55));
+  box-shadow: 0 0 14px rgba(255, 210, 120, calc(var(--draw) * 0.7)), inset 0 0 10px rgba(255, 210, 120, calc(var(--draw) * 0.4));
+}
+.golden-game__reticle span { width: 5px; height: 5px; background: #fff0b5; box-shadow: 0 0 8px #ffd27a; }
+
+.golden-game__stage {
+  position: absolute; z-index: 7; inset: 0; display: grid; place-items: center; padding: 80px 20px; pointer-events: none;
+}
+.golden-game__card {
+  position: relative; width: min(520px, 92vw); padding: 42px 46px 36px; text-align: center;
+  color: #201a12; pointer-events: auto; border: 1px solid rgba(190, 151, 83, 0.65);
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.85), transparent 65%), linear-gradient(145deg, #f8f0df, #e9dcc0);
+  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.55), inset 0 0 0 5px rgba(255, 255, 255, 0.17);
+  display: flex; flex-direction: column; align-items: center;
+}
+.golden-game__eyebrow { color: #94703d; font-size: 9px; letter-spacing: 0.24em; font-weight: 600; }
+.golden-game__card h1 {
+  margin: 16px 0 0; color: #342519; font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(40px, 6vw, 58px); font-weight: 500; line-height: 1;
+}
+.golden-game__card h1 em { color: #9b7139; font-weight: 500; }
+.golden-game__card p {
+  max-width: 400px; margin: 0 0 26px; color: #65533e;
+  font-family: "Cormorant Garamond", Georgia, serif; font-size: 18px; line-height: 1.6;
+}
+.golden-game__rule { display: flex; align-items: center; justify-content: center; gap: 13px; margin: 20px 0; color: #ad874c; font-size: 13px; }
+.golden-game__rule i { width: 55px; height: 1px; background: linear-gradient(90deg, transparent, #b18b52); }
+.golden-game__rule i:last-child { transform: rotate(180deg); }
+
+.golden-game__primary {
+  min-height: 48px; padding: 0 26px; display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  border: 1px solid #8b642f; background: linear-gradient(135deg, #785329, #a67b3e); color: #fff4dc;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+}
+.golden-game__primary:hover { background: linear-gradient(135deg, #9b7139, #c09656); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(116, 79, 34, 0.3); }
+.golden-game__replay {
+  margin-top: 16px; display: flex; align-items: center; gap: 8px; border: 0; background: transparent;
+  color: #82633b; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+}
+.golden-game__replay:hover { color: #3f2d19; }
+.golden-game__pause {
+  position: absolute; z-index: 12; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  background: rgba(10, 17, 12, 0.72); backdrop-filter: blur(8px);
+}
+.golden-game__pause .golden-game__replay { color: #e9c77e; }
+
+@media (max-width: 650px) {
+  .golden-game__brand { font-size: 17px; }
+  .golden-game__card { padding: 32px 24px 28px; }
+  .golden-game__card p { font-size: 16px; }
+  .golden-game__hint { font-size: 8px; bottom: 6%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .golden-game *, .golden-game *::before, .golden-game *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

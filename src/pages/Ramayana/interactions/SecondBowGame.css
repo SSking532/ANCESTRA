@@ -1,0 +1,1046 @@
+/* =========================================================
+   ANCESTRA — THE SECOND BOW
+========================================================= */
+
+.second-bow {
+  position: relative;
+
+  width: 100%;
+  min-height: 100%;
+
+  overflow: hidden;
+
+  color: #f0e4cd;
+
+  background:
+    radial-gradient(
+      circle at 50% 22%,
+      rgba(190, 151, 78, 0.12),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      #302920 0%,
+      #211c16 58%,
+      #161310 100%
+    );
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+}
+
+.second-bow *,
+.second-bow *::before,
+.second-bow *::after {
+  box-sizing: border-box;
+}
+
+.second-bow button {
+  font: inherit;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.second-bow__intro,
+.second-bow__complete {
+  position: relative;
+
+  min-height: 680px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding:
+    70px
+    28px;
+}
+
+.second-bow__intro::before,
+.second-bow__complete::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 7% 11%;
+
+  border:
+    1px solid
+    rgba(
+      217,
+      180,
+      106,
+      0.12
+    );
+
+  pointer-events: none;
+}
+
+.second-bow__ornament {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 28px;
+
+  color: #d0a960;
+}
+
+.second-bow__ornament i {
+  display: block;
+
+  width: 74px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        208,
+        169,
+        96,
+        0.72
+      )
+    );
+}
+
+.second-bow__ornament i:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        208,
+        169,
+        96,
+        0.72
+      ),
+      transparent
+    );
+}
+
+.second-bow__eyebrow {
+  color: #b89860;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.42em;
+
+  text-transform: uppercase;
+}
+
+.second-bow__intro h1,
+.second-bow__complete h1 {
+  margin:
+    20px
+    0
+    20px;
+
+  color: #f1e4cb;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      58px,
+      10vw,
+      108px
+    );
+
+  font-weight: 400;
+
+  line-height: 0.88;
+
+  letter-spacing:
+    -0.025em;
+}
+
+.second-bow__lead {
+  margin: 0;
+
+  color: #e6d8bd;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      21px,
+      2.5vw,
+      30px
+    );
+
+  line-height: 1.32;
+}
+
+.second-bow__sub {
+  max-width: 500px;
+
+  margin:
+    19px
+    0
+    34px;
+
+  color:
+    rgba(
+      235,
+      222,
+      197,
+      0.62
+    );
+
+  font-size: 12px;
+
+  line-height: 1.8;
+}
+
+.second-bow__primary,
+.second-bow__next,
+.second-bow__dialogue-next {
+  border: 0;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 13px;
+
+  min-height: 46px;
+
+  padding:
+    12px
+    21px;
+
+  color: #2a2016;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e3c98c,
+      #b98e49
+    );
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.27em;
+
+  text-transform: uppercase;
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.second-bow__primary:hover,
+.second-bow__next:hover,
+.second-bow__dialogue-next:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0
+    11px
+    30px
+    rgba(
+      163,
+      120,
+      50,
+      0.22
+    );
+}
+
+.second-bow__primary:focus-visible,
+.second-bow__next:focus-visible,
+.second-bow__dialogue-next:focus-visible {
+  outline:
+    2px solid
+    rgba(
+      237,
+      216,
+      174,
+      0.85
+    );
+
+  outline-offset: 4px;
+}
+
+.second-bow__identity {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 46px;
+
+  color:
+    rgba(
+      236,
+      219,
+      185,
+      0.48
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.30em;
+}
+
+.second-bow__identity i {
+  width: 42px;
+  height: 1px;
+
+  background:
+    rgba(
+      210,
+      170,
+      94,
+      0.4
+    );
+}
+
+/* =========================================================
+   MAIN CINEMATIC STAGE
+========================================================= */
+
+.second-bow__stage {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 650px;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  background: #17130f;
+}
+
+.second-bow__shot {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+.second-bow__shot img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+}
+
+.second-bow__vignette {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        8,
+        6,
+        4,
+        0.30
+      ),
+      transparent 25%,
+      transparent 59%,
+      rgba(
+        7,
+        5,
+        4,
+        0.80
+      )
+    );
+}
+
+.second-bow__grain {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.035;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   FIGHT CAPTIONS
+========================================================= */
+
+.second-bow__frame-caption {
+  position: absolute;
+
+  left:
+    clamp(
+      22px,
+      5vw,
+      72px
+    );
+
+  bottom:
+    clamp(
+      72px,
+      8vw,
+      105px
+    );
+
+  z-index: 5;
+
+  max-width: 530px;
+}
+
+.second-bow__frame-caption span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #d2ad6c;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.35em;
+
+  text-transform: uppercase;
+}
+
+.second-bow__frame-caption p {
+  max-width: 470px;
+
+  margin: 0;
+
+  color:
+    rgba(
+      244,
+      233,
+      211,
+      0.78
+    );
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      19px,
+      2.1vw,
+      27px
+    );
+
+  line-height: 1.3;
+}
+
+/* =========================================================
+   FIGHT PROGRESS
+========================================================= */
+
+.second-bow__progress {
+  position: absolute;
+
+  top: 24px;
+  right: 27px;
+
+  z-index: 8;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color:
+    rgba(
+      239,
+      223,
+      192,
+      0.70
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.16em;
+}
+
+.second-bow__progress i {
+  width: 36px;
+  height: 1px;
+
+  background:
+    rgba(
+      218,
+      182,
+      111,
+      0.42
+    );
+}
+
+.second-bow__next {
+  position: absolute;
+
+  right:
+    clamp(
+      22px,
+      4vw,
+      55px
+    );
+
+  bottom:
+    clamp(
+      22px,
+      4vw,
+      44px
+    );
+
+  z-index: 8;
+}
+
+/* =========================================================
+   COMIC-STYLE DIALOGUE
+========================================================= */
+
+.second-bow--dialogue {
+  background: #17130f;
+}
+
+.second-bow__dialogue-stage {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 650px;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  background: #17130f;
+}
+
+.second-bow__dialogue-shot {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+.second-bow__dialogue-shot img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+}
+
+.second-bow__dialogue-box {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 48px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 7;
+
+  width:
+    min(
+      calc(100% - 40px),
+      860px
+    );
+
+  padding:
+    20px
+    26px
+    23px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        17,
+        13,
+        9,
+        0.34
+      ),
+      rgba(
+        17,
+        13,
+        9,
+        0.94
+      )
+    );
+
+  border:
+    1px solid
+    rgba(
+      219,
+      182,
+      111,
+      0.19
+    );
+
+  backdrop-filter:
+    blur(8px);
+}
+
+.second-bow__speaker {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+
+  color: #d4b16f;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.42em;
+
+  text-transform: uppercase;
+}
+
+.second-bow__speaker span {
+  width: 24px;
+  height: 1px;
+
+  background:
+    rgba(
+      213,
+      177,
+      111,
+      0.52
+    );
+}
+
+.second-bow__dialogue-box p {
+  margin: 0 auto;
+
+  max-width: 780px;
+
+  color: #f2e6d1;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      20px,
+      2.35vw,
+      30px
+    );
+
+  line-height: 1.3;
+}
+
+/*
+  This is the visible back-and-forth
+  camera indicator.
+
+  Rama enters from left.
+  Parashurama enters from right.
+*/
+
+.second-bow__dialogue-shot--rama {
+  transform-origin: 35% 50%;
+}
+
+.second-bow__dialogue-shot--parashurama {
+  transform-origin: 65% 50%;
+}
+
+.second-bow__dialogue-count {
+  position: absolute;
+
+  left: 24px;
+  bottom: 30px;
+
+  z-index: 9;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color:
+    rgba(
+      237,
+      218,
+      181,
+      0.68
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.16em;
+}
+
+.second-bow__dialogue-count i {
+  width: 40px;
+  height: 1px;
+
+  background:
+    rgba(
+      218,
+      181,
+      111,
+      0.35
+    );
+}
+
+.second-bow__dialogue-next {
+  position: absolute;
+
+  right: 23px;
+  bottom: 22px;
+
+  z-index: 9;
+}
+
+/* =========================================================
+   CONCLUSION COPY
+========================================================= */
+
+.second-bow__conclusion-copy {
+  position: absolute;
+
+  left:
+    clamp(
+      22px,
+      5vw,
+      72px
+    );
+
+  bottom:
+    clamp(
+      72px,
+      8vw,
+      105px
+    );
+
+  z-index: 6;
+
+  max-width: 540px;
+}
+
+.second-bow__conclusion-copy > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #d2ad6c;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.35em;
+
+  text-transform: uppercase;
+}
+
+.second-bow__conclusion-copy h2 {
+  margin: 0;
+
+  color: #f2e6ce;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      38px,
+      5vw,
+      64px
+    );
+
+  font-weight: 400;
+
+  line-height: 0.92;
+}
+
+.second-bow__conclusion-copy p {
+  max-width: 480px;
+
+  margin:
+    15px
+    0
+    0;
+
+  color:
+    rgba(
+      241,
+      230,
+      207,
+      0.75
+    );
+
+  font-size: 13px;
+
+  line-height: 1.75;
+}
+
+/* =========================================================
+   COMPLETE
+========================================================= */
+
+.second-bow--complete {
+  background:
+    radial-gradient(
+      circle at 50% 22%,
+      rgba(
+        191,
+        151,
+        73,
+        0.12
+      ),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      #302920,
+      #17130f
+    );
+}
+
+.second-bow__complete-line {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  margin:
+    35px
+    0
+    34px;
+
+  color:
+    rgba(
+      219,
+      182,
+      111,
+      0.75
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.28em;
+}
+
+.second-bow__complete-line i {
+  width: 30px;
+  height: 1px;
+
+  background:
+    rgba(
+      219,
+      182,
+      111,
+      0.30
+    );
+}
+
+.second-bow__complete p {
+  max-width: 520px;
+
+  margin: 0;
+
+  color:
+    rgba(
+      237,
+      225,
+      201,
+      0.72
+    );
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 22px;
+
+  line-height: 1.5;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+  .second-bow__intro,
+  .second-bow__complete {
+    min-height: 590px;
+
+    padding:
+      50px
+      20px;
+  }
+
+  .second-bow__intro::before,
+  .second-bow__complete::before {
+    inset: 5% 4%;
+  }
+
+  .second-bow__intro h1,
+  .second-bow__complete h1 {
+    font-size:
+      clamp(
+        48px,
+        16vw,
+        75px
+      );
+  }
+
+  .second-bow__lead {
+    font-size: 19px;
+  }
+
+  .second-bow__stage,
+  .second-bow__dialogue-stage {
+    min-height: 570px;
+
+    aspect-ratio: 16 / 9;
+  }
+
+  .second-bow__frame-caption,
+  .second-bow__conclusion-copy {
+    left: 18px;
+    right: 18px;
+    bottom: 78px;
+  }
+
+  .second-bow__frame-caption p {
+    font-size: 19px;
+  }
+
+  .second-bow__conclusion-copy h2 {
+    font-size: 41px;
+  }
+
+  .second-bow__next {
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .second-bow__dialogue-box {
+    bottom: 62px;
+
+    width:
+      calc(100% - 24px);
+
+    padding:
+      16px
+      16px
+      18px;
+  }
+
+  .second-bow__dialogue-box p {
+    font-size: 19px;
+  }
+
+  .second-bow__dialogue-count {
+    left: 15px;
+    bottom: 26px;
+  }
+
+  .second-bow__dialogue-next {
+    right: 14px;
+    bottom: 13px;
+
+    min-height: 40px;
+
+    padding:
+      10px
+      14px;
+  }
+
+  .second-bow__complete-line {
+    flex-wrap: wrap;
+
+    line-height: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .second-bow__primary,
+  .second-bow__next,
+  .second-bow__dialogue-next {
+    transition: none;
+  }
+}
+
+.second-bow__dialogue-word {
+  display: inline;
+  white-space: pre-wrap;
+  will-change: opacity, transform;
+}

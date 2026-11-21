@@ -1,0 +1,609 @@
+/* ==========================================================
+   SITA AND LAKSHMANA — Ancestra · Chapter XXIII
+   Everything is scoped under .sl — no global rules.
+   ========================================================== */
+
+.sl {
+  --parchment: #f2e8d2;
+  --ivory: #fbf6ea;
+  --ink: #2a1f14;
+  --ink-soft: #6a5841;
+  --gold: #b48d3f;
+  --gold-deep: #8a6a26;
+  --gold-line: rgba(138, 106, 38, 0.32);
+  --serif: "Cormorant Garamond", "Cormorant", "EB Garamond", "Iowan Old Style",
+    "Palatino Linotype", Georgia, serif;
+
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--serif);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(180, 141, 63, 0.16), transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% 0%, var(--ivory), var(--parchment));
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+.sl *,
+.sl *::before,
+.sl *::after {
+  box-sizing: border-box;
+}
+
+.sl button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.sl button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------- */
+/*  Stage                                                      */
+/* ---------------------------------------------------------- */
+
+.sl__stage {
+  position: relative;
+  flex: 0 0 76%;
+  overflow: hidden;
+  /* the image melts into the parchment below */
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  background: #1b130b;
+}
+
+.sl__perspective {
+  position: absolute;
+  inset: 0;
+  perspective: 1200px;
+}
+
+.sl__scene3d {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: scale(1.07); /* hides edges while tilting */
+  will-change: transform;
+}
+
+.sl__plate {
+  position: absolute;
+  inset: -3%;
+}
+
+.sl__parallax {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.sl__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  animation: sl-drift 26s ease-in-out infinite alternate;
+  transition: filter 1.4s ease;
+  pointer-events: none;
+}
+
+/* subtle per-scene colour grade */
+.sl__img--1 { filter: saturate(1.04) brightness(1.02); }
+.sl__img--2 { filter: saturate(0.98) brightness(0.98); animation-name: sl-drift-b; }
+.sl__img--3 { filter: saturate(0.8) brightness(0.94) contrast(1.04); }
+.sl__img--4 { filter: saturate(0.72) brightness(0.9) sepia(0.12); animation-name: sl-drift-b; }
+.sl__img--5 { filter: saturate(1.08) brightness(0.97) sepia(0.1); }
+
+@keyframes sl-drift {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to   { transform: scale(1.07) translate3d(-1.2%, -0.8%, 0); }
+}
+
+@keyframes sl-drift-b {
+  from { transform: scale(1.07) translate3d(1.2%, 0, 0); }
+  to   { transform: scale(1) translate3d(0, -0.8%, 0); }
+}
+
+/* light shafts */
+.sl__rays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  background: conic-gradient(
+    from 195deg at 88% -12%,
+    transparent 0deg,
+    rgba(255, 236, 180, 0.2) 8deg,
+    transparent 18deg,
+    rgba(255, 236, 180, 0.14) 30deg,
+    transparent 42deg,
+    rgba(255, 236, 180, 0.1) 54deg,
+    transparent 66deg
+  );
+  animation: sl-rays 15s ease-in-out infinite alternate;
+}
+
+@keyframes sl-rays {
+  from { opacity: 0.3; transform: translateX(-1.5%); }
+  to   { opacity: 0.65; transform: translateX(1.5%); }
+}
+
+/* river glints near the lower edge */
+.sl__water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26%;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  opacity: 0.45;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 38px,
+      rgba(255, 244, 214, 0.5) 40px,
+      transparent 44px 90px
+    ),
+    repeating-linear-gradient(
+      100deg,
+      transparent 0 70px,
+      rgba(255, 244, 214, 0.35) 72px,
+      transparent 78px 160px
+    );
+  background-size: 180px 100%, 320px 100%;
+  -webkit-mask-image: linear-gradient(to top, #000, transparent);
+  mask-image: linear-gradient(to top, #000, transparent);
+  animation: sl-water 9s linear infinite;
+}
+
+@keyframes sl-water {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 180px 0, -320px 0; }
+}
+
+.sl__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(38, 24, 10, 0.34) 100%),
+    linear-gradient(to bottom, rgba(38, 24, 10, 0.32), transparent 22%);
+}
+
+.sl__motes-wrap {
+  position: absolute;
+  inset: -4%;
+  pointer-events: none;
+}
+
+.sl__motes {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------------------------------------------------------- */
+/*  Header                                                     */
+/* ---------------------------------------------------------- */
+
+.sl__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(14px, 2.4vh, 24px) clamp(16px, 3vw, 36px);
+  pointer-events: none;
+}
+
+.sl__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--ivory);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+}
+
+.sl__brand span {
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+}
+
+.sl__tools {
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.sl__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(251, 246, 234, 0.5);
+  border-radius: 50%;
+  color: var(--ivory);
+  background: rgba(42, 31, 20, 0.28);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.sl__icon:hover {
+  background: rgba(251, 246, 234, 0.9);
+  border-color: var(--ivory);
+  color: var(--ink);
+  transform: scale(1.06);
+}
+
+/* ---------------------------------------------------------- */
+/*  Voice — fixed dialogue area, no box                        */
+/* ---------------------------------------------------------- */
+
+.sl__voice {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(6px, 1.2vh, 14px) clamp(20px, 6vw, 80px) 56px;
+  margin-top: -2%;
+  text-align: center;
+}
+
+.sl__line {
+  width: 100%;
+  max-width: 880px;
+}
+
+.sl__speaker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 0 clamp(6px, 1.2vh, 12px);
+  color: var(--gold-deep);
+  font-size: clamp(0.82rem, 1.5vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+}
+
+.sl__speaker::before,
+.sl__speaker::after {
+  content: "";
+  width: clamp(24px, 6vw, 64px);
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+
+.sl__speaker::after {
+  transform: scaleX(-1);
+}
+
+.sl__ornament {
+  margin: 0 0 clamp(6px, 1.2vh, 12px);
+  height: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sl__ornament i {
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  box-shadow: -20px 0 0 -2px var(--gold-line), 20px 0 0 -2px var(--gold-line);
+  opacity: 0.8;
+}
+
+.sl__text {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.34;
+  text-wrap: balance;
+  color: var(--ink);
+}
+
+.sl__line.is-speech .sl__text {
+  font-size: clamp(1.25rem, min(2.5vw, 3.6vh), 2.05rem);
+}
+
+.sl__line.is-narration .sl__text {
+  font-size: clamp(1.1rem, min(2.1vw, 3.1vh), 1.6rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+/* not-yet-typed characters keep their space so nothing reflows */
+.sl__ghost {
+  visibility: hidden;
+}
+
+/* ---------------------------------------------------------- */
+/*  Title                                                      */
+/* ---------------------------------------------------------- */
+
+.sl__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.6vh, 16px);
+  width: 100%;
+}
+
+.sl__title h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, min(5.4vw, 7vh), 3.7rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.sl__letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(6px);
+  animation: sl-letter 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--i) * 45ms + 300ms);
+}
+
+@keyframes sl-letter {
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.sl__subtitle {
+  margin: 0;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  color: var(--gold-deep);
+  opacity: 0;
+  animation: sl-fade 1.2s ease 1.5s forwards;
+}
+
+.sl__title .sl__begin {
+  opacity: 0;
+  animation: sl-fade 1.2s ease 2s forwards;
+}
+
+@keyframes sl-fade {
+  to { opacity: 1; }
+}
+
+.sl__begin {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(4px, 1vh, 10px);
+  padding: 13px 30px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gold-deep);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.sl__begin:hover {
+  background: var(--gold-deep);
+  color: var(--ivory);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(138, 106, 38, 0.28);
+}
+
+/* ---------------------------------------------------------- */
+/*  Footer                                                     */
+/* ---------------------------------------------------------- */
+
+.sl__footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 clamp(18px, 4vw, 48px) clamp(14px, 2.4vh, 22px);
+  pointer-events: none;
+}
+
+.sl__continue {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 2px;
+  border: 0;
+  border-bottom: 1px solid var(--gold-line);
+  background: none;
+  color: var(--gold-deep);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  pointer-events: auto;
+  transition: color 0.25s ease, border-color 0.25s ease, gap 0.25s ease;
+}
+
+.sl__continue:hover {
+  color: var(--ink);
+  border-color: var(--gold);
+  gap: 14px;
+}
+
+.sl__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(138, 106, 38, 0.14);
+  pointer-events: none;
+}
+
+.sl__progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(to right, var(--gold-deep), var(--gold));
+  transition: width 0.5s ease;
+}
+
+/* ---------------------------------------------------------- */
+/*  Closing screen                                             */
+/* ---------------------------------------------------------- */
+
+.sl__end {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  cursor: default;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 45%, rgba(255, 236, 180, 0.55), transparent 70%),
+    radial-gradient(ellipse 120% 90% at 50% 0%, var(--ivory), var(--parchment));
+}
+
+.sl__end-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 2.6vh, 24px);
+  max-width: 760px;
+}
+
+.sl__end h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 5vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.12;
+}
+
+.sl__rule {
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  position: relative;
+}
+
+.sl__rule::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.sl__quote {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.6vw, 1.85rem);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
+
+.sl__label {
+  margin: 0;
+  font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: var(--gold-deep);
+}
+
+/* ---------------------------------------------------------- */
+/*  Responsive                                                 */
+/* ---------------------------------------------------------- */
+
+@media (max-width: 720px), (orientation: portrait) {
+  .sl__stage {
+    flex-basis: 62%;
+  }
+
+  .sl__img {
+    object-position: center 22%;
+  }
+
+  .sl__voice {
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 60px;
+  }
+
+  .sl__brand {
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+  }
+
+  .sl__icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .sl__stage {
+    flex-basis: 70%;
+  }
+  .sl__voice {
+    padding-bottom: 44px;
+  }
+  .sl__line.is-speech .sl__text,
+  .sl__line.is-narration .sl__text {
+    font-size: clamp(1rem, 3.4vh, 1.3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sl__img,
+  .sl__rays,
+  .sl__water,
+  .sl__letter,
+  .sl__subtitle,
+  .sl__title .sl__begin {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .sl__img--3 { filter: saturate(0.8) brightness(0.94); }
+  .sl__img--4 { filter: saturate(0.72) brightness(0.9); }
+}

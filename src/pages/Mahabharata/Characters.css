@@ -1,0 +1,1317 @@
+/* =========================================================
+   ANCESTRA — MAHABHARATA CHARACTERS
+   CINEMATIC DIVINE EDITION
+   MAROON & ANTIQUE GOLD
+========================================================= */
+
+/* =========================================================
+   COLOR SYSTEM
+========================================================= */
+
+.characters-page {
+  --mb-maroon-deep: #120608;
+  --mb-maroon-dark: #1b080c;
+  --mb-maroon: #2a0d13;
+  --mb-maroon-mid: #3a1119;
+  --mb-wine: #4a151d;
+
+  --mb-gold: #c9a45c;
+  --mb-gold-light: #d8b873;
+  --mb-gold-dark: #9f783d;
+
+  --mb-ivory: #eee5d2;
+  --mb-muted: rgba(238, 229, 210, 0.55);
+
+  position: relative;
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(201, 164, 92, 0.075),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 50% 65%,
+      rgba(74, 21, 29, 0.18),
+      transparent 55%
+    ),
+    var(--mb-maroon-deep);
+
+  color: var(--mb-ivory);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   ATMOSPHERE
+========================================================= */
+
+.characters-page__atmosphere {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(74, 21, 29, 0.20),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 50%,
+      rgba(74, 21, 29, 0.20),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(201, 164, 92, 0.055),
+      transparent 38%
+    );
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.characters-nav {
+  position: relative;
+
+  height: 90px;
+
+  padding: 0 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  z-index: 10;
+
+  border-bottom:
+    1px solid
+    rgba(201, 164, 92, 0.12);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 6, 8, 0.82),
+      rgba(18, 6, 8, 0.20)
+    );
+}
+
+
+.characters-nav__back {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color:
+    rgba(
+      238,
+      229,
+      210,
+      0.65
+    );
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  letter-spacing: 0.25em;
+
+  transition: 0.3s ease;
+}
+
+
+.characters-nav__back:hover {
+  color: var(--mb-gold-light);
+
+  transform:
+    translateX(-3px);
+}
+
+
+.characters-nav__brand {
+  position: absolute;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  color: var(--mb-gold);
+
+  font-size: 14px;
+
+  letter-spacing: 0.35em;
+
+  text-shadow:
+    0 0 25px
+    rgba(201, 164, 92, 0.18);
+}
+
+
+.characters-nav__label {
+  color:
+    rgba(
+      201,
+      164,
+      92,
+      0.78
+    );
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.characters-intro {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 950px;
+
+  margin:
+    110px auto 90px;
+
+  padding:
+    0 30px;
+
+  text-align: center;
+}
+
+
+.characters-intro__eyebrow {
+  display: block;
+
+  margin-bottom: 25px;
+
+  color: var(--mb-gold);
+
+  font-size: 10px;
+
+  letter-spacing: 0.5em;
+
+  text-shadow:
+    0 0 18px
+    rgba(201, 164, 92, 0.15);
+}
+
+
+.characters-intro h1 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      65px,
+      8vw,
+      125px
+    );
+
+  line-height: 0.86;
+
+  font-weight: 400;
+
+  color: var(--mb-ivory);
+
+  letter-spacing: 0.01em;
+
+  text-shadow:
+    0 12px 40px
+    rgba(0, 0, 0, 0.45);
+}
+
+
+.characters-intro h1 span {
+  display: block;
+
+  color: var(--mb-gold);
+
+  font-style: italic;
+
+  text-shadow:
+    0 0 40px
+    rgba(201, 164, 92, 0.15);
+}
+
+
+.characters-intro__line {
+  width: 180px;
+
+  height: 1px;
+
+  margin:
+    42px auto 30px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--mb-gold),
+      transparent
+    );
+}
+
+
+.characters-intro p {
+  margin: 0;
+
+  color:
+    rgba(
+      238,
+      229,
+      210,
+      0.48
+    );
+
+  font-size: 13px;
+
+  line-height: 2;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.characters-grid {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding:
+    0 45px 100px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 35px;
+}
+
+
+/* =========================================================
+   CHARACTER CARD
+========================================================= */
+
+.character-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 720px;
+
+  overflow: hidden;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(201, 164, 92, 0.07),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(74, 21, 29, 0.55),
+      rgba(18, 6, 8, 0.88)
+    );
+
+  border:
+    1px solid
+    rgba(
+      201,
+      164,
+      92,
+      0.28
+    );
+
+  box-shadow:
+    inset 0 0 70px
+    rgba(74, 21, 29, 0.18);
+
+  transition:
+    transform 0.6s
+      cubic-bezier(
+        .16,
+        1,
+        .3,
+        1
+      ),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+
+.character-card:hover {
+  transform:
+    translateY(-10px);
+
+  border-color:
+    rgba(
+      201,
+      164,
+      92,
+      0.72
+    );
+
+  box-shadow:
+    0 35px 80px
+      rgba(0, 0, 0, 0.55),
+
+    0 0 55px
+      rgba(
+        201,
+        164,
+        92,
+        0.07
+      ),
+
+    inset 0 0 90px
+      rgba(
+        74,
+        21,
+        29,
+        0.28
+      );
+}
+
+
+/* =========================================================
+   IMAGE VISUAL
+========================================================= */
+
+.character-card__visual {
+  position: relative;
+
+  height: 420px;
+
+  overflow: hidden;
+
+  background:
+    #1a080c;
+}
+
+
+/* =========================================================
+   BLURRED IMAGE COPY
+========================================================= */
+
+.character-card__blur {
+  position: absolute;
+
+  inset: -30px;
+
+  width:
+    calc(100% + 60px);
+
+  height:
+    calc(100% + 60px);
+
+  object-fit: cover;
+
+  filter:
+    blur(25px)
+    brightness(0.42)
+    saturate(0.85);
+
+  transform:
+    scale(1.15);
+
+  opacity: 0.72;
+}
+
+
+/* =========================================================
+   IMAGE FRAME
+========================================================= */
+
+.character-card__image-frame {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   CHARACTER IMAGE
+========================================================= */
+
+.character-card__image {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+  object-position:
+    center center;
+
+  display: block;
+}
+
+
+/* =========================================================
+   CINEMATIC IMAGE SHADE
+========================================================= */
+
+.character-card__image-shade {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+
+      rgba(
+        18,
+        6,
+        8,
+        0.03
+      ) 0%,
+
+      transparent 40%,
+
+      rgba(
+        18,
+        6,
+        8,
+        0.35
+      ) 72%,
+
+      rgba(
+        18,
+        6,
+        8,
+        0.96
+      ) 100%
+    );
+}
+
+
+/* =========================================================
+   CARD NUMBER
+========================================================= */
+
+.character-card__number {
+  position: absolute;
+
+  top: 25px;
+
+  right: 25px;
+
+  z-index: 5;
+
+  color:
+    rgba(
+      238,
+      229,
+      210,
+      0.82
+    );
+
+  font-size: 9px;
+
+  letter-spacing: 0.35em;
+
+  text-shadow:
+    0 2px 10px
+    rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.character-card__content {
+  position: relative;
+
+  z-index: 5;
+
+  min-height: 300px;
+
+  padding:
+    30px 35px 28px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(
+        201,
+        164,
+        92,
+        0.07
+      ),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      #250a10,
+      #120608
+    );
+
+  border-top:
+    1px solid
+    rgba(
+      201,
+      164,
+      92,
+      0.12
+    );
+}
+
+
+/* =========================================================
+   CARD ROLE
+========================================================= */
+
+.character-card__role {
+  margin-bottom: 12px;
+
+  color:
+    var(--mb-gold);
+
+  font-size: 9px;
+
+  letter-spacing: 0.4em;
+
+  text-shadow:
+    0 0 15px
+    rgba(
+      201,
+      164,
+      92,
+      0.12
+    );
+}
+
+
+/* =========================================================
+   CARD NAME
+========================================================= */
+
+.character-card h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      26px,
+      2.2vw,
+      40px
+    );
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing:
+    -0.025em;
+
+  color:
+    var(--mb-ivory);
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-shadow:
+    0 5px 20px
+    rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================================================
+   CARD RULE
+========================================================= */
+
+.character-card__rule {
+  width: 100%;
+
+  height: 1px;
+
+  margin:
+    25px 0 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        201,
+        164,
+        92,
+        0.50
+      ),
+      rgba(
+        201,
+        164,
+        92,
+        0.08
+      ),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+========================================================= */
+
+.character-card p {
+  margin: 0;
+
+  max-width: 430px;
+
+  color:
+    rgba(
+      238,
+      229,
+      210,
+      0.55
+    );
+
+  font-size: 13px;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.character-card__footer {
+  margin-top: auto;
+
+  padding-top: 25px;
+
+  border-top:
+    1px solid
+    rgba(
+      201,
+      164,
+      92,
+      0.14
+    );
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color:
+    var(--mb-gold);
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+
+  transition:
+    0.4s ease;
+}
+
+
+.character-card:hover
+.character-card__footer {
+  letter-spacing: 0.4em;
+
+  color:
+    var(--mb-gold-light);
+}
+
+
+.character-card__footer svg {
+  transition:
+    transform 0.4s ease;
+}
+
+
+.character-card:hover
+.character-card__footer svg {
+  transform:
+    translateX(7px);
+}
+
+
+/* =========================================================
+   CARD GOLD EDGE
+========================================================= */
+
+.character-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        201,
+        164,
+        92,
+        0.55
+      ),
+      transparent
+    );
+
+  opacity: 0.65;
+
+  z-index: 8;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.characters-footer {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1310px;
+
+  margin: 0 auto;
+
+  padding:
+    25px 0 40px;
+
+  border-top:
+    1px solid
+    rgba(
+      201,
+      164,
+      92,
+      0.14
+    );
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color:
+    rgba(
+      238,
+      229,
+      210,
+      0.3
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   FOOTER GOLD LINE
+========================================================= */
+
+.characters-footer::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: -1px;
+
+  width: 160px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--mb-gold),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   CHARACTER GROUPS
+========================================================= */
+
+.characters-groups {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   GROUP SECTION
+========================================================= */
+
+.character-group {
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding:
+    80px 45px 30px;
+}
+
+
+.character-group:first-child {
+  padding-top: 20px;
+}
+
+
+/* =========================================================
+   GROUP HEADER
+========================================================= */
+
+.character-group__header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 40px;
+
+  margin-bottom: 25px;
+}
+
+
+.character-group__heading {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+.character-group__subtitle {
+  color:
+    var(--mb-gold-dark);
+
+  font-size: 9px;
+
+  letter-spacing: 0.4em;
+}
+
+
+.character-group__heading h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      42px,
+      5vw,
+      72px
+    );
+
+  line-height: 0.95;
+
+  font-weight: 400;
+
+  letter-spacing:
+    -0.035em;
+
+  color:
+    var(--mb-ivory);
+
+  text-shadow:
+    0 8px 30px
+    rgba(
+      0,
+      0,
+      0,
+      0.38
+    );
+}
+
+
+.character-group__count {
+  flex-shrink: 0;
+
+  padding-bottom: 7px;
+
+  color:
+    rgba(
+      238,
+      229,
+      210,
+      0.3
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   GROUP LINE
+========================================================= */
+
+.character-group__line {
+  width: 100%;
+
+  height: 1px;
+
+  margin-bottom: 35px;
+
+  background:
+    linear-gradient(
+      90deg,
+
+      rgba(
+        201,
+        164,
+        92,
+        0.50
+      ),
+
+      rgba(
+        116,
+        48,
+        56,
+        0.28
+      ),
+
+      transparent
+    );
+}
+
+
+/* =========================================================
+   GROUP GRID
+========================================================= */
+
+.character-group
+.characters-grid {
+  max-width: none;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   GROUP SPACING
+========================================================= */
+
+.character-group
++ .character-group {
+  margin-top: 35px;
+}
+
+
+/* =========================================================
+   GROUP VISUAL IDENTITIES
+========================================================= */
+
+/* Pandavas */
+
+.character-group--pandava
+.character-group__heading h2 {
+  color:
+    #f0e6d3;
+}
+
+
+/* Kuru / Kaurava */
+
+.character-group--kuru
+.character-group__heading h2 {
+  color:
+    #e9ddc8;
+}
+
+
+/* Warriors */
+
+.character-group--warriors
+.character-group__heading h2 {
+  color:
+    #eee5d2;
+}
+
+
+/* Yadava */
+
+.character-group--yadava
+.character-group__heading h2 {
+  color:
+    #f0e5cf;
+}
+
+
+/* Panchala */
+
+.character-group--panchala
+.character-group__heading h2 {
+  color:
+    #eadfcb;
+}
+
+
+/* Legacy */
+
+.character-group--legacy
+.character-group__heading h2 {
+  color:
+    #eee5d2;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .characters-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    padding:
+      0 30px 80px;
+  }
+
+
+  .character-group {
+    padding-left: 30px;
+
+    padding-right: 30px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .characters-nav {
+    padding:
+      0 20px;
+  }
+
+
+  .characters-nav__brand {
+    display: none;
+  }
+
+
+  .characters-nav__label {
+    font-size: 8px;
+  }
+
+
+  .characters-intro {
+    margin-top: 80px;
+
+    margin-bottom: 60px;
+  }
+
+
+  .characters-intro h1 {
+    font-size: 58px;
+  }
+
+
+  .characters-grid {
+    grid-template-columns: 1fr;
+
+    padding:
+      0 20px 60px;
+
+    gap: 25px;
+  }
+
+
+  .character-card {
+    min-height: 680px;
+  }
+
+
+  .character-card__visual {
+    height: 390px;
+  }
+
+
+  .character-card__content {
+    min-height: 290px;
+
+    padding: 28px;
+  }
+
+
+  .character-card h2 {
+    font-size:
+      clamp(
+        30px,
+        9vw,
+        42px
+      );
+
+    letter-spacing:
+      -0.02em;
+  }
+
+
+  .characters-footer {
+    margin:
+      0 20px;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+  }
+
+
+  /* -------------------------------------------------------
+     CHARACTER GROUPS
+  ------------------------------------------------------- */
+
+  .character-group {
+    padding:
+      65px 20px 20px;
+  }
+
+
+  .character-group:first-child {
+    padding-top: 10px;
+  }
+
+
+  .character-group__header {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap: 20px;
+  }
+
+
+  .character-group__heading h2 {
+    font-size: 43px;
+  }
+
+
+  .character-group__count {
+    padding-bottom: 0;
+  }
+
+
+  .character-group__line {
+    margin-bottom: 25px;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .character-card,
+  .characters-nav__back,
+  .character-card__footer,
+  .character-card__footer svg {
+    transition: none !important;
+  }
+
+}

@@ -1,0 +1,646 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;600;800&display=swap");
+
+.tbo-game {
+  --tbo-gold: #e4bd78;
+  --tbo-gold-deep: #bd8b4f;
+  --tbo-ivory: #f6ead4;
+  --tbo-ember: #ff8a3a;
+  --tbo-ink: #382316;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  isolation: isolate;
+  background: #3d291e;
+  color: var(--tbo-ivory);
+  font-family: "Inter", system-ui, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- Canvas & atmosphere ---------- */
+
+.tbo-game__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.tbo-game__canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.tbo-game.is-heat .tbo-game__canvas,
+.tbo-game.is-shield .tbo-game__canvas {
+  animation: tbo-shimmer 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes tbo-shimmer {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+    filter: saturate(1.05);
+  }
+  to {
+    transform: scale(1.007) translate3d(0.15%, -0.1%, 0);
+    filter: saturate(1.2) brightness(1.04);
+  }
+}
+
+.tbo-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(24, 15, 10, 0.3), transparent 24%),
+    linear-gradient(0deg, rgba(25, 15, 9, 0.5), transparent 36%),
+    radial-gradient(ellipse at center, transparent 45%, rgba(35, 20, 10, 0.38));
+}
+
+.tbo-flare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 18%, rgba(255, 236, 178, 0.55), transparent 70%),
+    radial-gradient(circle at 50% 14%, rgba(255, 255, 240, 0.35), transparent 22%);
+  mix-blend-mode: screen;
+  transition: opacity 2.5s ease;
+}
+
+.tbo-game.is-flight .tbo-flare {
+  opacity: 0.25;
+}
+
+.tbo-game.is-heat .tbo-flare,
+.tbo-game.is-shield .tbo-flare {
+  opacity: 0.9;
+}
+
+.tbo-heat,
+.tbo-shield-light {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.tbo-heat {
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(255, 225, 143, 0.32), transparent 58%),
+    linear-gradient(180deg, rgba(255, 160, 54, 0.14), rgba(125, 48, 16, 0.2));
+  animation: tbo-heat-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes tbo-heat-pulse {
+  0%, 100% { opacity: 0.25; }
+  35% { opacity: 0.75; }
+  65% { opacity: 0.4; }
+}
+
+.tbo-shield-light {
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    rgba(255, 238, 186, 0.5),
+    rgba(255, 190, 91, 0.14) 42%,
+    transparent 75%
+  );
+  animation: tbo-shield-pulse 2s ease-in-out infinite;
+}
+
+@keyframes tbo-shield-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.85; }
+}
+
+.tbo-whiteout {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  background: #fff8e6;
+  animation: tbo-whiteout 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes tbo-whiteout {
+  0% { opacity: 1; }
+  22% { opacity: 0.96; }
+  100% { opacity: 0; }
+}
+
+/* ---------- Corner buttons ---------- */
+
+.tbo-exit,
+.tbo-sound {
+  position: absolute;
+  z-index: 40;
+  top: 22px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 237, 201, 0.3);
+  border-radius: 50%;
+  background: rgba(36, 25, 18, 0.35);
+  color: #fff1d8;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.tbo-exit { right: 24px; }
+.tbo-sound { right: 78px; }
+
+.tbo-exit:hover { background: rgba(255, 235, 197, 0.18); transform: rotate(90deg); }
+.tbo-sound:hover { background: rgba(255, 235, 197, 0.18); }
+
+.tbo-exit:focus-visible,
+.tbo-sound:focus-visible,
+.tbo-control:focus-visible,
+.tbo-start:focus-visible,
+.tbo-ghost:focus-visible {
+  outline: 2px solid var(--tbo-gold);
+  outline-offset: 3px;
+}
+
+/* ---------- Intro ---------- */
+
+.tbo-intro,
+.tbo-ending {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  text-align: center;
+}
+
+.tbo-intro {
+  background:
+    radial-gradient(ellipse at center, rgba(35, 20, 12, 0.5), rgba(35, 20, 12, 0.15) 70%),
+    linear-gradient(0deg, rgba(32, 20, 12, 0.5), transparent 60%);
+}
+
+.tbo-intro__content,
+.tbo-ending__content {
+  width: min(700px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tbo-eyebrow {
+  color: var(--tbo-gold);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tbo-intro h1,
+.tbo-ending h2 {
+  margin: 22px 0 16px;
+  color: #fff1d8;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(58px, 9vw, 112px);
+  font-weight: 500;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  text-shadow: 0 5px 40px rgba(0, 0, 0, 0.35);
+}
+
+.tbo-lede,
+.tbo-ending__content > p {
+  max-width: 480px;
+  margin: 0;
+  color: rgba(255, 242, 219, 0.88);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(19px, 2.2vw, 25px);
+  line-height: 1.45;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+.tbo-keys {
+  margin: 28px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 239, 210, 0.8);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.tbo-key {
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 235, 195, 0.3);
+  border-radius: 6px;
+  background: rgba(40, 25, 15, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-weight: 600;
+}
+
+.tbo-keys__or {
+  font-style: italic;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.tbo-keys small {
+  flex-basis: 100%;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.tbo-start {
+  min-height: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 0 30px;
+  border: 1px solid #f0d39d;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #f2d8a7, var(--tbo-gold-deep));
+  color: var(--tbo-ink);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.28);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.tbo-start:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+}
+
+.tbo-ghost {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 24px;
+  border: 1px solid rgba(255, 235, 195, 0.4);
+  border-radius: 2px;
+  background: rgba(40, 25, 15, 0.35);
+  color: #fff1d8;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.tbo-ghost:hover {
+  background: rgba(255, 235, 197, 0.16);
+  transform: translateY(-3px);
+}
+
+/* ---------- Play: letterbox, HUD, journey ---------- */
+
+.tbo-letterbox {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(10, 6, 3, 0.55), transparent 9%),
+    linear-gradient(0deg, rgba(10, 6, 3, 0.55), transparent 9%);
+}
+
+.tbo-hud {
+  position: absolute;
+  z-index: 5;
+  top: 24px;
+  left: 30px;
+  right: 138px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.tbo-hud__title {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tbo-hud__label {
+  color: #f1d29a;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(35, 17, 8, 0.8);
+}
+
+.tbo-hud strong {
+  color: #fff4df;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 12px rgba(35, 17, 8, 0.8);
+}
+
+.tbo-telemetry {
+  margin-top: 6px;
+  display: flex;
+  gap: 18px;
+  color: rgba(255, 239, 210, 0.78);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 8px rgba(35, 17, 8, 0.8);
+}
+
+.tbo-telemetry b {
+  color: #fff4df;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tbo-hud__timer {
+  color: #fff1d8;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 32px;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 14px #4d2d17;
+}
+
+.tbo-journey {
+  position: absolute;
+  z-index: 5;
+  top: 92px;
+  left: 50%;
+  width: min(420px, 46vw);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.tbo-journey__track {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 237, 201, 0.25);
+  border-radius: 2px;
+}
+
+.tbo-journey__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: linear-gradient(90deg, rgba(228, 189, 120, 0.2), var(--tbo-gold));
+  border-radius: 2px;
+}
+
+.tbo-journey__bird {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff1d8;
+  box-shadow: 0 0 12px 3px rgba(255, 220, 140, 0.8);
+  transform: translate(-50%, -50%);
+}
+
+.tbo-journey__sun {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff6d2 30%, #ffc45c 70%);
+  box-shadow: 0 0 14px 4px rgba(255, 196, 92, 0.65);
+}
+
+.tbo-caption {
+  position: absolute;
+  z-index: 6;
+  left: 20px;
+  right: 20px;
+  bottom: 138px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.tbo-caption p {
+  margin: 0;
+  color: #fff1d8;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(19px, 2.6vw, 28px);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 16px rgba(35, 17, 8, 0.9);
+}
+
+/* ---------- Controls ---------- */
+
+.tbo-controls {
+  position: absolute;
+  z-index: 8;
+  bottom: 28px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.tbo-controls__group {
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.tbo-controls__group:first-child {
+  flex-direction: column;
+}
+
+.tbo-control {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 235, 197, 0.45);
+  border-radius: 50%;
+  background: rgba(47, 29, 18, 0.4);
+  color: #fff0d6;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  touch-action: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.tbo-control:active {
+  background: rgba(234, 190, 119, 0.55);
+  transform: scale(0.93);
+}
+
+/* ---------- Flash message + ending ---------- */
+
+.tbo-flashmsg {
+  position: absolute;
+  z-index: 12;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  pointer-events: none;
+  padding: 0 24px;
+}
+
+.tbo-flashmsg span {
+  color: #ffe9bf;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(22px, 3.6vw, 40px);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 30px rgba(255, 140, 50, 0.85), 0 2px 18px rgba(30, 12, 4, 0.9);
+}
+
+.tbo-flashmsg strong {
+  color: #fff7e2;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(44px, 8vw, 96px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 44px rgba(255, 170, 70, 0.8), 0 4px 24px rgba(30, 12, 4, 0.9);
+}
+
+.tbo-ending {
+  background:
+    radial-gradient(ellipse at center, rgba(255, 231, 173, 0.14), transparent 58%),
+    rgba(37, 21, 12, 0.72);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: tbo-ending-in 1.4s ease-out both;
+}
+
+@keyframes tbo-ending-in {
+  from { background-color: rgba(255, 244, 213, 0.9); }
+  to { background-color: rgba(37, 21, 12, 0.72); }
+}
+
+.tbo-ending h2 {
+  font-size: clamp(54px, 8vw, 94px);
+  letter-spacing: 0.01em;
+}
+
+.tbo-ending__rule {
+  width: 100px;
+  height: 1px;
+  margin: 14px 0 20px;
+  background: linear-gradient(90deg, transparent, #e9c17e, transparent);
+}
+
+.tbo-ending__content h3 {
+  margin: 25px 0 0;
+  color: #edc987;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(19px, 3vw, 28px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.tbo-ending__content .tbo-ending__last {
+  margin: 8px 0 30px;
+  color: #fff3df;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.tbo-ending__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 700px) {
+  .tbo-exit,
+  .tbo-sound {
+    top: 14px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .tbo-exit { right: 14px; }
+  .tbo-sound { right: 62px; }
+
+  .tbo-hud {
+    top: 16px;
+    left: 18px;
+    right: 112px;
+  }
+
+  .tbo-hud strong { font-size: 17px; }
+  .tbo-hud__timer { font-size: 24px; }
+  .tbo-telemetry { gap: 12px; }
+
+  .tbo-journey {
+    top: 84px;
+    width: 62vw;
+  }
+
+  .tbo-controls {
+    left: 16px;
+    right: 16px;
+    bottom: 22px;
+  }
+
+  .tbo-control {
+    width: 52px;
+    height: 52px;
+  }
+
+  .tbo-caption { bottom: 120px; }
+
+  .tbo-intro,
+  .tbo-ending { padding: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tbo-game__canvas,
+  .tbo-game *,
+  .tbo-game *::before,
+  .tbo-game *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

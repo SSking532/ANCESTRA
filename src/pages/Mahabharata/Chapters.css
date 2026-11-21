@@ -1,0 +1,6326 @@
+/* =========================================================
+   ANCESTRA — MAHABHARATA CHAPTERS
+   CLEAN DIVINE GRANTH OPENING
+   ---------------------------------------------------------
+   Important:
+   - One opening overlay only.
+   - One visible Om only: the front cover.
+   - One title only: MAHABHARATA on the front cover.
+   - No Framer Motion controls the opening transforms.
+   - The story page stays visually isolated until the opening ends.
+   ========================================================= */
+
+:root {
+  --gold: #d8ad5b;
+  --gold-light: #f0d28a;
+  --gold-soft: #b98a3f;
+  --ink: #0f0d0e;
+  --cream: #eee5d3;
+  --muted: #9b8d78;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #080604;
+  color: var(--cream);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* =========================================================
+   OPENING ROOT / LAYER STACK
+   ========================================================= */
+
+.granth-opening {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(183, 132, 40, 0.18) 0%,
+      rgba(53, 32, 10, 0.5) 25%,
+      rgba(6, 4, 2, 0.96) 68%,
+      #020201 100%
+    );
+
+  animation:
+    openingFadeOut
+    0.65s
+    cubic-bezier(0.76, 0, 0.24, 1)
+    6.35s
+    forwards;
+}
+
+/*
+   Layer order is deliberate:
+
+   0  background
+   1  aura
+   2  mandala
+   3  rays
+   10 granth
+   20 pages
+   50 front cover
+   60 spine
+   70 light
+   80 hint
+*/
+
+.granth-opening__void {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(226, 177, 75, 0.16),
+      rgba(125, 83, 25, 0.07) 28%,
+      transparent 62%
+    );
+
+  animation:
+    openingVoidBreath
+    5.5s
+    ease-in-out
+    0.1s
+    both;
+}
+
+.granth-opening::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 17%,
+      rgba(0, 0, 0, 0.16) 52%,
+      rgba(0, 0, 0, 0.88) 100%
+    );
+}
+
+.granth-opening::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 79;
+
+  pointer-events: none;
+
+  opacity: 0.16;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(221, 183, 103, 0.025) 0,
+      rgba(221, 183, 103, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  mix-blend-mode: screen;
+}
+
+/* =========================================================
+   DIVINE AURA
+   ========================================================= */
+
+.granth-opening__aura {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+
+  width: min(760px, 78vmin);
+  height: min(760px, 78vmin);
+
+  transform: translate(-50%, -50%) scale(0.42);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 224, 143, 0.25) 0%,
+      rgba(219, 166, 65, 0.12) 24%,
+      rgba(164, 108, 30, 0.06) 43%,
+      transparent 70%
+    );
+
+  filter: blur(5px);
+  opacity: 0;
+
+  animation:
+    auraReveal
+    2.4s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.2s
+    forwards;
+}
+
+.granth-opening__aura--two {
+  width: min(430px, 48vmin);
+  height: min(430px, 48vmin);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 239, 185, 0.32) 0%,
+      rgba(233, 190, 93, 0.15) 32%,
+      transparent 72%
+    );
+
+  filter: blur(2px);
+
+  animation:
+    auraRevealInner
+    2s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.65s
+    forwards;
+}
+
+/* =========================================================
+   MANDALA
+   ========================================================= */
+
+.granth-opening__mandala {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+
+  width: min(720px, 72vw);
+  height: min(720px, 72vw);
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.55)
+    rotate(-18deg);
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(222, 178, 87, 0.13) 0deg,
+      rgba(222, 178, 87, 0.13) 1deg,
+      transparent 1deg,
+      transparent 15deg
+    );
+
+  -webkit-mask-image:
+    radial-gradient(
+      circle,
+      transparent 0%,
+      black 27%,
+      black 58%,
+      transparent 73%
+    );
+
+  mask-image:
+    radial-gradient(
+      circle,
+      transparent 0%,
+      black 27%,
+      black 58%,
+      transparent 73%
+    );
+
+  filter:
+    drop-shadow(
+      0 0 20px rgba(214, 166, 74, 0.16)
+    );
+
+  pointer-events: none;
+
+  animation:
+    mandalaReveal
+    1.9s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.35s
+    forwards;
+}
+
+.granth-opening__mandala::before,
+.granth-opening__mandala::after {
+  content: "";
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 76%;
+  height: 76%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+
+  border:
+    1px solid
+    rgba(225, 183, 94, 0.22);
+
+  border-radius: 8%;
+}
+
+.granth-opening__mandala::after {
+  width: 55%;
+  height: 55%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(22.5deg);
+}
+
+.mandala-ring--1 {
+  /* Explicit base ring modifier for the first ring. */
+}
+
+.mandala-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 100%;
+  height: 100%;
+
+  transform: translate(-50%, -50%);
+
+  border:
+    1px solid
+    rgba(225, 183, 94, 0.22);
+
+  border-radius: 50%;
+}
+
+.mandala-ring--2 {
+  width: 78%;
+  height: 78%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+
+  border-radius: 8%;
+}
+
+.mandala-ring--3 {
+  width: 57%;
+  height: 57%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(22.5deg);
+
+  border-radius: 8%;
+}
+
+.mandala-ring--4 {
+  width: 38%;
+  height: 38%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+
+  border-radius: 4%;
+}
+
+.mandala-diamond {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 28%;
+  height: 28%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+
+  border:
+    1px solid
+    rgba(238, 198, 111, 0.24);
+}
+
+.mandala-diamond--two {
+  width: 20%;
+  height: 20%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(22.5deg);
+}
+
+.mandala-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 74px;
+  height: 74px;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(239, 205, 128, 0.38);
+
+  border-radius: 50%;
+
+  color: #efd18b;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 231, 163, 0.12),
+      transparent 70%
+    );
+
+  box-shadow:
+    0 0 25px rgba(229, 183, 80, 0.25),
+    inset 0 0 20px rgba(229, 183, 80, 0.12);
+}
+
+/* =========================================================
+   DIVINE RAYS
+   ========================================================= */
+
+.granth-opening__rays {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+
+  width: 100vw;
+  height: 100vh;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  animation:
+    raysReveal
+    1.6s
+    ease-out
+    0.75s
+    forwards;
+}
+
+.granth-opening__rays span {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 1px;
+  height: 48vh;
+
+  transform-origin: 50% 100%;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(245, 205, 116, 0.32),
+      transparent
+    );
+
+  opacity: 0.22;
+}
+
+.granth-opening__rays span:nth-child(1) {
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.granth-opening__rays span:nth-child(2) {
+  transform: translate(-50%, -100%) rotate(30deg);
+}
+
+.granth-opening__rays span:nth-child(3) {
+  transform: translate(-50%, -100%) rotate(60deg);
+}
+
+.granth-opening__rays span:nth-child(4) {
+  transform: translate(-50%, -100%) rotate(90deg);
+}
+
+.granth-opening__rays span:nth-child(5) {
+  transform: translate(-50%, -100%) rotate(120deg);
+}
+
+.granth-opening__rays span:nth-child(6) {
+  transform: translate(-50%, -100%) rotate(150deg);
+}
+
+.granth-opening__rays span:nth-child(7) {
+  transform: translate(-50%, -100%) rotate(180deg);
+}
+
+.granth-opening__rays span:nth-child(8) {
+  transform: translate(-50%, -100%) rotate(210deg);
+}
+
+.granth-opening__rays span:nth-child(9) {
+  transform: translate(-50%, -100%) rotate(240deg);
+}
+
+.granth-opening__rays span:nth-child(10) {
+  transform: translate(-50%, -100%) rotate(270deg);
+}
+
+.granth-opening__rays span:nth-child(11) {
+  transform: translate(-50%, -100%) rotate(300deg);
+}
+
+.granth-opening__rays span:nth-child(12) {
+  transform: translate(-50%, -100%) rotate(330deg);
+}
+
+/* =========================================================
+   THE GRANTH
+   ========================================================= */
+
+.granth {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+
+  width: min(1080px, 86vw);
+  height: min(620px, 68vh);
+
+  transform:
+    translate(-50%, -50%)
+    translateY(38px)
+    scale(0.84);
+
+  transform-style: preserve-3d;
+  perspective: 2200px;
+
+  opacity: 0;
+
+  filter:
+    drop-shadow(
+      0 40px 80px rgba(0, 0, 0, 0.85)
+    )
+    drop-shadow(
+      0 0 55px rgba(202, 151, 52, 0.18)
+    );
+
+  animation:
+    granthEnter
+    1.25s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.6s
+    forwards;
+}
+
+/* =========================================================
+   BACK COVER
+   ========================================================= */
+
+.granth__cover {
+  position: absolute;
+  inset: 0;
+
+  border-radius: 9px;
+
+  transform-style: preserve-3d;
+
+  overflow: hidden;
+}
+
+.granth__cover--back {
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      135deg,
+      #160d05 0%,
+      #3c210c 25%,
+      #71471b 50%,
+      #321908 78%,
+      #120a04 100%
+    );
+
+  border:
+    2px solid
+    rgba(174, 119, 42, 0.65);
+
+  box-shadow:
+    inset 0 0 70px rgba(0, 0, 0, 0.8),
+    inset 0 0 10px rgba(243, 193, 92, 0.18);
+}
+
+.granth__cover--back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.25;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 4px,
+      rgba(255, 210, 130, 0.025) 5px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 8px,
+      rgba(0, 0, 0, 0.06) 9px
+    );
+}
+
+.granth__back-texture {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 203, 106, 0.08),
+      transparent 62%
+    );
+}
+
+/* =========================================================
+   PAGE BLOCK
+   ========================================================= */
+
+.granth__pages {
+  position: absolute;
+  inset: 14px;
+  z-index: 20;
+
+  display: flex;
+
+  overflow: hidden;
+
+  border-radius: 5px;
+
+  transform-style: preserve-3d;
+
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================================
+   INDIVIDUAL PAGES
+   ========================================================= */
+
+.granth__page {
+  position: relative;
+
+  width: 50%;
+  height: 100%;
+
+  overflow: hidden;
+
+  transform-style: preserve-3d;
+
+  backface-visibility: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 244, 194, 0.98) 0%,
+      rgba(231, 201, 133, 0.98) 58%,
+      rgba(153, 102, 35, 0.98) 100%
+    );
+
+  border:
+    1px solid
+    rgba(111, 70, 21, 0.45);
+
+  box-shadow:
+    inset 0 0 70px rgba(94, 54, 14, 0.25),
+    inset 0 0 5px rgba(255, 243, 185, 0.5);
+}
+
+.granth__page--left {
+  transform:
+    rotateY(-76deg)
+    translateZ(0);
+
+  transform-origin: right center;
+
+  border-radius: 4px 0 0 4px;
+
+  animation:
+    pageSpreadLeft
+    1.55s
+    cubic-bezier(0.76, 0, 0.24, 1)
+    4.65s
+    forwards;
+}
+
+.granth__page--right {
+  transform:
+    rotateY(76deg)
+    translateZ(0);
+
+  transform-origin: left center;
+
+  border-radius: 0 4px 4px 0;
+
+  animation:
+    pageSpreadRight
+    1.55s
+    cubic-bezier(0.76, 0, 0.24, 1)
+    4.65s
+    forwards;
+}
+
+.granth__page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.45;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 5px,
+      rgba(107, 69, 20, 0.025) 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 8px,
+      rgba(107, 69, 20, 0.018) 9px
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   INNER PAGE
+   ========================================================= */
+
+.granth__page-inner {
+  position: absolute;
+  inset: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(111, 69, 20, 0.38);
+
+  box-shadow:
+    inset 0 0 25px rgba(92, 55, 13, 0.12);
+}
+
+.granth__page-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 249, 212, 0.12),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   PAGE BORDER
+   ========================================================= */
+
+.page-border {
+  position: absolute;
+  inset: 14px;
+
+  border:
+    1px solid
+    rgba(128, 79, 20, 0.25);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   PAGE ORNAMENT
+   ========================================================= */
+
+.page-ornament--top {
+  /* The top ornament uses the shared ornament styling. */
+}
+
+.page-ornament {
+  position: relative;
+  z-index: 4;
+
+  color: #8b5d20;
+
+  font-family: Georgia, serif;
+
+  font-size: 25px;
+
+  opacity: 0.7;
+
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   SANSKRIT SCRIPT
+   ========================================================= */
+
+.page-script {
+  position: relative;
+  z-index: 4;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #654116;
+
+  font-family:
+    "Noto Serif Devanagari",
+    "Nirmala UI",
+    Georgia,
+    serif;
+
+  font-size: clamp(20px, 2vw, 31px);
+
+  line-height: 1.3;
+
+  text-shadow:
+    0 1px 0 rgba(255, 239, 181, 0.5);
+}
+
+/* =========================================================
+   MANUSCRIPT LINES
+   ========================================================= */
+
+.page-manuscript-lines {
+  position: relative;
+  z-index: 4;
+
+  width: 70%;
+
+  margin-top: 24px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  opacity: 0.22;
+}
+
+.page-manuscript-lines span {
+  display: block;
+
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #70491c 20%,
+      #70491c 80%,
+      transparent
+    );
+}
+
+.page-manuscript-lines span:nth-child(2) {
+  width: 88%;
+}
+
+.page-manuscript-lines span:nth-child(4) {
+  width: 92%;
+}
+
+.page-manuscript-lines span:nth-child(6) {
+  width: 82%;
+}
+
+/* =========================================================
+   CENTRAL SPINE
+   ========================================================= */
+
+.granth__spine {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: 14px;
+  height: 100%;
+
+  transform:
+    translateX(-50%)
+    translateZ(65px);
+
+  z-index: 60;
+
+  background:
+    linear-gradient(
+      90deg,
+      #1a0b03 0%,
+      #6d3d0c 18%,
+      #d7a84e 45%,
+      #f1ca76 50%,
+      #8b5014 68%,
+      #210e03 100%
+    );
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 0 20px rgba(230, 183, 77, 0.35),
+    inset 0 0 5px rgba(255, 228, 153, 0.7);
+}
+
+.granth__spine-glow {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 150px;
+  height: 100%;
+
+  transform: translate(-50%, -50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 220, 128, 0.18),
+      transparent
+    );
+
+  filter: blur(10px);
+
+  animation:
+    spineDivineGlow
+    2.2s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   FRONT COVER
+   ========================================================= */
+
+.granth__cover--front {
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform-origin: left center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(154, 91, 22, 0.42),
+      transparent 42%
+    ),
+    linear-gradient(
+      135deg,
+      #241106 0%,
+      #5c3210 28%,
+      #8a571b 50%,
+      #4c270c 72%,
+      #1b0b04 100%
+    );
+
+  border:
+    2px solid
+    rgba(210, 159, 61, 0.72);
+
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.7),
+    inset 0 0 18px rgba(255, 215, 123, 0.16);
+
+  backface-visibility: hidden;
+
+  animation:
+    frontCoverOpen
+    1.55s
+    cubic-bezier(0.76, 0, 0.24, 1)
+    3.55s
+    forwards;
+}
+
+/* =========================================================
+   FRONT COVER BORDER
+   ========================================================= */
+
+.granth__cover-border {
+  position: absolute;
+  inset: 25px;
+
+  border:
+    1px solid
+    rgba(235, 190, 102, 0.55);
+
+  box-shadow:
+    inset 0 0 20px rgba(235, 190, 102, 0.08);
+}
+
+.granth__cover-border::after {
+  content: "";
+
+  position: absolute;
+  inset: 12px;
+
+  border:
+    1px solid
+    rgba(235, 190, 102, 0.25);
+}
+
+/* =========================================================
+   COVER CORNERS
+   ========================================================= */
+
+.cover-corner {
+  position: absolute;
+
+  width: 50px;
+  height: 50px;
+
+  border-color:
+    rgba(237, 193, 104, 0.55);
+
+  border-style: solid;
+}
+
+.cover-corner--tl {
+  left: 35px;
+  top: 35px;
+
+  border-width:
+    1px 0 0 1px;
+}
+
+.cover-corner--tr {
+  right: 35px;
+  top: 35px;
+
+  border-width:
+    1px 1px 0 0;
+}
+
+.cover-corner--bl {
+  left: 35px;
+  bottom: 35px;
+
+  border-width:
+    0 0 1px 1px;
+}
+
+.cover-corner--br {
+  right: 35px;
+  bottom: 35px;
+
+  border-width:
+    0 1px 1px 0;
+}
+
+/* =========================================================
+   COVER TYPOGRAPHY
+   ========================================================= */
+
+.granth__cover-ornament {
+  position: relative;
+  z-index: 5;
+
+  width: 70%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  color: #e8c982;
+
+  text-shadow:
+    0 0 18px rgba(236, 191, 97, 0.25);
+
+  opacity: 0;
+  transform: translateY(14px);
+
+  animation:
+    coverContentReveal
+    0.95s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.95s
+    forwards;
+}
+
+.cover-symbol {
+  margin-bottom: 18px;
+
+  color: #f0d18b;
+
+  font-family:
+    "Noto Serif Devanagari",
+    "Nirmala UI",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(48px, 6vw, 82px);
+
+  line-height: 1;
+
+  text-shadow:
+    0 0 12px rgba(255, 222, 142, 0.75),
+    0 0 35px rgba(225, 167, 63, 0.45);
+}
+
+.cover-line {
+  width: 150px;
+
+  height: 1px;
+
+  margin-bottom: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d9ad5b,
+      transparent
+    );
+}
+
+.granth__cover-ornament > span {
+  display: block;
+
+  font-size: 10px;
+
+  letter-spacing: 0.65em;
+
+  margin-left: 0.65em;
+
+  color: #c69a4c;
+}
+
+.granth__cover-ornament > strong {
+  display: block;
+
+  margin-top: 12px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(32px, 4vw, 58px);
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+
+  color: #f0d79b;
+
+  white-space: nowrap;
+}
+
+.granth__cover-ornament > small {
+  display: block;
+
+  margin-top: 14px;
+
+  font-size: 8px;
+
+  letter-spacing: 0.48em;
+
+  color: #b9883c;
+}
+
+/* =========================================================
+   DIVINE LIGHT — NO TEXT / NO SECOND OM
+   ========================================================= */
+
+.granth-opening__divine {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+  z-index: 70;
+
+  width: 1px;
+  height: 1px;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  animation:
+    divineBurst
+    1.15s
+    ease-out
+    3.55s
+    forwards;
+}
+
+.granth-opening__divine::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 24px;
+  height: 24px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: rgba(255, 245, 210, 0.98);
+
+  box-shadow:
+    0 0 35px 12px rgba(255, 225, 142, 0.55),
+    0 0 130px 48px rgba(218, 166, 66, 0.28);
+}
+
+.granth-opening__divine::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 360px;
+  height: 360px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 239, 180, 0.26) 0%,
+      rgba(255, 212, 108, 0.1) 28%,
+      transparent 68%
+    );
+
+  filter: blur(5px);
+}
+
+/* =========================================================
+   FINAL SOFT LIGHT
+   ========================================================= */
+
+.granth-opening__final-light {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+  z-index: 71;
+
+  width: 18px;
+  height: 18px;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.1);
+
+  border-radius: 50%;
+
+  background: rgba(255, 244, 203, 0.95);
+
+  box-shadow:
+    0 0 40px 14px rgba(255, 225, 142, 0.42),
+    0 0 140px 45px rgba(218, 166, 66, 0.2);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  animation:
+    finalLight
+    0.85s
+    ease-out
+    5.65s
+    forwards;
+}
+
+/* =========================================================
+   OPENING HINT
+   ========================================================= */
+
+.granth-opening__hint {
+  position: absolute;
+
+  left: 50%;
+  bottom: 7%;
+
+  transform: translateX(-50%);
+
+  z-index: 80;
+
+  width: max-content;
+
+  color: rgba(201, 166, 99, 0.62);
+
+  font-size: 8px;
+
+  letter-spacing: 0.42em;
+
+  white-space: nowrap;
+
+  text-transform: uppercase;
+
+  opacity: 0;
+
+  animation:
+    hintReveal
+    2.4s
+    ease
+    1.8s
+    forwards;
+}
+
+/* =========================================================
+   OPENING ANIMATIONS
+   ========================================================= */
+
+@keyframes openingVoidBreath {
+  0% {
+    opacity: 0.35;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes auraReveal {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.42);
+  }
+
+  45% {
+    opacity: 0.92;
+  }
+
+  100% {
+    opacity: 0.58;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+@keyframes auraRevealInner {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.35);
+  }
+
+  55% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0.62;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+@keyframes mandalaReveal {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.55)
+      rotate(-18deg);
+  }
+
+  45% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.28;
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(0deg);
+  }
+}
+
+@keyframes raysReveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes granthEnter {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      translateY(38px)
+      scale(0.84);
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes coverContentReveal {
+  0% {
+    opacity: 0;
+    transform:
+      translateY(14px)
+      scale(0.97);
+    filter: blur(6px);
+  }
+
+  70% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes frontCoverOpen {
+  0% {
+    opacity: 1;
+    transform:
+      rotateY(0deg)
+      translateZ(0);
+  }
+
+  60% {
+    opacity: 1;
+    transform:
+      rotateY(-72deg)
+      translateZ(12px);
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform:
+      rotateY(-108deg)
+      translateZ(0);
+  }
+}
+
+@keyframes pageSpreadLeft {
+  0% {
+    transform:
+      rotateY(-76deg)
+      translateZ(0);
+  }
+
+  55% {
+    transform:
+      rotateY(-12deg)
+      translateZ(20px);
+  }
+
+  100% {
+    transform:
+      rotateY(0deg)
+      translateZ(0);
+  }
+}
+
+@keyframes pageSpreadRight {
+  0% {
+    transform:
+      rotateY(76deg)
+      translateZ(0);
+  }
+
+  55% {
+    transform:
+      rotateY(12deg)
+      translateZ(20px);
+  }
+
+  100% {
+    transform:
+      rotateY(0deg)
+      translateZ(0);
+  }
+}
+
+@keyframes spineDivineGlow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes divineBurst {
+  0% {
+    opacity: 0;
+  }
+
+  22% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes finalLight {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.1);
+  }
+
+  25% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(14);
+  }
+}
+
+@keyframes hintReveal {
+  0% {
+    opacity: 0;
+  }
+
+  22% {
+    opacity: 0.85;
+  }
+
+  75% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes openingFadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* =========================================================
+   STORY PAGE — preserved visual system
+   ========================================================= */
+
+.story-atmosphere {
+  position: fixed;
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+
+.story-atmosphere__glow {
+  position: absolute;
+
+  width: 800px;
+  height: 800px;
+
+  top: -260px;
+  right: -180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(190, 143, 54, 0.13),
+      transparent 68%
+    );
+
+  animation: ambientGlow 8s ease-in-out infinite;
+}
+
+
+.story-atmosphere__sun {
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  top: 130px;
+  right: 11%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(218, 171, 78, 0.09),
+      transparent 68%
+    );
+
+  animation: sunPulse 6s ease-in-out infinite;
+}
+
+
+.story-atmosphere__ring {
+  position: absolute;
+
+  border:
+    1px solid rgba(199, 153, 66, 0.09);
+
+  border-radius: 50%;
+}
+
+
+.story-atmosphere__ring--one {
+  width: 650px;
+  height: 650px;
+
+  right: -260px;
+  top: 40px;
+
+  animation: ringRotate 40s linear infinite;
+}
+
+
+.story-atmosphere__ring--two {
+  width: 850px;
+  height: 850px;
+
+  right: -360px;
+  top: -60px;
+
+  animation: ringRotateReverse 60s linear infinite;
+}
+
+
+.story-atmosphere__grid {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.3;
+
+  background-image:
+    linear-gradient(
+      rgba(191, 148, 63, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(191, 148, 63, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 72px 72px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 80%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 80%
+    );
+}
+
+
+@keyframes ambientGlow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(0.95);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+
+@keyframes ringRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes ringRotateReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.story-nav {
+  position: relative;
+
+  z-index: 10;
+
+  height: 108px;
+
+  padding: 0 6%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom:
+    1px solid rgba(195, 150, 62, 0.12);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(8, 7, 5, 0.55),
+      transparent
+    );
+}
+
+
+.story-nav__back {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  color: #aaa296;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  letter-spacing: 0.25em;
+
+  transition: 0.35s ease;
+}
+
+
+.story-nav__back:hover {
+  color: #d8ab55;
+
+  transform:
+    translateX(-5px);
+}
+
+
+.story-nav__brand {
+  color: #d7a948;
+
+  font-family: Georgia, serif;
+
+  font-size: 16px;
+
+  letter-spacing: 0.38em;
+
+  text-shadow:
+    0 0 18px rgba(215, 169, 72, 0.25);
+}
+
+
+.story-nav__label {
+  color: #817a70;
+
+  font-size: 10px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.story-hero {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1400px;
+
+  margin: auto;
+
+  min-height: 1050px;
+
+  padding:
+    135px 7% 120px;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.story-hero__content {
+  position: relative;
+
+  z-index: 4;
+
+  max-width: 980px;
+}
+
+
+.story-hero__eyebrow,
+.story-eyebrow {
+  display: block;
+
+  color: #b88a36;
+
+  font-size: 10px;
+
+  letter-spacing: 0.5em;
+}
+
+
+.story-hero h1 {
+  margin: 35px 0 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(72px, 9vw, 150px);
+
+  line-height: 0.78;
+
+  font-weight: 400;
+
+  letter-spacing: -0.055em;
+
+  color: #eee7d8;
+
+  text-shadow:
+    0 10px 45px rgba(0, 0, 0, 0.35);
+}
+
+
+.story-hero h1 em {
+  display: block;
+
+  color: #c89b48;
+
+  font-style: italic;
+
+  text-shadow:
+    0 0 25px rgba(200, 155, 72, 0.18);
+}
+
+
+.story-hero__line {
+  width: 260px;
+
+  height: 1px;
+
+  margin:
+    48px 0 28px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #c09543,
+      transparent
+    );
+
+  box-shadow:
+    0 0 12px rgba(192, 149, 67, 0.25);
+}
+
+
+.story-hero__content p {
+  max-width: 720px;
+
+  margin: 0;
+
+  color: #999187;
+
+  font-size: 18px;
+
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.story-hero__image-wrap {
+  position: relative;
+
+  width: 82%;
+
+  max-width: 1120px;
+
+  margin:
+    75px auto 0;
+
+  align-self: center;
+}
+
+
+.story-hero__image-glow {
+  position: absolute;
+
+  inset: -100px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(193, 146, 57, 0.18),
+      transparent 65%
+    );
+
+  filter: blur(8px);
+
+  animation:
+    heroImageGlow 6s ease-in-out infinite;
+}
+
+
+.story-hero__image-frame {
+  position: relative;
+
+  width: 100%;
+
+  padding: 10px;
+
+  border:
+    1px solid rgba(195, 150, 62, 0.32);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(195, 150, 62, 0.08),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  overflow: hidden;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+
+.story-hero__image-frame::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 22px;
+
+  border:
+    1px solid rgba(220, 177, 89, 0.18);
+
+  z-index: 3;
+
+  pointer-events: none;
+}
+
+
+.story-hero__image-frame img {
+  display: block;
+
+  width: 100%;
+
+  height: 520px;
+
+  object-fit: cover;
+
+  filter:
+    saturate(0.82)
+    contrast(1.08)
+    brightness(0.72);
+
+  transition:
+    transform 1.5s ease,
+    filter 1.5s ease;
+}
+
+
+.story-hero__image-frame:hover img {
+  transform: scale(1.035);
+
+  filter:
+    saturate(0.95)
+    contrast(1.08)
+    brightness(0.82);
+}
+
+
+.story-hero__image-overlay {
+  position: absolute;
+
+  inset: 10px;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(8, 7, 5, 0.05),
+      rgba(8, 7, 5, 0.15) 45%,
+      rgba(8, 7, 5, 0.78)
+    );
+}
+
+
+.story-hero__image-caption {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 45px;
+  right: 45px;
+  bottom: 40px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #d4c5a8;
+
+  font-size: 9px;
+
+  letter-spacing: 0.32em;
+}
+
+
+.story-hero__scroll {
+  position: absolute;
+
+  left: 7%;
+  bottom: 45px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #746e64;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+}
+
+
+@keyframes heroImageGlow {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.story-introduction {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 170px 50px;
+
+  display: grid;
+
+  grid-template-columns: 180px 1fr;
+
+  gap: 100px;
+
+  border-top:
+    1px solid rgba(195, 150, 62, 0.12);
+}
+
+
+.story-section-index {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  height: fit-content;
+}
+
+
+.story-section-index span {
+  color: #b98b39;
+
+  font-family: Georgia, serif;
+
+  font-size: 26px;
+}
+
+
+.story-section-index small {
+  color: #716b62;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+}
+
+
+.story-introduction__content {
+  max-width: 780px;
+}
+
+
+.story-introduction h2 {
+  margin:
+    35px 0 55px;
+
+  font-family: Georgia, serif;
+
+  font-size:
+    clamp(55px, 7vw, 100px);
+
+  line-height: 0.85;
+
+  font-weight: 400;
+
+  letter-spacing: -0.045em;
+}
+
+
+.story-introduction h2 em {
+  color: #c39647;
+
+  font-style: italic;
+}
+
+
+.story-introduction p {
+  max-width: 720px;
+
+  margin:
+    0 0 25px;
+
+  color: #948d82;
+
+  font-size: 18px;
+
+  line-height: 1.95;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.story-timeline {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 150px 50px;
+}
+
+
+.story-timeline__header {
+  display: grid;
+
+  grid-template-columns: 180px 1fr;
+
+  gap: 100px;
+}
+
+
+.story-timeline__header h2 {
+  max-width: 800px;
+
+  margin: 30px 0 0;
+
+  font-family: Georgia, serif;
+
+  font-size:
+    clamp(48px, 6vw, 85px);
+
+  line-height: 0.92;
+
+  font-weight: 400;
+
+  letter-spacing: -0.04em;
+}
+
+
+.story-timeline__header h2 em {
+  color: #c49645;
+
+  font-style: italic;
+}
+
+
+.story-timeline__header h2 strong {
+  display: block;
+
+  font-weight: 400;
+}
+
+
+.story-timeline__line {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 90px 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(195, 150, 62, 0.3),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   STORY CHAPTERS
+   ========================================================= */
+
+.story-chapters {
+  position: relative;
+}
+
+
+.story-chapters::before {
+  content: "";
+
+  position: absolute;
+
+  left: 90px;
+
+  top: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(195, 150, 62, 0.3) 5%,
+      rgba(195, 150, 62, 0.3) 95%,
+      transparent
+    );
+}
+
+
+.story-chapter {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 180px 1fr;
+
+  gap: 100px;
+
+  min-height: 340px;
+
+  padding: 45px 0;
+
+  border-bottom:
+    1px solid rgba(195, 150, 62, 0.08);
+}
+
+
+.story-chapter__number {
+  position: relative;
+
+  z-index: 2;
+
+  width: 72px;
+  height: 72px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 54px;
+
+  border:
+    1px solid rgba(195, 150, 62, 0.3);
+
+  border-radius: 50%;
+
+  background: #080705;
+
+  color: #bc8f3e;
+
+  font-family: Georgia, serif;
+
+  font-size: 22px;
+
+  box-shadow:
+    0 0 30px rgba(195, 150, 62, 0.06);
+}
+
+
+.story-chapter__content {
+  max-width: 700px;
+
+  padding:
+    20px 0 50px;
+}
+
+
+.story-chapter__content h3 {
+  margin:
+    25px 0;
+
+  font-family: Georgia, serif;
+
+  font-size:
+    clamp(42px, 5vw, 70px);
+
+  font-weight: 400;
+
+  line-height: 0.9;
+
+  letter-spacing: -0.035em;
+}
+
+
+.story-chapter__content p {
+  max-width: 650px;
+
+  color: #8e887d;
+
+  font-size: 16px;
+
+  line-height: 1.9;
+}
+
+
+.story-chapter__footer {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 35px;
+
+  color: #a77d32;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+   ========================================================= */
+
+.story-philosophy {
+  position: relative;
+
+  z-index: 2;
+
+  min-height: 720px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 150px 30px;
+
+  text-align: center;
+
+  border-top:
+    1px solid rgba(195, 150, 62, 0.12);
+
+  overflow: hidden;
+}
+
+
+.story-philosophy__geometry {
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  border:
+    1px solid rgba(195, 150, 62, 0.08);
+
+  border-radius: 50%;
+
+  transform: rotate(45deg);
+
+  animation:
+    philosophyRotate 50s linear infinite;
+}
+
+
+.story-philosophy__geometry::before,
+.story-philosophy__geometry::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 18%;
+
+  border:
+    1px solid rgba(195, 150, 62, 0.08);
+
+  transform: rotate(45deg);
+}
+
+
+.story-philosophy__geometry::after {
+  transform: rotate(90deg);
+}
+
+
+.story-philosophy__content {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+.story-philosophy h2 {
+  margin: 35px 0;
+
+  font-family: Georgia, serif;
+
+  font-size:
+    clamp(55px, 7vw, 105px);
+
+  font-weight: 400;
+
+  line-height: 0.86;
+
+  letter-spacing: -0.05em;
+}
+
+
+.story-philosophy h2 em {
+  color: #c49748;
+
+  font-style: italic;
+}
+
+
+.story-philosophy p {
+  color: #827b70;
+
+  font-size: 16px;
+
+  line-height: 2;
+}
+
+
+@keyframes philosophyRotate {
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.story-footer {
+  position: relative;
+
+  z-index: 5;
+
+  padding: 35px 6%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  border-top:
+    1px solid rgba(195, 150, 62, 0.12);
+
+  color: #625c52;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .granth-book {
+    width: 94vw;
+    height: 58vh;
+  }
+
+  .granth-opening__mandala {
+    width: 90vmin;
+    height: 90vmin;
+  }
+
+  .story-hero {
+    min-height: auto;
+
+    padding:
+      100px 6% 130px;
+  }
+
+  .story-hero__image-wrap {
+    width: 100%;
+  }
+
+  .story-hero__image-frame img {
+    height: 430px;
+  }
+
+  .story-introduction,
+  .story-timeline__header,
+  .story-chapter {
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+  }
+
+  .story-chapters::before {
+    left: 35px;
+  }
+
+  .story-chapter__number {
+    margin-left: 0;
+  }
+
+  .story-chapter__content {
+    padding-left: 70px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .granth-book {
+    width: 100vw;
+    height: 52vh;
+  }
+
+  .granth-book__page::after {
+    inset: 14px;
+  }
+
+  .granth-opening__divine span {
+    font-size: 58px;
+  }
+
+  .granth-opening__title small {
+    font-size: 8px;
+    letter-spacing: 0.42em;
+  }
+
+  .granth-opening__title h1 {
+    font-size: 52px;
+  }
+
+  .granth-opening__title p {
+    font-size: 8px;
+  }
+
+  .story-nav {
+    height: 82px;
+
+    padding:
+      0 22px;
+  }
+
+  .story-nav__label {
+    display: none;
+  }
+
+  .story-nav__brand {
+    font-size: 13px;
+  }
+
+  .story-nav__back {
+    font-size: 9px;
+
+    letter-spacing: 0.16em;
+  }
+
+  .story-hero {
+    padding:
+      80px 25px 110px;
+  }
+
+  .story-hero h1 {
+    font-size:
+      clamp(58px, 17vw, 90px);
+  }
+
+  .story-hero__content p {
+    font-size: 15px;
+  }
+
+  .story-hero__image-wrap {
+    margin-top: 55px;
+  }
+
+  .story-hero__image-frame img {
+    height: 300px;
+  }
+
+  .story-hero__image-frame::before {
+    inset: 14px;
+  }
+
+  .story-hero__image-caption {
+    left: 28px;
+    right: 28px;
+    bottom: 25px;
+
+    font-size: 7px;
+  }
+
+  .story-hero__scroll {
+    position: relative;
+
+    left: auto;
+    bottom: auto;
+
+    margin-top: 45px;
+  }
+
+  .story-introduction,
+  .story-timeline {
+    padding:
+      100px 25px;
+  }
+
+  .story-introduction h2 {
+    font-size: 54px;
+  }
+
+  .story-timeline__header h2 {
+    font-size: 48px;
+  }
+
+  .story-chapter {
+    min-height: auto;
+
+    padding:
+      55px 0;
+  }
+
+  .story-chapter__content {
+    padding-left: 55px;
+  }
+
+  .story-chapter__content h3 {
+    font-size: 42px;
+  }
+
+  .story-chapter__content p {
+    font-size: 15px;
+  }
+
+  .story-philosophy {
+    min-height: 600px;
+
+    padding:
+      100px 25px;
+  }
+
+  .story-philosophy h2 {
+    font-size: 52px;
+  }
+
+  .story-philosophy__geometry {
+    width: 430px;
+    height: 430px;
+  }
+
+  .story-footer {
+    flex-direction: column;
+
+    gap: 14px;
+
+    padding:
+      30px 25px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .granth-book {
+    height: 46vh;
+  }
+
+  .granth-opening__title h1 {
+    font-size: 43px;
+  }
+
+  .story-hero h1 {
+    font-size: 55px;
+  }
+
+  .story-hero__image-frame img {
+    height: 240px;
+  }
+
+  .story-introduction h2 {
+    font-size: 48px;
+  }
+
+  .story-timeline__header h2 {
+    font-size: 42px;
+  }
+
+  .story-chapter__content {
+    padding-left: 45px;
+  }
+
+  .story-chapter__content h3 {
+    font-size: 37px;
+  }
+
+  .story-philosophy h2 {
+    font-size: 45px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .granth-opening,
+  .granth-book__page,
+  .granth-opening__mandala,
+  .granth-opening__divine,
+  .granth-opening__title,
+  .story-atmosphere__glow,
+  .story-atmosphere__sun,
+  .story-atmosphere__ring--one,
+  .story-atmosphere__ring--two,
+  .story-philosophy__geometry {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   OPENING / STORY ISOLATION SAFETY
+   ========================================================= */
+
+.story-page {
+  overflow-x: hidden;
+}
+
+.granth-opening,
+.granth-opening * {
+  pointer-events: none;
+}
+
+/* =========================================================
+   GRANTH RESPONSIVE REFINEMENT
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .granth {
+    width: 94vw;
+    height: 58vh;
+  }
+
+  .granth__cover-ornament {
+    width: 78%;
+  }
+
+  .granth__cover-ornament > strong {
+    font-size: clamp(30px, 6vw, 52px);
+  }
+}
+
+@media (max-width: 700px) {
+  .granth {
+    width: 94vw;
+    height: 54vh;
+    min-height: 340px;
+  }
+
+  .granth__pages {
+    inset: 9px;
+  }
+
+  .granth__page-inner {
+    inset: 15px;
+  }
+
+  .granth__cover-border {
+    inset: 15px;
+  }
+
+  .cover-corner {
+    width: 42px;
+    height: 42px;
+  }
+
+  .cover-corner--tl {
+    left: 23px;
+    top: 23px;
+  }
+
+  .cover-corner--tr {
+    right: 23px;
+    top: 23px;
+  }
+
+  .cover-corner--bl {
+    left: 23px;
+    bottom: 23px;
+  }
+
+  .cover-corner--br {
+    right: 23px;
+    bottom: 23px;
+  }
+
+  .granth__cover-ornament {
+    width: 80%;
+  }
+
+  .cover-symbol {
+    font-size: 48px;
+  }
+
+  .granth__cover-ornament > strong {
+    font-size: clamp(27px, 7.5vw, 48px);
+  }
+
+  .granth__cover-ornament > span {
+    font-size: 8px;
+    letter-spacing: 0.5em;
+  }
+
+  .granth__cover-ornament > small {
+    font-size: 6px;
+    letter-spacing: 0.34em;
+  }
+
+  .page-script {
+    font-size: 20px;
+  }
+
+  .page-manuscript-lines {
+    width: 82%;
+  }
+
+  .granth-opening__mandala {
+    width: 480px;
+    height: 480px;
+  }
+
+  .granth-opening__hint {
+    bottom: 30px;
+    font-size: 6px;
+    letter-spacing: 0.34em;
+  }
+}
+
+@media (max-width: 420px) {
+  .granth {
+    width: 96vw;
+    height: 50vh;
+    min-height: 310px;
+  }
+
+  .granth__cover-ornament {
+    width: 82%;
+  }
+
+  .granth__cover-ornament > strong {
+    font-size: clamp(24px, 8.2vw, 40px);
+  }
+
+  .cover-symbol {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .cover-line {
+    width: 100px;
+    margin-bottom: 13px;
+  }
+
+  .page-script {
+    font-size: 16px;
+    gap: 7px;
+  }
+
+  .granth-opening__mandala {
+    width: 370px;
+    height: 370px;
+  }
+
+  .granth-opening__hint {
+    bottom: 22px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .granth-opening,
+  .granth-opening *,
+  .story-atmosphere__glow,
+  .story-atmosphere__sun,
+  .story-atmosphere__ring--one,
+  .story-atmosphere__ring--two,
+  .story-philosophy__geometry {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .granth-opening {
+    animation-name: none !important;
+    opacity: 1;
+  }
+
+  .granth {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  .granth__cover--front {
+    animation: none !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: rotateY(-108deg);
+  }
+
+  .granth__page--left,
+  .granth__page--right {
+    animation: none !important;
+    transform: rotateY(0deg);
+  }
+
+  .granth__cover-ornament {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+/* =========================================================
+   FINAL BAR REMOVAL
+   ========================================================= */
+
+/*
+   The visible center bar/spine has been intentionally removed
+   from the opening design.
+
+   Keep the page halves meeting naturally at the center.
+*/
+
+.granth__spine {
+  display: none !important;
+}
+
+.granth__spine-glow {
+  display: none !important;
+}
+
+
+/* Prevent any older spine pseudo-elements from appearing */
+
+.granth__spine::before,
+.granth__spine::after,
+.granth__spine-glow::before,
+.granth__spine-glow::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* =========================================================
+   ANCESTRA — CHAPTER DETAIL
+   CINEMATIC CHRONICLE EDITION
+========================================================= */
+
+.chapter-detail {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 8%,
+      rgba(201, 164, 92, 0.08),
+      transparent 32%
+    ),
+    #070605;
+  color: #eee5d2;
+}
+
+
+/* =========================================================
+   ATMOSPHERE
+========================================================= */
+
+.chapter-detail__atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.chapter-detail__glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  top: -350px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(201, 164, 92, 0.14),
+      rgba(201, 164, 92, 0.035) 40%,
+      transparent 70%
+    );
+
+  filter: blur(10px);
+}
+
+.chapter-detail__glow--two {
+  width: 500px;
+  height: 500px;
+  top: 45%;
+  left: 5%;
+  opacity: 0.45;
+}
+
+.chapter-detail__grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(201, 164, 92, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(201, 164, 92, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 70%
+    );
+}
+
+.chapter-detail__ring {
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border: 1px solid rgba(201, 164, 92, 0.045);
+  border-radius: 50%;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.chapter-detail__ring--two {
+  width: 900px;
+  height: 900px;
+  border-color: rgba(201, 164, 92, 0.025);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.chapter-detail__nav {
+  position: relative;
+  z-index: 10;
+
+  width: min(1400px, calc(100% - 80px));
+  margin: 0 auto;
+
+  min-height: 88px;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  border-bottom: 1px solid rgba(201, 164, 92, 0.12);
+}
+
+.chapter-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  width: fit-content;
+
+  color: rgba(238, 229, 210, 0.62);
+
+  text-decoration: none;
+
+  font-size: 10px;
+  letter-spacing: 0.22em;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.chapter-detail__back:hover {
+  color: #c9a45c;
+  transform: translateX(-4px);
+}
+
+.chapter-detail__brand {
+  font-size: 13px;
+  letter-spacing: 0.5em;
+  font-weight: 500;
+  color: #c9a45c;
+  padding-left: 0.5em;
+}
+
+.chapter-detail__counter {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #eee5d2;
+
+  font-size: 12px;
+  letter-spacing: 0.14em;
+}
+
+.chapter-detail__counter span {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(238, 229, 210, 0.4);
+}
+
+.chapter-detail__counter i {
+  color: rgba(201, 164, 92, 0.45);
+  font-style: normal;
+}
+
+
+/* =========================================================
+   OPENING
+========================================================= */
+
+.chapter-detail__opening {
+  position: relative;
+  z-index: 2;
+
+  width: min(1320px, calc(100% - 100px));
+  margin: 0 auto;
+
+  padding:
+    95px
+    0
+    110px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* =========================================================
+   OPENING LABEL
+========================================================= */
+
+.chapter-detail__opening-label {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin-bottom: 30px;
+
+  color: #c9a45c;
+
+  font-size: 9px;
+  letter-spacing: 0.34em;
+}
+
+.chapter-detail__opening-label div {
+  width: 35px;
+  height: 1px;
+
+  background: rgba(201, 164, 92, 0.5);
+}
+
+
+/* =========================================================
+   OPENING TITLE
+========================================================= */
+
+.chapter-detail__opening-title {
+  width: 100%;
+  text-align: center;
+}
+
+.chapter-detail__roman {
+  margin-bottom: 14px;
+
+  color: rgba(201, 164, 92, 0.48);
+
+  font-family: Georgia, serif;
+
+  font-size: 15px;
+  letter-spacing: 0.45em;
+}
+
+.chapter-detail__opening-title h1 {
+  margin: 0;
+
+  max-width: 1000px;
+  margin-inline: auto;
+
+  color: #eee5d2;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(42px, 6vw, 82px);
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.035em;
+
+  text-transform: uppercase;
+}
+
+.chapter-detail__title-line {
+  width: 70px;
+  height: 1px;
+
+  margin: 32px auto 22px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #c9a45c,
+      transparent
+    );
+}
+
+.chapter-detail__opening-title h2 {
+  max-width: 780px;
+
+  margin: 0 auto 55px;
+
+  color: rgba(238, 229, 210, 0.58);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(17px, 2vw, 23px);
+
+  font-weight: 400;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   IMAGE SHELL
+========================================================= */
+
+.chapter-detail__image-shell {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   IMAGE FRAME
+========================================================= */
+
+.chapter-detail__image-frame {
+  position: relative;
+
+  width: min(1120px, 92%);
+
+  padding: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(201, 164, 92, 0.22),
+      rgba(201, 164, 92, 0.025) 30%,
+      rgba(201, 164, 92, 0.08) 70%,
+      rgba(201, 164, 92, 0.02)
+    );
+
+  border: 1px solid rgba(201, 164, 92, 0.22);
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.65),
+    0 0 80px rgba(201, 164, 92, 0.055);
+}
+
+
+/* =========================================================
+   IMAGE CORNERS
+========================================================= */
+
+.chapter-detail__image-corner {
+  position: absolute;
+
+  width: 30px;
+  height: 30px;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.chapter-detail__image-corner--tl {
+  top: -1px;
+  left: -1px;
+
+  border-top: 1px solid #c9a45c;
+  border-left: 1px solid #c9a45c;
+}
+
+.chapter-detail__image-corner--tr {
+  top: -1px;
+  right: -1px;
+
+  border-top: 1px solid #c9a45c;
+  border-right: 1px solid #c9a45c;
+}
+
+.chapter-detail__image-corner--bl {
+  bottom: -1px;
+  left: -1px;
+
+  border-bottom: 1px solid #c9a45c;
+  border-left: 1px solid #c9a45c;
+}
+
+.chapter-detail__image-corner--br {
+  bottom: -1px;
+  right: -1px;
+
+  border-bottom: 1px solid #c9a45c;
+  border-right: 1px solid #c9a45c;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.chapter-detail__image-inner {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 8.2;
+
+  overflow: hidden;
+
+  background: #0a0806;
+}
+
+.chapter-detail__image-inner img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transform: scale(1.01);
+
+  transition:
+    transform 1.2s ease;
+}
+
+.chapter-detail__image-frame:hover
+.chapter-detail__image-inner img {
+  transform: scale(1.035);
+}
+
+
+/* =========================================================
+   IMAGE DARKENING
+========================================================= */
+
+.chapter-detail__image-dark {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.05),
+      transparent 35%,
+      rgba(0, 0, 0, 0.48)
+    );
+
+  pointer-events: none;
+}
+
+.chapter-detail__image-vignette {
+  position: absolute;
+  inset: 0;
+
+  box-shadow:
+    inset 0 0 100px rgba(0, 0, 0, 0.45);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   IMAGE CAPTION
+========================================================= */
+
+.chapter-detail__image-caption {
+  position: absolute;
+
+  left: 30px;
+  right: 30px;
+  bottom: 25px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  z-index: 4;
+}
+
+.chapter-detail__image-caption > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.chapter-detail__image-caption > div:last-child {
+  text-align: right;
+}
+
+.chapter-detail__image-caption span {
+  color: #eee5d2;
+
+  font-size: 11px;
+
+  letter-spacing: 0.28em;
+
+  text-transform: uppercase;
+}
+
+.chapter-detail__image-caption small {
+  color: rgba(201, 164, 92, 0.8);
+
+  font-size: 7px;
+
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   OPENING DESCRIPTION
+========================================================= */
+
+.chapter-detail__opening-description {
+  width: min(760px, 90%);
+
+  margin-top: 48px;
+
+  text-align: center;
+}
+
+.chapter-detail__opening-description p {
+  margin: 0;
+
+  color: rgba(238, 229, 210, 0.68);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 17px;
+
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.chapter-detail__scroll {
+  margin-top: 65px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  color: rgba(201, 164, 92, 0.6);
+
+  font-size: 8px;
+
+  letter-spacing: 0.35em;
+}
+
+.chapter-detail__scroll svg {
+  animation: chapterScroll 2s ease-in-out infinite;
+}
+
+@keyframes chapterScroll {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.chapter-detail__divider {
+  position: relative;
+  z-index: 2;
+
+  width: min(900px, 80%);
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.chapter-detail__divider span {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 164, 92, 0.25)
+    );
+}
+
+.chapter-detail__divider span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(201, 164, 92, 0.25),
+      transparent
+    );
+}
+
+.chapter-detail__divider div {
+  color: #c9a45c;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   MAIN STORY
+========================================================= */
+
+.chapter-detail__story {
+  position: relative;
+  z-index: 2;
+
+  width: min(1080px, calc(100% - 100px));
+
+  margin: 0 auto;
+
+  padding:
+    150px
+    0
+    160px;
+
+  display: grid;
+
+  grid-template-columns:
+    150px
+    minmax(0, 720px);
+
+  gap: 70px;
+}
+
+
+/* =========================================================
+   STORY INDEX
+========================================================= */
+
+.chapter-detail__story-index {
+  position: relative;
+
+  padding-top: 7px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chapter-detail__story-index span {
+  color: rgba(201, 164, 92, 0.65);
+
+  font-family: Georgia, serif;
+
+  font-size: 46px;
+
+  font-weight: 400;
+}
+
+.chapter-detail__story-index div {
+  width: 35px;
+  height: 1px;
+
+  margin: 18px 0;
+
+  background: rgba(201, 164, 92, 0.35);
+}
+
+.chapter-detail__story-index small {
+  color: rgba(238, 229, 210, 0.3);
+
+  font-size: 7px;
+
+  letter-spacing: 0.28em;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   STORY CONTENT
+========================================================= */
+
+.chapter-detail__story-content {
+  max-width: 720px;
+}
+
+.chapter-detail__story-content h2 {
+  margin: 22px 0 40px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(38px, 5vw, 66px);
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  letter-spacing: -0.035em;
+}
+
+.chapter-detail__story-content h2 em {
+  color: #c9a45c;
+
+  font-style: italic;
+}
+
+.chapter-detail__story-lead p {
+  margin: 0;
+
+  color: #eee5d2;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 23px;
+
+  line-height: 1.7;
+}
+
+.chapter-detail__story-content > p {
+  margin: 28px 0;
+
+  color: rgba(238, 229, 210, 0.58);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 17px;
+
+  line-height: 1.9;
+}
+
+.chapter-detail__story-rule {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 45px 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(201, 164, 92, 0.3),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.chapter-detail__quote {
+  position: relative;
+
+  margin: 75px 0;
+
+  padding:
+    45px
+    40px
+    42px;
+
+  text-align: center;
+
+  border-top: 1px solid rgba(201, 164, 92, 0.2);
+  border-bottom: 1px solid rgba(201, 164, 92, 0.2);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(201, 164, 92, 0.055),
+      transparent 65%
+    );
+}
+
+.chapter-detail__quote > span {
+  color: #c9a45c;
+
+  font-size: 13px;
+}
+
+.chapter-detail__quote blockquote {
+  max-width: 600px;
+
+  margin: 20px auto;
+
+  color: #eee5d2;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(22px, 3vw, 31px);
+
+  font-style: italic;
+
+  line-height: 1.5;
+}
+
+.chapter-detail__quote small {
+  color: rgba(201, 164, 92, 0.6);
+
+  font-size: 7px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   STORY BLOCK
+========================================================= */
+
+.chapter-detail__story-block {
+  display: grid;
+
+  grid-template-columns: 60px 1fr;
+
+  gap: 25px;
+
+  margin-top: 80px;
+}
+
+.chapter-detail__story-block-number {
+  color: rgba(201, 164, 92, 0.45);
+
+  font-family: Georgia, serif;
+
+  font-size: 30px;
+}
+
+.chapter-detail__story-block h3 {
+  margin: 0 0 20px;
+
+  color: #eee5d2;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.2em;
+}
+
+.chapter-detail__story-block p {
+  margin: 0 0 18px;
+
+  color: rgba(238, 229, 210, 0.56);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   KEY FIGURES
+========================================================= */
+
+.chapter-detail__figures {
+  position: relative;
+  z-index: 2;
+
+  width: min(1080px, calc(100% - 100px));
+
+  margin: 0 auto;
+
+  padding:
+    120px
+    0
+    150px;
+
+  border-top: 1px solid rgba(201, 164, 92, 0.1);
+}
+
+.chapter-detail__figures-heading {
+  margin-bottom: 55px;
+}
+
+.chapter-detail__figures-heading h2 {
+  margin: 18px 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(40px, 5vw, 64px);
+
+  font-weight: 400;
+
+  letter-spacing: -0.035em;
+}
+
+.chapter-detail__figures-heading h2 em {
+  color: #c9a45c;
+
+  font-style: italic;
+}
+
+.chapter-detail__figures-heading p {
+  max-width: 520px;
+
+  margin: 0;
+
+  color: rgba(238, 229, 210, 0.42);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+.chapter-detail__figure-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  border-top: 1px solid rgba(201, 164, 92, 0.13);
+}
+
+.chapter-detail__figure {
+  min-height: 75px;
+
+  display: grid;
+
+  grid-template-columns:
+    45px
+    1fr
+    auto;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid rgba(201, 164, 92, 0.1);
+
+  color: rgba(238, 229, 210, 0.5);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    padding 0.3s ease;
+}
+
+.chapter-detail__figure:nth-child(odd) {
+  border-right: 1px solid rgba(201, 164, 92, 0.1);
+}
+
+.chapter-detail__figure:hover {
+  padding-left: 28px;
+
+  color: #eee5d2;
+
+  background:
+    rgba(201, 164, 92, 0.035);
+}
+
+.chapter-detail__figure > span {
+  color: rgba(201, 164, 92, 0.42);
+
+  font-size: 9px;
+
+  letter-spacing: 0.15em;
+}
+
+.chapter-detail__figure strong {
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+}
+
+.chapter-detail__figure svg {
+  color: rgba(201, 164, 92, 0.5);
+}
+
+
+/* =========================================================
+   PREVIOUS / NEXT
+========================================================= */
+
+.chapter-detail__navigation {
+  position: relative;
+  z-index: 2;
+
+  width: min(1320px, calc(100% - 100px));
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  border-top: 1px solid rgba(201, 164, 92, 0.12);
+}
+
+.chapter-detail__next-card {
+  min-height: 210px;
+
+  padding: 45px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  text-decoration: none;
+
+  border-right: 1px solid rgba(201, 164, 92, 0.1);
+
+  transition:
+    background 0.4s ease,
+    padding 0.4s ease;
+}
+
+.chapter-detail__next-card--right {
+  text-align: right;
+
+  align-items: flex-end;
+
+  border-right: none;
+}
+
+.chapter-detail__next-card:hover {
+  padding-left: 55px;
+
+  background:
+    rgba(201, 164, 92, 0.035);
+}
+
+.chapter-detail__next-card--right:hover {
+  padding-left: 45px;
+  padding-right: 55px;
+}
+
+.chapter-detail__next-card span {
+  margin-bottom: 15px;
+
+  color: rgba(201, 164, 92, 0.55);
+
+  font-size: 8px;
+
+  letter-spacing: 0.25em;
+}
+
+.chapter-detail__next-card strong {
+  max-width: 420px;
+
+  color: #eee5d2;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 25px;
+
+  font-weight: 400;
+
+  line-height: 1.25;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.chapter-detail__footer {
+  position: relative;
+  z-index: 2;
+
+  width: min(1400px, calc(100% - 80px));
+
+  min-height: 100px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-top: 1px solid rgba(201, 164, 92, 0.1);
+
+  color: rgba(238, 229, 210, 0.28);
+
+  font-size: 7px;
+
+  letter-spacing: 0.28em;
+}
+
+.chapter-detail__footer span:first-child {
+  color: rgba(201, 164, 92, 0.55);
+}
+
+
+/* =========================================================
+   INVALID CHAPTER
+========================================================= */
+
+.chapter-detail__invalid {
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.chapter-detail__invalid h1 {
+  margin: 20px 0 35px;
+
+  font-family: Georgia, serif;
+
+  font-size: 60px;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .chapter-detail__nav {
+    width: calc(100% - 40px);
+  }
+
+  .chapter-detail__opening {
+    width: calc(100% - 40px);
+
+    padding-top: 70px;
+  }
+
+  .chapter-detail__image-frame {
+    width: 96%;
+  }
+
+  .chapter-detail__story {
+    width: calc(100% - 50px);
+
+    grid-template-columns: 80px 1fr;
+
+    gap: 35px;
+  }
+
+  .chapter-detail__figures {
+    width: calc(100% - 50px);
+  }
+
+  .chapter-detail__navigation {
+    width: calc(100% - 40px);
+  }
+
+  .chapter-detail__footer {
+    width: calc(100% - 40px);
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .chapter-detail__nav {
+    min-height: 70px;
+
+    grid-template-columns:
+      1fr auto;
+  }
+
+  .chapter-detail__brand {
+    display: none;
+  }
+
+  .chapter-detail__counter span {
+    display: none;
+  }
+
+  .chapter-detail__opening {
+    width: calc(100% - 28px);
+
+    padding-top: 55px;
+    padding-bottom: 80px;
+  }
+
+  .chapter-detail__opening-label {
+    font-size: 7px;
+
+    gap: 10px;
+  }
+
+  .chapter-detail__opening-title h1 {
+    font-size: 42px;
+  }
+
+  .chapter-detail__opening-title h2 {
+    font-size: 16px;
+
+    margin-bottom: 38px;
+  }
+
+  .chapter-detail__image-frame {
+    width: 100%;
+
+    padding: 7px;
+  }
+
+  .chapter-detail__image-inner {
+    aspect-ratio: 4 / 3;
+  }
+
+  .chapter-detail__image-caption {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .chapter-detail__image-caption span {
+    font-size: 8px;
+  }
+
+  .chapter-detail__opening-description {
+    margin-top: 35px;
+  }
+
+  .chapter-detail__opening-description p {
+    font-size: 15px;
+  }
+
+  .chapter-detail__story {
+    width: calc(100% - 35px);
+
+    display: block;
+
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .chapter-detail__story-index {
+    display: none;
+  }
+
+  .chapter-detail__story-content h2 {
+    font-size: 40px;
+  }
+
+  .chapter-detail__story-lead p {
+    font-size: 19px;
+  }
+
+  .chapter-detail__quote {
+    padding: 35px 20px;
+  }
+
+  .chapter-detail__story-block {
+    grid-template-columns: 35px 1fr;
+
+    gap: 15px;
+
+    margin-top: 60px;
+  }
+
+  .chapter-detail__figures {
+    width: calc(100% - 35px);
+
+    padding-top: 90px;
+  }
+
+  .chapter-detail__figure-list {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter-detail__figure:nth-child(odd) {
+    border-right: none;
+  }
+
+  .chapter-detail__navigation {
+    width: 100%;
+
+    grid-template-columns: 1fr;
+  }
+
+  .chapter-detail__next-card {
+    min-height: 160px;
+
+    padding: 30px;
+  }
+
+  .chapter-detail__next-card--right {
+    text-align: left;
+    align-items: flex-start;
+
+    border-top: 1px solid rgba(201, 164, 92, 0.1);
+  }
+
+  .chapter-detail__next-card:hover,
+  .chapter-detail__next-card--right:hover {
+    padding-left: 35px;
+    padding-right: 30px;
+  }
+
+  .chapter-detail__footer {
+    width: calc(100% - 30px);
+
+    min-height: 120px;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    text-align: center;
+  }
+
+}
+/* =========================================================
+   ANCESTRA — CHAPTER STORY
+   CINEMATIC MANUSCRIPT READING SYSTEM
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   STORY CONTAINER
+   --------------------------------------------------------- */
+
+.chapter-detail__story-content {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  padding-bottom: 160px;
+}
+
+/* ---------------------------------------------------------
+   STORY LEAD
+   --------------------------------------------------------- */
+
+.chapter-detail__story-lead {
+  width: min(100%, 760px);
+  margin: 42px auto 70px;
+}
+
+.chapter-detail__story-lead p {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(19px, 1.5vw, 23px);
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+/* ---------------------------------------------------------
+   SCENE STACK
+   --------------------------------------------------------- */
+
+.chapter-detail__scenes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+}
+
+/* ---------------------------------------------------------
+   INDIVIDUAL SCENE
+   --------------------------------------------------------- */
+
+.chapter-detail__scene {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 0 110px;
+}
+
+/* Elegant separator between scenes */
+
+.chapter-detail__scene:not(:last-child)::after {
+  content: "✦";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+
+  width: 100%;
+  text-align: center;
+
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.5em;
+}
+
+/* Horizontal manuscript line */
+
+.chapter-detail__scene:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  transform: translateX(-50%);
+
+  width: min(100%, 500px);
+  height: 1px;
+
+  opacity: 0.25;
+}
+
+/* ---------------------------------------------------------
+   SCENE HEADER
+   --------------------------------------------------------- */
+
+.chapter-detail__scene-header {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 28px;
+  align-items: start;
+
+  margin-bottom: 48px;
+}
+
+/* Scene number */
+
+.chapter-detail__scene-number {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(201, 164, 92, 0.35);
+
+  position: relative;
+}
+
+.chapter-detail__scene-number::before,
+.chapter-detail__scene-number::after {
+  content: "";
+  position: absolute;
+
+  width: 7px;
+  height: 7px;
+
+  border: 1px solid rgba(201, 164, 92, 0.65);
+}
+
+.chapter-detail__scene-number::before {
+  top: -4px;
+  left: -4px;
+}
+
+.chapter-detail__scene-number::after {
+  right: -4px;
+  bottom: -4px;
+}
+
+.chapter-detail__scene-number span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  letter-spacing: 0.05em;
+}
+
+/* Scene eyebrow */
+
+.chapter-detail__scene-header .story-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  line-height: 1.4;
+}
+
+/* Scene title */
+
+.chapter-detail__scene-header h3 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(27px, 3vw, 42px);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+/* Location */
+
+.chapter-detail__scene-header small {
+  display: block;
+  margin-top: 15px;
+
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  opacity: 0.55;
+}
+
+/* ---------------------------------------------------------
+   SCENE IMAGE
+   --------------------------------------------------------- */
+
+/*
+   Images are intentionally restrained for now.
+   When we create individual scene images later,
+   this already gives them proper cinematic treatment.
+*/
+
+.chapter-detail__scene-image {
+  width: 100%;
+  max-height: 540px;
+  margin: 0 auto 52px;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.chapter-detail__scene-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 360px;
+
+  object-fit: cover;
+
+  transition: transform 1.2s ease;
+}
+
+.chapter-detail__scene:hover
+.chapter-detail__scene-image img {
+  transform: scale(1.025);
+}
+
+.chapter-detail__scene-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.chapter-detail__scene-image-label {
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+
+  font-size: 10px;
+  letter-spacing: 0.25em;
+}
+
+/* ---------------------------------------------------------
+   STORY TEXT
+   --------------------------------------------------------- */
+
+.chapter-detail__scene-text {
+  width: min(100%, 760px);
+  margin: 0 auto;
+}
+
+/* Every paragraph gets breathing room */
+
+.chapter-detail__scene-text p {
+  margin: 0 0 28px;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(18px, 1.35vw, 21px);
+  line-height: 1.95;
+
+  letter-spacing: 0.008em;
+}
+
+/* Last paragraph */
+
+.chapter-detail__scene-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   FIRST PARAGRAPH — DROP CAP
+   --------------------------------------------------------- */
+
+.chapter-detail__scene:first-child
+.chapter-detail__scene-text p:first-child::first-letter {
+  float: left;
+
+  margin: 8px 12px 0 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 68px;
+  line-height: 0.72;
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------
+   EMOTIONAL / NARRATIVE LINE
+   --------------------------------------------------------- */
+
+.chapter-detail__scene-emotion {
+  width: min(100%, 650px);
+
+  margin: 58px auto 0;
+  padding: 30px 0 4px;
+
+  text-align: center;
+
+  position: relative;
+}
+
+.chapter-detail__scene-emotion::before {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90px;
+  height: 1px;
+
+  opacity: 0.45;
+}
+
+.chapter-detail__scene-emotion span {
+  display: block;
+
+  margin-bottom: 15px;
+
+  font-size: 13px;
+}
+
+.chapter-detail__scene-emotion p {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.7;
+
+  font-style: italic;
+  letter-spacing: 0.015em;
+
+  opacity: 0.78;
+}
+
+/* ---------------------------------------------------------
+   STORY ENDING
+   --------------------------------------------------------- */
+
+.chapter-detail__story-ending {
+  width: min(100%, 700px);
+
+  margin: 110px auto 0;
+
+  text-align: center;
+}
+
+.chapter-detail__story-ending .story-eyebrow {
+  display: block;
+  margin-bottom: 28px;
+}
+
+.chapter-detail__story-ending .chapter-detail__story-rule {
+  margin: 0 auto 35px;
+}
+
+.chapter-detail__story-ending p {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  line-height: 1.8;
+
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .chapter-detail__story-content {
+    padding-bottom: 100px;
+  }
+
+  .chapter-detail__story-lead {
+    margin-top: 30px;
+    margin-bottom: 55px;
+  }
+
+  .chapter-detail__scenes {
+    gap: 100px;
+  }
+
+  .chapter-detail__scene {
+    padding-bottom: 80px;
+  }
+
+  .chapter-detail__scene-header {
+    grid-template-columns: 52px 1fr;
+    gap: 18px;
+    margin-bottom: 35px;
+  }
+
+  .chapter-detail__scene-number {
+    width: 45px;
+    height: 45px;
+  }
+
+  .chapter-detail__scene-header h3 {
+    font-size: 27px;
+  }
+
+  .chapter-detail__scene-text p {
+    font-size: 17px;
+    line-height: 1.85;
+    margin-bottom: 24px;
+  }
+
+  .chapter-detail__scene-image {
+    margin-bottom: 38px;
+  }
+
+  .chapter-detail__scene-emotion {
+    margin-top: 45px;
+  }
+
+}
+
+/* ---------------------------------------------------------
+   LARGE SCREENS
+   --------------------------------------------------------- */
+
+@media (min-width: 1400px) {
+
+  .chapter-detail__story-content {
+    width: 940px;
+  }
+
+  .chapter-detail__scene {
+    max-width: 850px;
+  }
+
+  .chapter-detail__scene-text {
+    width: 780px;
+  }
+
+}
+/* =========================================================
+   ANCESTRA — CHAPTER STORY VISIBILITY + SPACING FIX
+   Put this at the VERY BOTTOM of Chapters.css
+   ========================================================= */
+
+.chapter-detail__story {
+  position: relative;
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  padding: 120px 0 160px;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  column-gap: 70px;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.chapter-detail__story-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+.chapter-detail__story-lead {
+  margin: 35px 0 55px;
+  max-width: 780px;
+}
+
+.chapter-detail__story-lead p {
+  margin: 0;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+.chapter-detail__story-rule {
+  width: 100%;
+  height: 1px;
+  margin: 0 0 85px;
+  background: rgba(201, 164, 92, 0.28);
+}
+
+.chapter-detail__scenes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 130px;
+}
+
+.chapter-detail__scene {
+  width: 100%;
+  max-width: 900px;
+  padding: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.chapter-detail__scene-header {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  column-gap: 28px;
+  align-items: start;
+  margin-bottom: 45px;
+}
+
+.chapter-detail__scene-number {
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(201, 164, 92, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.chapter-detail__scene-number::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(201, 164, 92, 0.16);
+}
+
+.chapter-detail__scene-number span {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+}
+
+.chapter-detail__scene-header h3 {
+  margin: 10px 0 10px;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.chapter-detail__scene-header small {
+  display: block;
+  margin-top: 12px;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: rgba(201, 164, 92, 0.7);
+}
+
+.chapter-detail__scene-text {
+  max-width: 780px;
+  margin-left: 100px;
+}
+
+.chapter-detail__scene-text p {
+  margin: 0 0 25px;
+  font-size: clamp(16px, 1.15vw, 19px);
+  line-height: 1.95;
+  color: rgba(238, 229, 210, 0.82);
+  letter-spacing: 0.005em;
+}
+
+.chapter-detail__scene-text p:first-child::first-letter {
+  font-size: 3.5em;
+  float: left;
+  line-height: 0.8;
+  padding-right: 10px;
+  padding-top: 8px;
+  color: #c9a45c;
+}
+
+.chapter-detail__scene-image {
+  width: min(100%, 780px);
+  margin: 0 0 45px 100px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(201, 164, 92, 0.22);
+  background: #080706;
+}
+
+.chapter-detail__scene-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+.chapter-detail__scene-image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 55%,
+      rgba(5, 4, 3, 0.72)
+    );
+  pointer-events: none;
+}
+
+.chapter-detail__scene-image-label {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: #eee5d2;
+}
+
+.chapter-detail__scene-emotion {
+  width: min(100%, 720px);
+  margin: 55px 0 0 100px;
+  padding: 25px 30px;
+  border-left: 1px solid rgba(201, 164, 92, 0.6);
+  background: rgba(201, 164, 92, 0.035);
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.chapter-detail__scene-emotion span {
+  color: #c9a45c;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.chapter-detail__scene-emotion p {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.7;
+  font-style: italic;
+  color: rgba(238, 229, 210, 0.7);
+}
+
+.chapter-detail__story-ending {
+  margin-top: 150px;
+  padding-top: 70px;
+  max-width: 780px;
+  margin-left: 100px;
+  text-align: center;
+}
+
+.chapter-detail__story-ending .chapter-detail__story-rule {
+  margin: 25px 0 35px;
+}
+
+.chapter-detail__story-ending p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  line-height: 1.8;
+  color: rgba(238, 229, 210, 0.7);
+}
+
+.chapter-detail__story-empty {
+  padding: 100px 0;
+  text-align: center;
+  color: rgba(238, 229, 210, 0.6);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .chapter-detail__story {
+    width: 88vw;
+    grid-template-columns: 1fr;
+    padding: 90px 0 120px;
+  }
+
+  .chapter-detail__story-index {
+    display: none;
+  }
+
+  .chapter-detail__scene-header {
+    grid-template-columns: 55px 1fr;
+    column-gap: 18px;
+  }
+
+  .chapter-detail__scene-number {
+    width: 48px;
+    height: 48px;
+  }
+
+  .chapter-detail__scene-text,
+  .chapter-detail__scene-image,
+  .chapter-detail__scene-emotion,
+  .chapter-detail__story-ending {
+    margin-left: 0;
+  }
+
+  .chapter-detail__scenes {
+    gap: 95px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .chapter-detail__story {
+    width: 90vw;
+  }
+
+  .chapter-detail__scene-header h3 {
+    font-size: 27px;
+  }
+
+  .chapter-detail__scene-text p {
+    font-size: 16px;
+    line-height: 1.85;
+  }
+
+  .chapter-detail__scene-emotion {
+    padding: 20px;
+  }
+
+  .chapter-detail__story-ending {
+    margin-top: 100px;
+  }
+
+}
+/* =========================================================
+   CHAPTER STORY HEADING
+   ========================================================= */
+
+.chapter-detail__story-heading {
+  margin: 0;
+  max-width: 900px;
+  font-size: clamp(42px, 6vw, 82px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+/* =========================================================
+   ANCESTRA — DARKEST MAROON CHAPTER THEME
+   CINEMATIC • DIVINE • ANCIENT • DARK
+========================================================= */
+
+
+/* =========================================================
+   MAIN BACKGROUND
+   ========================================================= */
+
+.chapter-detail {
+  background:
+    radial-gradient(
+      circle at 50% 8%,
+      rgba(95, 18, 31, 0.14),
+      transparent 34%
+    ),
+    #120407;
+
+  color: #f5e6cf;
+}
+
+
+/* =========================================================
+   ATMOSPHERE
+   ========================================================= */
+
+.chapter-detail__glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(126, 30, 45, 0.12),
+      rgba(62, 10, 20, 0.10) 40%,
+      transparent 72%
+    );
+}
+
+.chapter-detail__glow--two {
+  opacity: 0.32;
+}
+
+.chapter-detail__grid {
+  background-image:
+    linear-gradient(
+      rgba(218, 157, 55, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(218, 157, 55, 0.025) 1px,
+      transparent 1px
+    );
+}
+
+.chapter-detail__ring {
+  border-color: rgba(218, 157, 55, 0.055);
+}
+
+.chapter-detail__ring--two {
+  border-color: rgba(218, 157, 55, 0.025);
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.chapter-detail__nav {
+  border-bottom-color: rgba(218, 157, 55, 0.14);
+}
+
+.chapter-detail__back {
+  color: rgba(245, 230, 207, 0.62);
+}
+
+.chapter-detail__back:hover {
+  color: #e0ad4f;
+}
+
+.chapter-detail__brand {
+  color: #e0ad4f;
+}
+
+.chapter-detail__counter {
+  color: #f5e6cf;
+}
+
+.chapter-detail__counter span {
+  color: rgba(245, 230, 207, 0.36);
+}
+
+.chapter-detail__counter i {
+  color: rgba(224, 173, 79, 0.58);
+}
+
+
+/* =========================================================
+   OPENING LABEL
+   ========================================================= */
+
+.chapter-detail__opening-label {
+  color: #e0ad4f;
+}
+
+.chapter-detail__opening-label div {
+  background: rgba(224, 173, 79, 0.55);
+}
+
+
+/* =========================================================
+   OPENING TITLE
+   ========================================================= */
+
+.chapter-detail__roman {
+  color: rgba(224, 173, 79, 0.52);
+}
+
+.chapter-detail__opening-title h1 {
+  color: #f5e6cf;
+}
+
+.chapter-detail__title-line {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #e0ad4f,
+      transparent
+    );
+}
+
+.chapter-detail__opening-title h2 {
+  color: rgba(245, 230, 207, 0.58);
+}
+
+
+/* =========================================================
+   IMAGE FRAME
+   ========================================================= */
+
+.chapter-detail__image-frame {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(224, 173, 79, 0.22),
+      rgba(42, 8, 15, 0.18) 30%,
+      rgba(224, 173, 79, 0.08) 70%,
+      rgba(20, 4, 9, 0.30)
+    );
+
+  border-color: rgba(224, 173, 79, 0.26);
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.82),
+    0 0 70px rgba(224, 173, 79, 0.045);
+}
+
+
+/* =========================================================
+   IMAGE CORNERS
+   ========================================================= */
+
+.chapter-detail__image-corner--tl,
+.chapter-detail__image-corner--tr,
+.chapter-detail__image-corner--bl,
+.chapter-detail__image-corner--br {
+  border-color: #e0ad4f;
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.chapter-detail__image-inner {
+  background: #18060a;
+}
+
+
+/* =========================================================
+   IMAGE CAPTION
+   ========================================================= */
+
+.chapter-detail__image-caption span {
+  color: #f5e6cf;
+}
+
+.chapter-detail__image-caption small {
+  color: rgba(224, 173, 79, 0.84);
+}
+
+
+/* =========================================================
+   OPENING DESCRIPTION
+   ========================================================= */
+
+.chapter-detail__opening-description p {
+  color: rgba(245, 230, 207, 0.68);
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.chapter-detail__scroll {
+  color: rgba(224, 173, 79, 0.64);
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.chapter-detail__divider span {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(224, 173, 79, 0.28)
+    );
+}
+
+.chapter-detail__divider span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(224, 173, 79, 0.28),
+      transparent
+    );
+}
+
+.chapter-detail__divider div {
+  color: #e0ad4f;
+}
+
+
+/* =========================================================
+   STORY INDEX
+   ========================================================= */
+
+.chapter-detail__story-index span {
+  color: rgba(224, 173, 79, 0.70);
+}
+
+.chapter-detail__story-index div {
+  background: rgba(224, 173, 79, 0.36);
+}
+
+.chapter-detail__story-index small {
+  color: rgba(245, 230, 207, 0.30);
+}
+
+
+/* =========================================================
+   STORY HEADING
+   ========================================================= */
+
+.chapter-detail__story-content h2 {
+  color: #f5e6cf;
+}
+
+.chapter-detail__story-content h2 em {
+  color: #e0ad4f;
+}
+
+.chapter-detail__story-lead p {
+  color: #f5e6cf;
+}
+
+.chapter-detail__story-content > p {
+  color: rgba(245, 230, 207, 0.58);
+}
+
+.chapter-detail__story-rule {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(224, 173, 79, 0.30),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   QUOTE
+   ========================================================= */
+
+.chapter-detail__quote {
+  border-top-color: rgba(224, 173, 79, 0.20);
+  border-bottom-color: rgba(224, 173, 79, 0.20);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(224, 173, 79, 0.045),
+      rgba(61, 9, 18, 0.07) 45%,
+      transparent 70%
+    );
+}
+
+.chapter-detail__quote > span {
+  color: #e0ad4f;
+}
+
+.chapter-detail__quote blockquote {
+  color: #f5e6cf;
+}
+
+.chapter-detail__quote small {
+  color: rgba(224, 173, 79, 0.62);
+}
+
+
+/* =========================================================
+   STORY BLOCK
+   ========================================================= */
+
+.chapter-detail__story-block-number {
+  color: rgba(224, 173, 79, 0.46);
+}
+
+.chapter-detail__story-block h3 {
+  color: #f5e6cf;
+}
+
+.chapter-detail__story-block p {
+  color: rgba(245, 230, 207, 0.56);
+}
+
+
+/* =========================================================
+   SCENE HEADER
+   ========================================================= */
+
+.chapter-detail__scene-number {
+  border-color: rgba(224, 173, 79, 0.44);
+}
+
+.chapter-detail__scene-number::before {
+  border-color: rgba(224, 173, 79, 0.18);
+}
+
+.chapter-detail__scene-number::after {
+  border-color: rgba(224, 173, 79, 0.58);
+}
+
+.chapter-detail__scene-number span {
+  color: #f5e6cf;
+}
+
+.chapter-detail__scene-header .story-eyebrow {
+  color: #e0ad4f;
+}
+
+.chapter-detail__scene-header h3 {
+  color: #f5e6cf;
+}
+
+.chapter-detail__scene-header small {
+  color: rgba(224, 173, 79, 0.70);
+}
+
+
+/* =========================================================
+   SCENE TEXT
+   ========================================================= */
+
+.chapter-detail__scene-text p {
+  color: rgba(245, 230, 207, 0.82);
+}
+
+.chapter-detail__scene-text p:first-child::first-letter {
+  color: #e0ad4f;
+}
+
+
+/* =========================================================
+   SCENE IMAGE
+   ========================================================= */
+
+.chapter-detail__scene-image {
+  border-color: rgba(224, 173, 79, 0.22);
+  background: #18060a;
+}
+
+.chapter-detail__scene-image-label {
+  color: #f5e6cf;
+}
+
+
+/* =========================================================
+   SCENE EMOTION
+   ========================================================= */
+
+.chapter-detail__scene-emotion {
+  border-left-color: rgba(224, 173, 79, 0.62);
+  background: rgba(224, 173, 79, 0.028);
+}
+
+.chapter-detail__scene-emotion span {
+  color: #e0ad4f;
+}
+
+.chapter-detail__scene-emotion p {
+  color: rgba(245, 230, 207, 0.70);
+}
+
+
+/* =========================================================
+   SCENE SEPARATORS
+   ========================================================= */
+
+.chapter-detail__scene:not(:last-child)::after {
+  color: #e0ad4f;
+}
+
+.chapter-detail__scene:not(:last-child)::before {
+  background: rgba(224, 173, 79, 0.28);
+}
+
+
+/* =========================================================
+   STORY ENDING
+   ========================================================= */
+
+.chapter-detail__story-ending .story-eyebrow {
+  color: #e0ad4f;
+}
+
+.chapter-detail__story-ending p {
+  color: rgba(245, 230, 207, 0.70);
+}
+
+
+/* =========================================================
+   KEY FIGURES
+   ========================================================= */
+
+.chapter-detail__figures {
+  border-top-color: rgba(224, 173, 79, 0.12);
+}
+
+.chapter-detail__figures-heading h2 {
+  color: #f5e6cf;
+}
+
+.chapter-detail__figures-heading h2 em {
+  color: #e0ad4f;
+}
+
+.chapter-detail__figures-heading p {
+  color: rgba(245, 230, 207, 0.40);
+}
+
+.chapter-detail__figure-list {
+  border-top-color: rgba(224, 173, 79, 0.13);
+}
+
+.chapter-detail__figure {
+  border-bottom-color: rgba(224, 173, 79, 0.10);
+  color: rgba(245, 230, 207, 0.50);
+}
+
+.chapter-detail__figure:nth-child(odd) {
+  border-right-color: rgba(224, 173, 79, 0.10);
+}
+
+.chapter-detail__figure:hover {
+  color: #f5e6cf;
+  background: rgba(224, 173, 79, 0.028);
+}
+
+.chapter-detail__figure > span {
+  color: rgba(224, 173, 79, 0.44);
+}
+
+.chapter-detail__figure svg {
+  color: rgba(224, 173, 79, 0.56);
+}
+
+
+/* =========================================================
+   PREVIOUS / NEXT
+   ========================================================= */
+
+.chapter-detail__navigation {
+  border-top-color: rgba(224, 173, 79, 0.12);
+}
+
+.chapter-detail__next-card {
+  border-right-color: rgba(224, 173, 79, 0.10);
+}
+
+.chapter-detail__next-card:hover {
+  background: rgba(224, 173, 79, 0.028);
+}
+
+.chapter-detail__next-card span {
+  color: rgba(224, 173, 79, 0.58);
+}
+
+.chapter-detail__next-card strong {
+  color: #f5e6cf;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.chapter-detail__footer {
+  border-top-color: rgba(224, 173, 79, 0.10);
+  color: rgba(245, 230, 207, 0.27);
+}
+
+.chapter-detail__footer span:first-child {
+  color: rgba(224, 173, 79, 0.58);
+}
+
+
+/* =========================================================
+   INVALID CHAPTER
+   ========================================================= */
+
+.chapter-detail__invalid {
+  color: #f5e6cf;
+}
+
+.chapter-detail__invalid h1 {
+  color: #f5e6cf;
+}
+
+
+/* =========================================================
+   STORY HEADING
+   ========================================================= */
+
+.chapter-detail__story-heading {
+  color: #f5e6cf;
+}
+
+
+/* =========================================================
+   =========================================================
+   ANCESTRA — DARKEST MAROON MAHABHARATA OVERRIDES
+   =========================================================
+   ========================================================= */
+
+
+/* ---------- MAIN CHAPTERS PAGE ---------- */
+
+.story-page {
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(85, 17, 30, 0.18),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 15% 70%,
+      rgba(55, 9, 19, 0.12),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(62, 11, 22, 0.10),
+      transparent 40%
+    ),
+    #120407 !important;
+
+  color: #eee5d2;
+}
+
+
+/* ---------- CHAPTER DETAIL PAGE ---------- */
+
+.chapter-detail {
+  background:
+    radial-gradient(
+      circle at 50% 12%,
+      rgba(90, 18, 31, 0.18),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 10% 60%,
+      rgba(50, 8, 17, 0.11),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(60, 10, 20, 0.10),
+      transparent 42%
+    ),
+    #120407 !important;
+
+  color: #eee5d2;
+}
+
+
+/* =========================================================
+   ATMOSPHERE — VERY DARK MAROON
+   ========================================================= */
+
+.story-atmosphere,
+.chapter-detail__atmosphere {
+  background: transparent !important;
+}
+
+
+/* Main ambient glow */
+
+.story-atmosphere__glow,
+.chapter-detail__glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(105, 23, 38, 0.16),
+      rgba(48, 8, 17, 0.07) 35%,
+      transparent 70%
+    ) !important;
+}
+
+
+/* Secondary glow */
+
+.chapter-detail__glow--two {
+  background:
+    radial-gradient(
+      circle,
+      rgba(75, 13, 27, 0.13),
+      transparent 68%
+    ) !important;
+}
+
+
+/* =========================================================
+   HERO / SECTION BACKGROUNDS
+   ========================================================= */
+
+.story-hero,
+.story-introduction,
+.story-timeline,
+.story-philosophy,
+.story-footer,
+.chapter-detail__opening,
+.chapter-detail__story,
+.chapter-detail__navigation,
+.chapter-detail__footer {
+  background-color: transparent !important;
+}
+
+
+/* =========================================================
+   DARK OVERLAYS
+   ========================================================= */
+
+.story-hero__image-overlay,
+.chapter-detail__image-dark,
+.chapter-detail__scene-image-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 4, 7, 0.10),
+      rgba(18, 4, 7, 0.84)
+    ) !important;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.story-timeline__line {
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(201, 164, 92, 0.48),
+      rgba(78, 14, 28, 0.55),
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   CHAPTER CARDS
+   ========================================================= */
+
+.story-chapter {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34, 8, 15, 0.88),
+      rgba(18, 4, 8, 0.96)
+    ) !important;
+
+  border-color:
+    rgba(201, 164, 92, 0.16) !important;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.018);
+}
+
+
+.story-chapter:hover {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(48, 11, 21, 0.92),
+      rgba(21, 5, 10, 0.98)
+    ) !important;
+
+  border-color:
+    rgba(201, 164, 92, 0.34) !important;
+
+  box-shadow:
+    0 25px 75px rgba(0, 0, 0, 0.68),
+    0 0 35px rgba(90, 17, 32, 0.12);
+}
+
+
+/* =========================================================
+   CHAPTER DETAIL STORY CARDS
+   ========================================================= */
+
+.chapter-detail__scene {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(31, 7, 14, 0.78),
+      rgba(15, 3, 7, 0.92)
+    ) !important;
+
+  border-color:
+    rgba(201, 164, 92, 0.13) !important;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.story-nav,
+.chapter-detail__nav {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 4, 7, 0.97),
+      rgba(18, 4, 7, 0.78),
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   IMAGE FRAMES
+   ========================================================= */
+
+.story-hero__image-frame,
+.chapter-detail__image-frame {
+  background:
+    #18060a !important;
+
+  border-color:
+    rgba(201, 164, 92, 0.24) !important;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.68),
+    0 0 45px rgba(91, 17, 32, 0.12);
+}
+
+
+/* =========================================================
+   IMAGE GLOW
+   ========================================================= */
+
+.story-hero__image-glow {
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(91, 18, 34, 0.17),
+      transparent 70%
+    ) !important;
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+   ========================================================= */
+
+.story-philosophy {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(72, 13, 27, 0.15),
+      transparent 55%
+    ) !important;
+}
+
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+
+.chapter-detail__divider span,
+.chapter-detail__story-rule {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 164, 92, 0.42),
+      transparent
+    ) !important;
+}
+
+
+/* =========================================================
+   PREVIOUS / NEXT
+   ========================================================= */
+
+.chapter-detail__next-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(31, 7, 14, 0.88),
+      rgba(17, 4, 8, 0.96)
+    ) !important;
+
+  border-color:
+    rgba(201, 164, 92, 0.15) !important;
+}
+
+
+.chapter-detail__next-card:hover {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(47, 11, 21, 0.94),
+      rgba(21, 5, 10, 0.98)
+    ) !important;
+
+  border-color:
+    rgba(201, 164, 92, 0.34) !important;
+}
+
+
+/* =========================================================
+   OPENING GRANTH
+   ========================================================= */
+
+.granth-opening {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(75, 14, 28, 0.22),
+      transparent 42%
+    ),
+    #100306 !important;
+}
+
+
+/* Void behind the granth */
+
+.granth-opening__void {
+  background:
+    radial-gradient(
+      circle,
+      rgba(61, 10, 22, 0.14),
+      transparent 65%
+    ) !important;
+}
+
+
+/* Opening aura */
+
+.granth-opening__aura {
+  background:
+    radial-gradient(
+      circle,
+      rgba(88, 18, 34, 0.16),
+      rgba(46, 8, 17, 0.06),
+      transparent 70%
+    ) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .story-page,
+  .chapter-detail {
+    background:
+      radial-gradient(
+        circle at 50% 15%,
+        rgba(78, 15, 28, 0.15),
+        transparent 42%
+      ),
+      #120407 !important;
+  }
+
+}
+
+/* =====================================================
+   LAUNCHING SOON — ANCESTRA PHASE II
+===================================================== */
+
+.story-soon {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 140px 24px 120px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.story-soon--hidden { visibility: hidden; }
+
+.story-soon__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(900px, 140vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.story-soon__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 164, 92, 0.22);
+}
+
+.story-soon__ring--one {
+  animation: soonSpin 60s linear infinite;
+  border-style: dashed;
+}
+
+.story-soon__ring--two {
+  inset: 12%;
+  border-color: rgba(224, 173, 79, 0.3);
+  animation: soonSpinReverse 45s linear infinite;
+}
+
+.story-soon__ring--three {
+  inset: 26%;
+  border-color: rgba(214, 182, 108, 0.18);
+  border-style: dotted;
+  animation: soonSpin 90s linear infinite;
+}
+
+.story-soon__ring::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e0ad4f;
+  box-shadow: 0 0 18px 4px rgba(224, 173, 79, 0.7);
+}
+
+.story-soon__core {
+  position: absolute;
+  inset: 34%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 173, 79, 0.28), transparent 70%);
+  animation: soonPulse 5s ease-in-out infinite;
+}
+
+.story-soon__content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+}
+
+.story-soon__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border: 1px solid rgba(201, 164, 92, 0.45);
+  border-radius: 999px;
+  background: rgba(33, 11, 17, 0.6);
+  color: #d6b66c;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  box-shadow: 0 0 30px rgba(201, 164, 92, 0.12);
+}
+
+.story-soon__badge svg { animation: soonTwinkle 2.4s ease-in-out infinite; }
+
+.story-soon__title {
+  margin: 36px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(46px, 10vw, 118px);
+  line-height: 1.02;
+  letter-spacing: 0.12em;
+  color: #f5e6cf;
+  text-shadow: 0 0 40px rgba(201, 164, 92, 0.18);
+}
+
+.story-soon__title span {
+  background: linear-gradient(100deg, #8c6a2c 0%, #e0ad4f 30%, #fff1c9 50%, #e0ad4f 70%, #8c6a2c 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: soonShimmer 5s linear infinite;
+}
+
+.story-soon__divider {
+  position: relative;
+  width: min(340px, 70%);
+  height: 1px;
+  margin: 38px auto 32px;
+  transform-origin: center;
+  background: linear-gradient(90deg, transparent, #c9a45c, transparent);
+}
+
+.story-soon__divider i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  background: #e0ad4f;
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 16px rgba(224, 173, 79, 0.8);
+}
+
+.story-soon__with {
+  margin: 0;
+  color: rgba(238, 229, 210, 0.75);
+  font-size: clamp(12px, 2.2vw, 16px);
+  letter-spacing: 0.4em;
+}
+
+.story-soon__with strong {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 400;
+  color: #e0ad4f;
+  animation: soonGlowText 3.5s ease-in-out infinite;
+}
+
+.story-soon__note {
+  margin: 34px 0 44px;
+  color: rgba(238, 229, 210, 0.55);
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.9;
+}
+
+.story-soon__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 34px;
+  border: 1px solid rgba(201, 164, 92, 0.55);
+  color: #eee5d2;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-decoration: none;
+  transition: background 0.4s, box-shadow 0.4s, gap 0.4s;
+}
+
+.story-soon__button:hover {
+  gap: 22px;
+  background: rgba(201, 164, 92, 0.14);
+  box-shadow: 0 0 34px rgba(201, 164, 92, 0.25);
+}
+
+.story-soon__dots {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  display: flex;
+  gap: 12px;
+  transform: translateX(-50%);
+}
+
+.story-soon__dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c9a45c;
+  animation: soonDot 1.6s ease-in-out infinite;
+}
+
+.story-soon__dots span:nth-child(2) { animation-delay: 0.25s; }
+.story-soon__dots span:nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes soonSpin { to { transform: rotate(360deg); } }
+@keyframes soonSpinReverse { to { transform: rotate(-360deg); } }
+@keyframes soonPulse { 0%, 100% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.12); } }
+@keyframes soonShimmer { to { background-position: -250% 0; } }
+@keyframes soonTwinkle { 0%, 100% { opacity: 0.4; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.15); } }
+@keyframes soonGlowText { 0%, 100% { text-shadow: 0 0 0 transparent; } 50% { text-shadow: 0 0 22px rgba(224, 173, 79, 0.65); } }
+@keyframes soonDot { 0%, 100% { opacity: 0.2; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-8px); } }
+
+@media (max-width: 640px) {
+  .story-soon { padding: 120px 20px 110px; }
+  .story-soon__title { letter-spacing: 0.06em; }
+  .story-soon__badge { letter-spacing: 0.22em; font-size: 11px; }
+  .story-soon__with { letter-spacing: 0.25em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-soon *, .story-soon *::before, .story-soon *::after {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap");
+
+.hanuman-game {
+  --hg-gold: #e9bd70;
+  --hg-light-gold: #ffe2a8;
+  --hg-ivory: #fff1d5;
+  --hg-dark: #180f0a;
+  position: relative;
+  width: 100%;
+  height: min(900px, 100vh);
+  min-height: min(780px, 100vh);
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--hg-ivory);
+  background: linear-gradient(180deg, #20140e 0%, #57321d 45%, #160e0a 100%);
+  border: 1px solid rgba(232, 187, 112, 0.35);
+  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.35);
+  font-family: "Cormorant Garamond", serif;
+}
+.hanuman-game *, .hanuman-game *::before, .hanuman-game *::after { box-sizing: border-box; }
+.hanuman-game button { font: inherit; }
+
+/* TOP BAR */
+.hg-topbar {
+  position: absolute; z-index: 20; top: 0; left: 0; width: 100%; height: 66px; padding: 0 36px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 226, 168, 0.18);
+  background: linear-gradient(180deg, rgba(17, 11, 8, 0.55), transparent);
+  font-family: "Cinzel", serif;
+}
+.hg-brand { display: flex; align-items: center; gap: 11px; color: #f5d69d; font-size: 12px; letter-spacing: 4px; }
+.hg-brand-symbol { font-family: "Noto Serif Devanagari", serif; font-size: 24px; color: var(--hg-gold); }
+.hg-chapter-label { color: rgba(255, 231, 193, 0.72); font-size: 9px; letter-spacing: 2px; }
+
+.hg-eyebrow { display: inline-block; color: var(--hg-gold); font-family: "Cinzel", serif; font-size: 10px; letter-spacing: 3px; }
+
+/* BUTTONS */
+.hg-primary-button {
+  min-height: 52px; padding: 0 22px; display: inline-flex; align-items: center; justify-content: center; gap: 27px;
+  border: 1px solid rgba(255, 218, 155, 0.75);
+  background: linear-gradient(135deg, #d4a15e, #9a6136);
+  color: #20140d; font-family: "Cinzel", serif; font-size: 10px; font-weight: 700; letter-spacing: 1.8px; cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.hg-primary-button:hover { transform: translateY(-3px); background: linear-gradient(135deg, #ffe2a8, #c88d4d); box-shadow: 0 12px 35px rgba(225, 164, 90, 0.28); }
+.hg-button-arrow { font-size: 18px; }
+.hg-text-button { border: 0; background: transparent; color: #e9c28a; font-family: "Cinzel", serif; font-size: 9px; letter-spacing: 1.5px; cursor: pointer; }
+.hanuman-game button:focus-visible { outline: 2px solid var(--hg-light-gold); outline-offset: 3px; }
+
+/* INTRO */
+.hg-intro-screen { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; align-items: center; padding: 100px 9% 90px; }
+.hg-intro-copy { position: relative; z-index: 5; width: 50%; max-width: 530px; animation: hg-copy-enter 1.1s ease both; }
+.hg-intro-copy h1 {
+  margin: 20px 0 18px; color: #fff0d5; font-size: clamp(52px, 6.3vw, 88px); line-height: 0.92; font-weight: 500;
+  letter-spacing: -2px; text-shadow: 0 5px 30px rgba(0, 0, 0, 0.55);
+}
+.hg-gold-line { width: 110px; height: 1px; margin: 28px 0; background: linear-gradient(90deg, var(--hg-gold), transparent); }
+.hg-intro-copy p { max-width: 390px; color: rgba(255, 239, 215, 0.92); font-size: 22px; line-height: 1.35; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5); }
+.hg-intro-copy .hg-intro-secondary { color: #f0c88c; font-size: 18px; font-style: italic; }
+.hg-intro-bottom {
+  position: absolute; bottom: 28px; left: 36px; right: 36px; display: flex; justify-content: space-between;
+  color: rgba(255, 228, 190, 0.6); font-family: "Cinzel", serif; font-size: 9px; letter-spacing: 2px;
+}
+
+/* CATCH */
+.hg-catch-screen { position: relative; z-index: 3; height: 100%; padding: 92px 35px 40px; text-align: center; }
+.hg-mantra-heading p { margin: 6px 0; color: rgba(255, 236, 205, 0.85); font-size: 17px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+
+/* Big reference verse (catch + arrange) */
+.hg-ref-mantra {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0.55em; max-width: 1100px; margin: 12px auto 4px;
+  font-family: "Noto Serif Devanagari", serif; font-weight: 600; font-size: clamp(19px, 3.4vw, 46px); line-height: 1.3;
+}
+.hg-ref-mantra span {
+  color: rgba(255, 236, 205, 0.4);
+  transition: color 0.6s ease, text-shadow 0.6s ease, transform 0.6s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.hg-ref-mantra span.is-found {
+  color: #ffe2a8; transform: translateY(-2px) scale(1.06);
+  text-shadow: 0 0 14px rgba(255, 196, 100, 0.95), 0 0 38px rgba(255, 160, 60, 0.6);
+}
+
+.hg-catch-progress { position: relative; z-index: 8; width: min(330px, 80%); margin: 14px auto 0; }
+.hg-progress-label { display: flex; justify-content: space-between; color: #f3d39d; font-family: "Cinzel", serif; font-size: 9px; letter-spacing: 1.5px; }
+.hg-progress-label strong { color: white; }
+.hg-progress-track { height: 4px; margin-top: 8px; overflow: hidden; background: rgba(255, 236, 205, 0.2); }
+.hg-progress-fill { height: 100%; background: linear-gradient(90deg, #d79a50, #fff0b9); box-shadow: 0 0 14px #ffdb9b; transition: width 0.45s ease; }
+
+.hg-card-field { position: absolute; z-index: 4; inset: 290px 0 90px; }
+.hg-flying-card {
+  position: absolute; left: var(--card-x); top: var(--card-y);
+  width: clamp(135px, 15vw, 190px); min-height: 64px; padding: 13px 9px;
+  display: flex; justify-content: center; align-items: center;
+  border: 1px solid rgba(255, 220, 158, 0.72);
+  background: linear-gradient(145deg, rgba(255, 242, 215, 0.96), rgba(204, 151, 91, 0.95));
+  color: #402516; font-family: "Noto Serif Devanagari", serif; font-size: clamp(13px, 1.5vw, 18px); font-weight: 600;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.22), inset 0 0 0 4px rgba(125, 76, 36, 0.08);
+  cursor: pointer;
+  animation: hg-card-float var(--card-duration) ease-in-out var(--card-delay) infinite alternate, hg-card-glow 3s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+.hg-flying-card::before { content: ""; position: absolute; inset: 5px; border: 1px solid rgba(113, 71, 34, 0.2); pointer-events: none; }
+.hg-flying-card::after { content: ""; position: absolute; left: 50%; bottom: -5px; width: 34px; height: 1px; background: #ffe6b6; transform: translateX(-50%); }
+.hg-flying-card:hover { z-index: 9; filter: brightness(1.15); box-shadow: 0 0 30px rgba(255, 220, 155, 0.65); }
+.hg-flying-card.is-caught { opacity: 0; pointer-events: none; transform: translate(-50%, -100%) scale(0.3); }
+.hg-card-corner { position: absolute; top: 2px; left: 7px; color: #a36d37; font-size: 10px; }
+.hg-card-corner--bottom { top: auto; left: auto; bottom: 2px; right: 7px; }
+
+.hg-catch-instruction {
+  position: absolute; bottom: 29px; left: 50%; width: max-content; max-width: 90%; transform: translateX(-50%);
+  color: rgba(255, 236, 205, 0.8); font-family: "Cinzel", serif; font-size: 9px; letter-spacing: 1.6px;
+}
+.hg-instruction-icon { color: var(--hg-gold); margin-right: 9px; }
+.hg-feedback {
+  position: absolute; z-index: 15; bottom: 65px; left: 50%; transform: translateX(-50%); width: max-content; max-width: 90%;
+  padding: 12px 20px; border: 1px solid rgba(255, 222, 165, 0.4); background: rgba(35, 20, 12, 0.9);
+  color: #ffe6bd; font-size: 17px; text-align: center; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); animation: hg-feedback-in 0.3s ease both;
+}
+
+/* ARRANGE: Hanuman on the left, puzzle on the right */
+.hg-arrange-screen {
+  position: relative; z-index: 3; height: 100%; padding: 92px 20px 24px;
+  display: flex; flex-direction: column; align-items: center; overflow-y: auto; scrollbar-width: none;
+}
+.hg-arrange-screen::-webkit-scrollbar { display: none; }
+.hg-arrange-heading { text-align: center; max-width: 650px; }
+.hg-arrange-heading h2 { margin: 8px 0 4px; color: #fff0d5; font-size: clamp(28px, 3.2vw, 44px); font-weight: 500; text-shadow: 0 3px 18px rgba(0, 0, 0, 0.5); }
+.hg-arrange-heading p { margin: 4px 0; color: rgba(255, 236, 205, 0.85); font-size: 17px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+.hg-arrange-screen .hg-ref-mantra { font-size: clamp(15px, 1.9vw, 24px); margin: 8px 0 0; }
+.hg-arrange-panel {
+  width: min(850px, 95%); margin-top: 12px; padding: 18px 20px;
+  border: 1px solid rgba(255, 222, 165, 0.5);
+  background: linear-gradient(160deg, rgba(48, 30, 18, 0.9), rgba(24, 14, 9, 0.92));
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), inset 0 0 40px rgba(255, 190, 100, 0.05);
+  backdrop-filter: blur(12px);
+}
+.hg-arrange-label { display: flex; justify-content: space-between; color: #eac58c; font-family: "Cinzel", serif; font-size: 9px; letter-spacing: 2px; }
+.hg-answer-slots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 12px 0 16px; }
+.hg-answer-slot {
+  min-height: 44px; padding: 7px; border: 1px dashed rgba(241, 199, 132, 0.5); background: rgba(255, 231, 194, 0.055);
+  color: #fff0d5; font-family: "Noto Serif Devanagari", serif; font-size: 13px; cursor: pointer;
+  transition: background 0.25s ease, border 0.25s ease;
+}
+.hg-answer-slot:disabled { cursor: default; color: rgba(255, 235, 202, 0.25); }
+.hg-answer-slot.has-fragment {
+  border-style: solid; border-color: rgba(255, 219, 156, 0.7); background: rgba(209, 151, 82, 0.18);
+  animation: hg-pop 0.35s cubic-bezier(0.2, 1.5, 0.4, 1); box-shadow: 0 0 18px rgba(255, 200, 120, 0.25);
+}
+.hg-bank-label { color: #eac58c; font-family: "Cinzel", serif; font-size: 9px; letter-spacing: 2px; }
+.hg-bank-items { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+.hg-bank-fragment {
+  padding: 8px 11px; display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid rgba(235, 193, 126, 0.45); background: linear-gradient(145deg, #f1d3a1, #c08b50);
+  color: #382214; font-family: "Noto Serif Devanagari", serif; font-size: 12.5px; cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.hg-bank-fragment:hover:not(:disabled) { transform: translateY(-3px); }
+.hg-bank-fragment:disabled { opacity: 0.2; cursor: default; }
+.hg-bank-fragment span { font-family: sans-serif; }
+.hg-arrange-actions { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+
+/* AWAKENING */
+.hg-awakening-screen { position: relative; z-index: 3; height: 100%; overflow: hidden; text-align: center; animation: hg-awakening-in 1.5s ease both; }
+.hg-awakening-mantra {
+  position: absolute; top: 100px; left: 0; width: 100%; display: flex; flex-direction: column; gap: 4px;
+  color: rgba(255, 237, 202, 0.75); font-family: "Noto Serif Devanagari", serif; font-size: clamp(13px, 1.7vw, 20px);
+  letter-spacing: 1px; text-shadow: 0 0 15px rgba(255, 218, 157, 0.35); animation: hg-mantra-rise 2s ease both;
+}
+.hg-awakening-copy { position: absolute; z-index: 5; top: 285px; left: 50%; width: 90%; transform: translateX(-50%); }
+.hg-awakening-copy h2 { margin: 8px 0; color: #fff0d5; font-size: clamp(35px, 4.2vw, 55px); font-weight: 500; }
+.hg-awakening-copy p { color: rgba(255, 236, 205, 0.85); font-size: 19px; }
+.hg-awakening-chant {
+  position: absolute; z-index: 8; bottom: 110px; left: 0; width: 100%; color: #fff1c6; font-family: "Cinzel", serif;
+  font-size: clamp(25px, 4.3vw, 56px); font-weight: 800; letter-spacing: 7px;
+  text-shadow: 0 0 12px #ffda91, 0 0 35px rgba(255, 179, 83, 0.85), 0 5px 25px #35180b;
+  animation: hg-chant-reveal 1.3s 2.8s both;
+}
+.hg-leap-button {
+  position: absolute; z-index: 10; bottom: 36px; left: 50%; transform: translateX(-50%); padding: 13px 23px;
+  border: 1px solid rgba(255, 226, 168, 0.7); background: rgba(39, 23, 14, 0.8); color: #ffe5b4;
+  font-family: "Cinzel", serif; font-size: 9px; letter-spacing: 2px; cursor: pointer; animation: hg-feedback-in 0.7s 3.5s both;
+}
+.hg-leap-button:hover { background: #d4a15e; color: #25170f; }
+
+/* COMPLETE */
+.hg-complete-screen {
+  position: relative; z-index: 4; height: 100%; padding: 180px 25px 50px;
+  display: flex; flex-direction: column; align-items: center; text-align: center; animation: hg-awakening-in 1.3s ease both;
+}
+.hg-complete-screen h2 { margin: 15px 0; color: #fff0d5; font-family: "Cinzel", serif; font-size: clamp(38px, 6vw, 75px); letter-spacing: 4px; text-shadow: 0 0 30px rgba(255, 214, 148, 0.45); }
+.hg-complete-screen p { max-width: 520px; color: rgba(255, 236, 205, 0.9); font-size: 23px; line-height: 1.35; }
+.hg-complete-mantra { margin: 20px 0 35px; color: #f1cc8f; font-family: "Noto Serif Devanagari", serif; font-size: 22px; }
+
+/* ANIMATIONS */
+@keyframes hg-copy-enter { from { opacity: 0; transform: translateX(-35px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes hg-card-float {
+  0% { transform: translate(-50%, -50%) rotate(-7deg) translateY(0); }
+  50% { transform: translate(-50%, -50%) rotate(5deg) translateY(-23px); }
+  100% { transform: translate(-50%, -50%) rotate(-3deg) translateY(15px); }
+}
+@keyframes hg-card-glow { 0%, 100% { box-shadow: 0 12px 25px rgba(0, 0, 0, 0.22); } 50% { box-shadow: 0 12px 35px rgba(255, 204, 125, 0.3); } }
+@keyframes hg-feedback-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes hg-awakening-in { from { opacity: 0; filter: brightness(0.5); } to { opacity: 1; filter: brightness(1); } }
+@keyframes hg-mantra-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hg-chant-reveal { from { opacity: 0; transform: scale(0.75); letter-spacing: 18px; } to { opacity: 1; transform: scale(1); letter-spacing: 7px; } }
+@keyframes hg-pop { from { transform: scale(0.82); opacity: 0.3; } to { transform: scale(1); opacity: 1; } }
+
+/* RESPONSIVE */
+@media (min-width: 901px) {
+  .hg-arrange-screen { align-items: flex-end; padding-right: 4vw; }
+  .hg-arrange-heading, .hg-arrange-panel { width: min(640px, 54vw); }
+}
+@media (max-width: 900px) {
+  .hg-arrange-panel { background: rgba(28, 17, 11, 0.94); }
+  .hg-card-field { inset: 330px 0 100px; }
+}
+@media (max-width: 800px) {
+  .hg-topbar { padding: 0 18px; }
+  .hg-chapter-label { font-size: 7px; letter-spacing: 1px; }
+  .hg-intro-screen { padding: 120px 25px 100px; align-items: flex-start; }
+  .hg-intro-copy { width: 100%; max-width: 480px; }
+  .hg-intro-copy h1 { font-size: clamp(48px, 11vw, 72px); }
+  .hg-intro-copy p { max-width: 330px; font-size: 19px; }
+  .hg-intro-bottom { left: 18px; right: 18px; font-size: 7px; }
+  .hg-catch-screen { padding: 90px 12px 35px; }
+  .hg-flying-card { width: 125px; min-height: 52px; font-size: 12px; }
+  .hg-arrange-screen { padding: 86px 10px 24px; }
+  .hg-arrange-panel { padding: 15px; }
+  .hg-answer-slots { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+  .hg-answer-slot { min-height: 44px; font-size: 12px; }
+  .hg-bank-fragment { padding: 8px 9px; font-size: 11px; }
+  .hg-arrange-actions { flex-direction: column; align-items: stretch; }
+  .hg-arrange-actions .hg-primary-button { width: 100%; }
+  .hg-awakening-mantra { top: 100px; font-size: 12px; }
+  .hg-awakening-copy { top: 285px; }
+  .hg-awakening-chant { bottom: 115px; letter-spacing: 3px; }
+  .hg-complete-screen { padding-top: 190px; }
+}
+@media (max-width: 480px) {
+  .hg-brand { font-size: 9px; letter-spacing: 2px; }
+  .hg-brand-symbol { font-size: 19px; }
+  .hg-mantra-heading p { font-size: 15px; }
+  .hg-flying-card { width: 112px; min-height: 46px; padding: 8px 4px; font-size: 11px; }
+  .hg-awakening-copy h2 { font-size: 33px; }
+  .hg-awakening-copy p { font-size: 16px; }
+  .hg-awakening-chant { font-size: 25px; letter-spacing: 2px; }
+  .hg-complete-screen h2 { font-size: 37px; }
+  .hg-complete-screen p { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hanuman-game *, .hanuman-game *::before, .hanuman-game *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}

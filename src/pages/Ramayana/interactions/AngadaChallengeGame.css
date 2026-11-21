@@ -1,0 +1,855 @@
+/* =========================================================
+   ANGADA'S CHALLENGE — THE UNMOVABLE FOOT
+   ANCESTRA · YUDDHA KANDA
+========================================================= */
+
+.angada-game {
+  position: relative;
+  width: 100%;
+  height: min(88vh, 820px);
+  min-height: 590px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0f0904;
+  color: #fff5df;
+  font-family: "Inter", sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.angada-game *,
+.angada-game *::before,
+.angada-game *::after {
+  box-sizing: border-box;
+}
+
+.angada-game button {
+  font: inherit;
+}
+
+.angada-sound {
+  position: absolute;
+  z-index: 60;
+  right: 18px;
+  bottom: 18px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(229, 190, 126, 0.4);
+  border-radius: 50%;
+  background: rgba(18, 11, 6, 0.6);
+  color: #e9c78c;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.angada-sound:hover {
+  background: rgba(60, 38, 18, 0.8);
+}
+
+.angada-title-screen,
+.angada-intro,
+.angada-gameplay-screen,
+.angada-ending-screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: #170f09;
+}
+
+/* ---------------- TITLE ---------------- */
+
+.angada-title-screen {
+  display: flex;
+  align-items: center;
+}
+
+.angada-title-bg {
+  position: absolute;
+  inset: 0;
+  background-position: center 43%;
+  background-size: cover;
+}
+
+.angada-title-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(15, 10, 7, 0.96) 0%, rgba(15, 10, 7, 0.82) 37%, rgba(15, 10, 7, 0.26) 75%, rgba(15, 10, 7, 0.38) 100%),
+    linear-gradient(0deg, rgba(12, 8, 5, 0.7), transparent 50%, rgba(12, 8, 5, 0.28));
+}
+
+.angada-embers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.angada-embers span {
+  position: absolute;
+  bottom: -10px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffb347;
+  box-shadow: 0 0 8px 2px rgba(255, 160, 60, 0.7);
+  opacity: 0;
+  animation: angada-ember linear infinite;
+}
+
+@keyframes angada-ember {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(40px, -75vh);
+  }
+}
+
+.angada-title-content {
+  position: relative;
+  z-index: 2;
+  width: min(620px, 76%);
+  padding: 50px 0 45px 7%;
+}
+
+.angada-title-kicker,
+.angada-hud-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e9c78c;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.8px;
+}
+
+.angada-title-rule {
+  height: 1px;
+  margin: 27px 0 28px;
+  background: linear-gradient(90deg, #d6ae68, transparent);
+}
+
+.angada-title-overline,
+.angada-eyebrow {
+  margin: 0 0 13px;
+  color: #d9b578;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.angada-title-content h1 {
+  margin: 0;
+  color: #fff2d8;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(55px, 7.5vw, 96px);
+  font-weight: 500;
+  line-height: 0.79;
+  letter-spacing: -2.5px;
+  text-shadow: 0 5px 30px rgba(0, 0, 0, 0.42);
+}
+
+.angada-title-content h1 em {
+  color: #d8ad6c;
+  font-weight: 500;
+}
+
+.angada-title-description {
+  max-width: 390px;
+  margin: 27px 0 30px;
+  color: rgba(255, 244, 222, 0.78);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+.angada-primary-button {
+  display: inline-flex;
+  min-height: 49px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 23px;
+  border: 1px solid rgba(229, 190, 126, 0.72);
+  border-radius: 2px;
+  background: linear-gradient(110deg, #b58a4e, #8b6338);
+  color: #fff8eb;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.angada-primary-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(110deg, #c69c60, #9d7345);
+  box-shadow: 0 9px 28px rgba(185, 135, 70, 0.25);
+}
+
+.angada-primary-button:focus-visible,
+.angada-replay-button:focus-visible,
+.angada-sound:focus-visible {
+  outline: 2px solid #f1d3a1;
+  outline-offset: 3px;
+}
+
+.angada-title-footnote {
+  margin: 35px 0 0;
+  color: rgba(255, 238, 208, 0.42);
+  font-size: 8px;
+  letter-spacing: 3px;
+}
+
+/* ---------------- CINEMATIC STILLS ---------------- */
+
+.angada-intro {
+  background: #0c0705;
+}
+
+.angada-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #0c0705;
+  will-change: transform, filter;
+}
+
+.angada-shake {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.angada-scene-image {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+}
+
+.angada-image-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(14, 9, 6, 0.96) 0%, rgba(14, 9, 6, 0.82) 25%, rgba(14, 9, 6, 0.1) 68%, rgba(14, 9, 6, 0.32) 100%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(8, 4, 2, 0.55) 100%);
+}
+
+.angada-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff1d2;
+  opacity: 0;
+  pointer-events: none;
+  animation: angada-flash 0.9s ease-out 0.35s both;
+}
+
+.angada-flash--ending {
+  background: #ffe2a6;
+  animation-delay: 0s;
+  animation-duration: 1.4s;
+}
+
+@keyframes angada-flash {
+  0% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.angada-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.angada-dust span {
+  position: absolute;
+  bottom: 18%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(222, 186, 130, 0.35), transparent 70%);
+  opacity: 0;
+  animation: angada-dust ease-out both;
+}
+
+@keyframes angada-dust {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  25% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-34vh) scale(2.1);
+  }
+}
+
+.angada-rage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(160, 20, 10, 0.55) 100%);
+  animation: angada-rage 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes angada-rage {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.angada-cinematic-top,
+.angada-ending-top {
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  right: 35px;
+  left: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(255, 241, 218, 0.8);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.angada-dialogue-content {
+  position: absolute;
+  z-index: 2;
+  right: 7%;
+  bottom: 7%;
+  left: 7%;
+  max-width: 680px;
+}
+
+.angada-dialogue-content h2,
+.angada-ending-content h2 {
+  margin: 0;
+  color: #fff1d7;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(38px, 5.3vw, 64px);
+  font-weight: 500;
+  line-height: 0.98;
+}
+
+.angada-dialogue-rule {
+  width: 65px;
+  height: 1px;
+  margin: 17px 0;
+  background: #c49a5e;
+}
+
+.angada-dialogue-text {
+  min-height: 3.6em;
+  max-width: 610px;
+  margin: 0 0 13px;
+  color: rgba(255, 245, 226, 0.92);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(18px, 2.2vw, 25px);
+  line-height: 1.38;
+}
+
+.angada-speaker {
+  display: block;
+  margin: 0 0 23px;
+  color: #d6b276;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+/* ---------------- GAMEPLAY ---------------- */
+
+.angada-gameplay-screen {
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.angada-canvas {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.angada-gameplay-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(14, 9, 5, 0.7) 0%, transparent 22%, transparent 60%, rgba(14, 9, 5, 0.82) 100%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(6, 3, 1, 0.6) 100%);
+}
+
+.angada-letterbox {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-top: 11vh solid #050302;
+  border-bottom: 11vh solid #050302;
+  transition: border-width 1.1s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.angada-letterbox.is-open {
+  border-width: 0;
+}
+
+.angada-game-hud {
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 21px 27px;
+  border-bottom: 1px solid rgba(229, 194, 143, 0.18);
+  background: rgba(19, 12, 7, 0.4);
+  pointer-events: none;
+}
+
+.angada-timer {
+  display: flex;
+  min-width: 91px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 9px 13px;
+  border: 1px solid rgba(230, 192, 134, 0.42);
+  background: rgba(18, 11, 6, 0.58);
+  color: #f6dfb9;
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.angada-gameplay-heading {
+  position: absolute;
+  z-index: 4;
+  top: 88px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.angada-gameplay-heading p {
+  margin: 0 0 7px;
+  color: #e7c58e;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.7px;
+}
+
+.angada-gameplay-heading h2 {
+  margin: 0;
+  color: #fff2d9;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(37px, 5vw, 56px);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.angada-gameplay-instruction {
+  position: absolute;
+  z-index: 8;
+  bottom: 196px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  max-width: 88%;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(227, 192, 137, 0.26);
+  background: rgba(21, 13, 8, 0.78);
+  color: #f5dfbd;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  animation: angada-subtitle 0.45s ease-out both;
+}
+
+@keyframes angada-subtitle {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.angada-effort-panel {
+  position: absolute;
+  z-index: 8;
+  right: 50%;
+  bottom: 24px;
+  width: min(390px, 86%);
+  padding: 17px 20px 13px;
+  border: 1px solid rgba(224, 190, 136, 0.3);
+  background: rgba(22, 14, 8, 0.88);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+  transform: translateX(50%);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.angada-effort-topline {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 9px;
+  color: #e6c38e;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.angada-effort-track {
+  height: 5px;
+  overflow: hidden;
+  background: rgba(255, 244, 224, 0.14);
+}
+
+.angada-effort-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a8793f, #e9c78d);
+  box-shadow: 0 0 13px rgba(226, 183, 115, 0.4);
+  transition: width 0.12s linear;
+}
+
+.angada-lift-button {
+  display: flex;
+  width: 100%;
+  min-height: 49px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 13px;
+  border: 1px solid #e1bd80;
+  background: linear-gradient(105deg, #b58a4d, #886036);
+  color: #fff8eb;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  animation: angada-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes angada-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.22);
+  }
+}
+
+.angada-gameplay-note {
+  margin: 9px 0 0;
+  color: rgba(255, 239, 215, 0.5);
+  font-size: 8px;
+  text-align: center;
+  letter-spacing: 1.7px;
+}
+
+.angada-immovable-stamp {
+  position: absolute;
+  z-index: 6;
+  right: 24px;
+  bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 231, 194, 0.68);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  pointer-events: none;
+}
+
+/* ---------------- ENDING ---------------- */
+
+.angada-ending-screen {
+  background: #150d08;
+}
+
+.angada-ending-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.angada-ending-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(14, 8, 5, 0.98) 0%, rgba(14, 8, 5, 0.87) 30%, rgba(14, 8, 5, 0.14) 78%, rgba(14, 8, 5, 0.25) 100%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(8, 4, 2, 0.5) 100%);
+}
+
+.angada-ending-content {
+  position: absolute;
+  z-index: 3;
+  right: 7%;
+  bottom: 5%;
+  left: 7%;
+  max-width: 650px;
+}
+
+.angada-ending-content h2 {
+  color: #e5bd7f;
+  font-size: clamp(43px, 5.8vw, 70px);
+}
+
+.angada-ending-dialogue {
+  max-width: 610px;
+  margin: 14px 0 12px;
+  color: #fff2dd;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.35;
+}
+
+.angada-ending-stats {
+  display: flex;
+  gap: 32px;
+  margin: 20px 0 22px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(229, 190, 129, 0.28);
+  border-bottom: 1px solid rgba(229, 190, 129, 0.28);
+}
+
+.angada-ending-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.angada-ending-stats strong {
+  color: #f1d3a1;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 27px;
+  font-weight: 500;
+}
+
+.angada-ending-stats span {
+  color: rgba(255, 239, 216, 0.56);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.angada-ending-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.angada-replay-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 4px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 239, 216, 0.72);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.angada-replay-button:hover {
+  color: #fff;
+}
+
+/* ---------------- TAP FEEDBACK ---------------- */
+
+.angada-tap-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 80%, rgba(255, 196, 110, 0.28), transparent 65%);
+  animation: angada-tap 0.35s ease-out both;
+}
+
+@keyframes angada-tap {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.angada-effort-panel.is-strained {
+  border-color: rgba(255, 190, 110, 0.7);
+  box-shadow: 0 0 36px rgba(255, 170, 70, 0.25), 0 15px 45px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 700px) {
+  .angada-game {
+    height: 88vh;
+    min-height: 560px;
+  }
+
+  .angada-title-content {
+    width: 90%;
+    padding-left: 7%;
+  }
+
+  .angada-title-content h1 {
+    font-size: clamp(52px, 13vw, 78px);
+  }
+
+  .angada-title-vignette {
+    background:
+      linear-gradient(90deg, rgba(15, 10, 7, 0.91), rgba(15, 10, 7, 0.45)),
+      linear-gradient(0deg, rgba(12, 8, 5, 0.72), transparent);
+  }
+
+  .angada-dialogue-content {
+    right: 6%;
+    bottom: 6%;
+    left: 6%;
+  }
+
+  .angada-cinematic-top,
+  .angada-ending-top {
+    right: 17px;
+    left: 17px;
+    font-size: 8px;
+  }
+
+  .angada-game-hud {
+    padding: 14px;
+  }
+
+  .angada-hud-brand {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  .angada-gameplay-heading {
+    top: 80px;
+  }
+
+  .angada-gameplay-heading p {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  .angada-gameplay-heading h2 {
+    font-size: 39px;
+  }
+
+  .angada-gameplay-instruction {
+    bottom: 186px;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .angada-immovable-stamp {
+    display: none;
+  }
+
+  .angada-sound {
+    right: 12px;
+    bottom: auto;
+    top: 62px;
+  }
+
+  .angada-ending-content {
+    right: 6%;
+    bottom: 5%;
+    left: 6%;
+  }
+
+  .angada-ending-stats {
+    gap: 17px;
+  }
+
+  .angada-ending-stats strong {
+    font-size: 23px;
+  }
+
+  .angada-ending-stats span {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 420px) {
+  .angada-game {
+    min-height: 530px;
+  }
+
+  .angada-title-description {
+    font-size: 18px;
+  }
+
+  .angada-dialogue-text {
+    font-size: 19px;
+  }
+
+  .angada-ending-stats {
+    gap: 12px;
+  }
+
+  .angada-ending-stats strong {
+    font-size: 21px;
+  }
+
+  .angada-ending-actions {
+    gap: 12px;
+  }
+
+  .angada-primary-button {
+    min-height: 45px;
+    padding: 0 15px;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .angada-embers span,
+  .angada-dust span,
+  .angada-rage,
+  .angada-lift-button {
+    animation: none;
+  }
+}

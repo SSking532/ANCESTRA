@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap");
+
+/* Hanuman vs Kumbhakarna: every rule is scoped under .hkg so nothing leaks into the rest of the app. */
+
+.hkg {
+  --ink: #0b0605;
+  --ember: #ff7a1a;
+  --gold: #f4c25a;
+  --blood: #d12a1f;
+  --bone: #f6e8cf;
+  --display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --ui: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--ui);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
+}
+
+.hkg *,
+.hkg *::before,
+.hkg *::after {
+  box-sizing: border-box;
+}
+
+.hkg #vig {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.hkg #grain {
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: hkg-grain 0.6s steps(6) infinite;
+}
+
+@keyframes hkg-grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-4%, 3%); }
+  40% { transform: translate(3%, -5%); }
+  60% { transform: translate(-6%, -2%); }
+  80% { transform: translate(5%, 4%); }
+  100% { transform: translate(0, 0); }
+}
+
+.hkg #flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 55%, #fff6dc, #ffb347 55%, #ff5a1a);
+}
+
+/* cinematic letterbox */
+.hkg #bars i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: #000;
+  z-index: 5;
+  transition: height 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.hkg #bars .top { top: 0; }
+.hkg #bars .bot { bottom: 0; }
+.hkg #bars.on i { height: 8vh; }
+
+/* closing line */
+.hkg #cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 40%;
+  z-index: 6;
+  padding: 0 16px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.9s, transform 2.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.hkg #cap.on { opacity: 1; transform: scale(1); }
+.hkg #cap h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(26px, 6vw, 78px);
+  letter-spacing: 0.14em;
+  line-height: 1.05;
+  text-wrap: balance;
+  background: linear-gradient(180deg, #fff2c9, #f4c25a 55%, #c4621a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.85));
+}
+
+/* opening card */
+.hkg .card {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 20px 16px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 60%, rgba(11, 6, 5, 0.28), rgba(11, 6, 5, 0.82) 75%);
+  transition: opacity 1s;
+}
+.hkg .card.off { opacity: 0; pointer-events: none; }
+.hkg .card .in {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hkg .eyebrow {
+  font-size: clamp(11px, 1.4vw, 15px);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--ember);
+  font-weight: 700;
+}
+
+.hkg .big {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  line-height: 0.98;
+  font-size: clamp(34px, 8vw, 96px);
+  letter-spacing: 0.06em;
+  text-wrap: balance;
+  background: linear-gradient(180deg, #fff2c9, #f4c25a 50%, #b8501a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.9));
+}
+
+.hkg .lede {
+  margin: 0;
+  max-width: 56ch;
+  font-size: clamp(14px, 1.7vw, 19px);
+  line-height: 1.5;
+  color: rgba(246, 232, 207, 0.88);
+  text-shadow: 0 2px 10px #000;
+}
+
+.hkg .btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 15px 44px;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(15px, 2vw, 20px);
+  letter-spacing: 0.3em;
+  color: #1a0a02;
+  background: linear-gradient(180deg, #ffe08a, #f4a02a);
+  clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  box-shadow: 0 0 40px rgba(255, 150, 40, 0.4);
+  transition: transform 0.2s, filter 0.2s;
+}
+.hkg .btn:hover { transform: scale(1.05); filter: brightness(1.12); }
+.hkg .btn:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+.hkg .btn--ghost {
+  color: var(--bone);
+  background: rgba(11, 6, 5, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(244, 194, 90, 0.7);
+}
+
+/* end buttons */
+.hkg #end {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(8vh + 24px);
+  z-index: 11;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s;
+}
+.hkg #end.on { opacity: 1; pointer-events: auto; }
+.hkg #end .btn { margin-top: 0; }
+
+/* close button */
+.hkg .hkg-exit {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 12;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 194, 90, 0.55);
+  background: rgba(11, 6, 5, 0.6);
+  color: var(--bone);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.hkg .hkg-exit:hover { background: rgba(120, 40, 10, 0.8); transform: scale(1.08); }
+.hkg .hkg-exit:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.hkg #err {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 30;
+  display: none;
+  max-height: 40%;
+  overflow: auto;
+  padding: 12px 14px;
+  background: #300;
+  border: 1px solid #f66;
+  color: #fcc;
+  font: 12px/1.4 ui-monospace, monospace;
+  white-space: pre-wrap;
+  user-select: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hkg #grain { animation: none; }
+}

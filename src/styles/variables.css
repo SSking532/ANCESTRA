@@ -1,0 +1,22 @@
+:root {
+  --ancestra-black: #070605;
+  --ancestra-deep: #0c0a08;
+  --ancestra-charcoal: #12100e;
+  --ancestra-brown: #211711;
+
+  --ancestra-ivory: #eee5d2;
+  --ancestra-muted: #a69b88;
+  --ancestra-faint: #6f675b;
+
+  --ancestra-gold: #c9a45c;
+  --ancestra-gold-soft: #9c7b45;
+  --ancestra-gold-faint: rgba(201, 164, 92, 0.15);
+
+  --ancestra-saffron: #9a522d;
+  --ancestra-maroon: #431a18;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
+
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,0 +1,1247 @@
+/* =========================================================
+   ANCESTRA — RAMAYANA CHAPTER DETAIL
+   CINEMATIC PARCHMENT EDITION
+   (page styles + ONE unified interaction-card design)
+========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap");
+
+.ramayana-chapter-detail {
+  --font-label: "Cinzel", Georgia, serif;
+  --font-heading: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: Georgia, "Times New Roman", serif;
+
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 247, 224, 0.55), transparent 42%),
+    linear-gradient(180deg, #f0e2c6 0%, #ead8b8 45%, #e5d0ab 100%);
+  color: #3b2413;
+}
+
+/* =========================================================
+   ATMOSPHERIC GLOW
+========================================================= */
+
+.ramayana-chapter-detail__glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255, 247, 220, 0.35), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(180, 132, 61, 0.08), transparent 32%),
+    radial-gradient(circle at 80% 70%, rgba(180, 132, 61, 0.07), transparent 30%);
+}
+
+/* =========================================================
+   SUBTLE GEOMETRY
+========================================================= */
+
+.ramayana-chapter-detail__geometry {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.45;
+}
+
+.ramayana-chapter-detail__geometry span {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 700px;
+  height: 700px;
+  border: 1px solid rgba(130, 91, 39, 0.07);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ramayana-chapter-detail__geometry span:nth-child(2) {
+  width: 560px;
+  height: 560px;
+  border-radius: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.ramayana-chapter-detail__geometry span:nth-child(3) {
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%) rotate(22.5deg);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ramayana-chapter-detail__header {
+  position: relative;
+  z-index: 30;
+  height: 96px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 5vw;
+  border-bottom: 1px solid rgba(91, 61, 30, 0.16);
+  background: rgba(241, 228, 202, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+.ramayana-chapter-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  color: #745536;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.ramayana-chapter-detail__back:hover {
+  color: #3b2413;
+  transform: translateX(-4px);
+}
+
+.ramayana-chapter-detail__brand {
+  color: #644522;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.46em;
+  text-align: center;
+}
+
+.ramayana-chapter-detail__chapter-number {
+  justify-self: end;
+  color: #806441;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.ramayana-chapter-detail__hero {
+  position: relative;
+  z-index: 2;
+  min-height: calc(100vh - 96px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 90px 6vw 120px;
+}
+
+.ramayana-chapter-detail__hero-content {
+  position: relative;
+  z-index: 10;
+  width: min(1100px, 94vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* KANDA */
+
+.ramayana-chapter-detail__kanda {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 34px;
+  color: #8a6943;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+}
+
+.ramayana-chapter-detail__kanda::before,
+.ramayana-chapter-detail__kanda::after {
+  content: "";
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(137, 96, 43, 0.42));
+}
+
+.ramayana-chapter-detail__kanda::after {
+  background: linear-gradient(90deg, rgba(137, 96, 43, 0.42), transparent);
+}
+
+/* TITLE */
+
+.ramayana-chapter-detail__hero h1 {
+  position: relative;
+  z-index: 12;
+  max-width: 1100px;
+  margin: 0;
+  color: #3a2111;
+  font-family: var(--font-heading);
+  font-size: clamp(58px, 7.2vw, 120px);
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* ORNAMENT */
+
+.ramayana-chapter-detail__ornament {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+  width: 310px;
+  margin-top: 42px;
+  transform-origin: center;
+}
+
+.ramayana-chapter-detail__ornament i {
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(157, 116, 56, 0.48));
+}
+
+.ramayana-chapter-detail__ornament i:last-child {
+  background: linear-gradient(90deg, rgba(157, 116, 56, 0.48), transparent);
+}
+
+.ramayana-chapter-detail__ornament span {
+  color: #9c7238;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* OPENING TEXT */
+
+.ramayana-chapter-detail__hero p {
+  position: relative;
+  z-index: 12;
+  max-width: 850px;
+  margin: 34px auto 0;
+  color: #745638;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+/* CORNER ORNAMENTS */
+
+.ramayana-chapter-detail__corner {
+  position: absolute;
+  z-index: 8;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+}
+
+.ramayana-chapter-detail__corner::before,
+.ramayana-chapter-detail__corner::after {
+  content: "";
+  position: absolute;
+  background: rgba(137, 96, 43, 0.23);
+}
+
+.ramayana-chapter-detail__corner::before {
+  width: 100%;
+  height: 1px;
+}
+
+.ramayana-chapter-detail__corner::after {
+  width: 1px;
+  height: 100%;
+}
+
+.ramayana-chapter-detail__corner--tl { top: 38px; left: 38px; }
+.ramayana-chapter-detail__corner--tr { top: 38px; right: 38px; transform: rotate(90deg); }
+.ramayana-chapter-detail__corner--bl { bottom: 38px; left: 38px; transform: rotate(-90deg); }
+.ramayana-chapter-detail__corner--br { bottom: 38px; right: 38px; transform: rotate(180deg); }
+
+/* SCROLL */
+
+.ramayana-chapter-detail__scroll {
+  position: absolute;
+  z-index: 20;
+  bottom: 30px;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  transform: translateX(-50%);
+  color: #896b45;
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+.ramayana-chapter-detail__scroll-line {
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(180deg, rgba(137, 96, 43, 0.62), transparent);
+}
+
+/* =========================================================
+   THEME
+========================================================= */
+
+.ramayana-chapter-detail__theme {
+  position: relative;
+  z-index: 5;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 90px 30px 100px;
+  text-align: center;
+  border-top: 1px solid rgba(106, 73, 35, 0.14);
+}
+
+.ramayana-chapter-detail__theme > span {
+  display: block;
+  margin-bottom: 22px;
+  color: #927148;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+}
+
+.ramayana-chapter-detail__theme p {
+  margin: 0;
+  color: #684b2f;
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* =========================================================
+   SCENES
+========================================================= */
+
+.ramayana-chapter-detail__scenes {
+  position: relative;
+  z-index: 5;
+  width: min(1100px, 88vw);
+  margin: 0 auto;
+  padding: 40px 0 100px;
+}
+
+.ramayana-scene {
+  position: relative;
+  margin-bottom: 150px;
+  padding-bottom: 110px;
+  border-bottom: 1px solid rgba(106, 73, 35, 0.15);
+}
+
+.ramayana-scene:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.ramayana-scene__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.ramayana-scene__eyebrow {
+  color: #927148;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.ramayana-scene__number {
+  color: rgba(110, 76, 39, 0.55);
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+/* IMAGE */
+
+.ramayana-scene__image-wrap {
+  width: 100%;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.ramayana-scene__image-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  background: #dfc79b;
+  border: 1px solid rgba(112, 76, 36, 0.25);
+  box-shadow: 0 18px 45px rgba(79, 49, 21, 0.12);
+}
+
+.ramayana-scene__image-frame::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid rgba(255, 247, 225, 0.35);
+}
+
+.ramayana-scene__image-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 680px;
+  object-fit: cover;
+}
+
+/* SCENE CONTENT */
+
+.ramayana-scene__content {
+  width: min(820px, 90%);
+  margin: 55px auto 0;
+}
+
+.ramayana-scene__location {
+  display: block;
+  margin-bottom: 15px;
+  color: #95734a;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.ramayana-scene__content h2 {
+  margin: 0 0 30px;
+  color: #3a2111;
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4.2vw, 62px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.ramayana-scene__text p {
+  margin: 0 0 24px;
+  color: #60442a;
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.95;
+}
+
+.ramayana-scene__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* EMOTION */
+
+.ramayana-scene__emotion {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-top: 42px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(106, 73, 35, 0.15);
+}
+
+.ramayana-scene__emotion > span {
+  color: #a27a40;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.ramayana-scene__emotion p {
+  margin: 0;
+  color: #80623f;
+  font-family: var(--font-heading);
+  font-size: 19px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* =========================================================
+   END OF CHAPTER
+========================================================= */
+
+.ramayana-chapter-detail__end {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 30px 140px;
+  text-align: center;
+  border-top: 1px solid rgba(106, 73, 35, 0.15);
+}
+
+.ramayana-chapter-detail__end > span {
+  color: #927148;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+.ramayana-chapter-detail__end-ornament {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 260px;
+  margin: 28px 0 38px;
+}
+
+.ramayana-chapter-detail__end-ornament i {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(137, 96, 43, 0.4));
+}
+
+.ramayana-chapter-detail__end-ornament i:last-child {
+  background: linear-gradient(90deg, rgba(137, 96, 43, 0.4), transparent);
+}
+
+.ramayana-chapter-detail__end-ornament span {
+  color: #9c7238;
+  font-size: 16px;
+}
+
+/* NEXT */
+
+.ramayana-chapter-detail__next {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 26px;
+  color: #f4e5c8;
+  background: #60401f;
+  border: 1px solid rgba(78, 48, 20, 0.35);
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.ramayana-chapter-detail__next:hover {
+  background: #4b3017;
+  transform: translateY(-2px);
+}
+
+/* RETURN */
+
+.ramayana-chapter-detail__return {
+  margin-top: 20px;
+  color: #76583a;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.ramayana-chapter-detail__return:hover {
+  color: #3a2111;
+}
+
+/* =========================================================
+   NOT FOUND
+========================================================= */
+
+.ramayana-chapter-detail--not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ramayana-chapter-detail__not-found {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ramayana-chapter-detail__not-found > span {
+  margin-bottom: 25px;
+  color: #927148;
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+}
+
+.ramayana-chapter-detail__not-found h1 {
+  margin: 0 0 30px;
+  color: #3a2111;
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 500;
+}
+
+.ramayana-chapter-detail__not-found a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #6f5133;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+}
+
+/* =========================================================
+   ★ UNIFIED INTERACTION CARD ★
+   Used by EVERY game card and EVERY quiz card.
+   Markup (see InteractionCard in the JSX):
+
+   section.chapter-interaction[data-kind="game|quiz"]
+     span.chapter-interaction__corner (x4)
+     div.chapter-interaction__halo
+     div.chapter-interaction__badge
+     div.chapter-interaction__eyebrow
+     div.chapter-interaction__number
+     h3.chapter-interaction__title
+     p.chapter-interaction__text
+     div.chapter-interaction__rule
+     button.chapter-interaction__button
+     small.chapter-interaction__footer
+========================================================= */
+
+.chapter-interaction {
+  --ci-ink: #3a2413;
+  --ci-gold: #9a7239;
+  --ci-gold-deep: #7d5828;
+  --ci-gold-soft: rgba(154, 114, 57, 0.35);
+  --ci-muted: #765b3c;
+  --ci-faint: #9a8059;
+  --ci-btn-from: #5b3b1f;
+  --ci-btn-to: #3f2814;
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  width: min(920px, calc(100% - 32px));
+  margin: 72px auto;
+  padding: 70px 48px 58px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  color: var(--ci-ink);
+
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 251, 234, 0.95), transparent 58%),
+    radial-gradient(ellipse at 50% 115%, rgba(190, 140, 70, 0.17), transparent 55%),
+    linear-gradient(145deg, #f8eed3 0%, #ecd9b0 52%, #f4e6c6 100%);
+
+  border: 1px solid rgba(125, 88, 40, 0.46);
+
+  box-shadow:
+    0 28px 70px rgba(72, 45, 18, 0.14),
+    0 2px 0 rgba(255, 250, 232, 0.7) inset,
+    inset 0 0 90px rgba(255, 246, 220, 0.35);
+
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+
+.chapter-interaction:hover {
+  box-shadow:
+    0 36px 85px rgba(72, 45, 18, 0.19),
+    0 2px 0 rgba(255, 250, 232, 0.7) inset,
+    inset 0 0 90px rgba(255, 246, 220, 0.4);
+}
+
+/* Double inner frame */
+
+.chapter-interaction::before,
+.chapter-interaction::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chapter-interaction::before {
+  inset: 12px;
+  border: 1px solid rgba(125, 88, 40, 0.34);
+}
+
+.chapter-interaction::after {
+  inset: 19px;
+  border: 1px solid rgba(125, 88, 40, 0.14);
+}
+
+/* Quiz variant: slightly deeper parchment, same design */
+
+.chapter-interaction[data-kind="quiz"] {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 249, 228, 0.9), transparent 58%),
+    radial-gradient(ellipse at 50% 115%, rgba(170, 120, 55, 0.2), transparent 55%),
+    linear-gradient(145deg, #f2e6c8 0%, #e3cd9f 52%, #efe0bd 100%);
+}
+
+/* Corner flourishes */
+
+.chapter-interaction__corner {
+  position: absolute;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 0 solid rgba(138, 98, 45, 0.6);
+  pointer-events: none;
+}
+
+.chapter-interaction__corner::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #a77d42;
+  transform: rotate(45deg);
+}
+
+.chapter-interaction__corner--tl { top: 27px; left: 27px; border-top-width: 1px; border-left-width: 1px; }
+.chapter-interaction__corner--tr { top: 27px; right: 27px; border-top-width: 1px; border-right-width: 1px; }
+.chapter-interaction__corner--bl { bottom: 27px; left: 27px; border-bottom-width: 1px; border-left-width: 1px; }
+.chapter-interaction__corner--br { bottom: 27px; right: 27px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.chapter-interaction__corner--tl::after { top: -3px; left: -3px; }
+.chapter-interaction__corner--tr::after { top: -3px; right: -3px; }
+.chapter-interaction__corner--bl::after { bottom: -3px; left: -3px; }
+.chapter-interaction__corner--br::after { bottom: -3px; right: -3px; }
+
+/* Sacred halo (concentric rings + slow dashed ring) */
+
+.chapter-interaction__halo {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 640px;
+  height: 640px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid rgba(154, 114, 57, 0.13);
+  background: radial-gradient(circle, rgba(214, 170, 90, 0.18), transparent 62%);
+  box-shadow:
+    0 0 0 70px rgba(154, 114, 57, 0.025),
+    0 0 0 140px rgba(154, 114, 57, 0.016);
+}
+
+.chapter-interaction__halo::before {
+  content: "";
+  position: absolute;
+  inset: 62px;
+  border-radius: 50%;
+  border: 1px dashed rgba(154, 114, 57, 0.2);
+  animation: ci-spin 120s linear infinite;
+}
+
+@keyframes ci-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Badge (GAME / QUIZ) */
+
+.chapter-interaction__badge {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 20px;
+  padding: 6px 16px 6px 14px;
+  color: var(--ci-gold-deep);
+  font-family: var(--font-label, "Cinzel", serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  border: 1px solid var(--ci-gold-soft);
+  background: rgba(255, 249, 229, 0.55);
+}
+
+.chapter-interaction__badge::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--ci-gold);
+  transform: rotate(45deg);
+}
+
+/* Eyebrow */
+
+.chapter-interaction__eyebrow {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 100%;
+  color: var(--ci-gold);
+  font-family: var(--font-label, "Cinzel", serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.chapter-interaction__eyebrow svg {
+  flex-shrink: 0;
+  color: #ad8243;
+}
+
+/* Roman numeral medallion */
+
+.chapter-interaction__number {
+  position: relative;
+  z-index: 2;
+  min-width: 54px;
+  height: 54px;
+  margin: 22px 0 14px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ci-gold-deep);
+  font-family: var(--font-label, "Cinzel", serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 88, 40, 0.45);
+  background: radial-gradient(circle, rgba(255, 250, 232, 0.8), rgba(236, 217, 176, 0.4));
+  box-shadow:
+    0 0 0 4px rgba(154, 114, 57, 0.07),
+    inset 0 0 0 3px rgba(255, 248, 226, 0.55);
+}
+
+/* Title */
+
+.chapter-interaction__title {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 0 20px;
+  color: #35200f;
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: clamp(40px, 5.4vw, 66px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  text-shadow: 0 1px 0 rgba(255, 250, 232, 0.7);
+}
+
+/* Description */
+
+.chapter-interaction__text {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--ci-muted);
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* Divider */
+
+.chapter-interaction__rule {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 240px;
+  max-width: 60%;
+  margin: 32px auto 30px;
+  color: var(--ci-gold);
+  font-size: 13px;
+}
+
+.chapter-interaction__rule i {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(154, 114, 57, 0.55));
+}
+
+.chapter-interaction__rule i:last-child {
+  background: linear-gradient(90deg, rgba(154, 114, 57, 0.55), transparent);
+}
+
+/* Button */
+
+.chapter-interaction__button {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  min-width: 240px;
+  min-height: 56px;
+  padding: 0 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+
+  color: #fbefd5;
+  font-family: var(--font-label, "Cinzel", serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  border: 1px solid #8b6330;
+  border-radius: 0;
+  background: linear-gradient(135deg, var(--ci-btn-from), var(--ci-btn-to));
+  box-shadow:
+    0 8px 22px rgba(72, 45, 18, 0.22),
+    inset 0 0 0 1px rgba(255, 240, 205, 0.1);
+  cursor: pointer;
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.chapter-interaction__button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 236, 196, 0.22), transparent);
+  transform: translateX(-130%) skewX(-18deg);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+}
+
+.chapter-interaction__button:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #7a5129, #54351b);
+  box-shadow: 0 14px 32px rgba(72, 45, 18, 0.3);
+}
+
+.chapter-interaction__button:hover::after {
+  transform: translateX(330%) skewX(-18deg);
+}
+
+.chapter-interaction__button:active {
+  transform: translateY(0);
+}
+
+.chapter-interaction__button:focus-visible {
+  outline: 2px solid #a77d42;
+  outline-offset: 4px;
+}
+
+.chapter-interaction__button svg {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.chapter-interaction__button:hover svg {
+  transform: translateX(5px);
+}
+
+/* Footer */
+
+.chapter-interaction__footer {
+  position: relative;
+  z-index: 2;
+  display: block;
+  margin-top: 24px;
+  color: var(--ci-faint);
+  font-family: var(--font-label, "Cinzel", serif);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   CHAPTER END SPACING
+========================================================= */
+
+.ramayana-scene--last {
+  margin-bottom: 0 !important;
+  padding-bottom: 48px;
+}
+
+.ramayana-chapter-detail__scenes {
+  padding-bottom: 32px !important;
+}
+
+.ramayana-chapter-detail__end {
+  padding: 72px 30px 76px !important;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .ramayana-chapter-detail__hero {
+    padding: 80px 30px 110px;
+  }
+
+  .ramayana-chapter-detail__hero h1 {
+    font-size: clamp(54px, 8vw, 90px);
+  }
+
+  .ramayana-scene__image-wrap {
+    padding: 0 15px;
+  }
+
+  .chapter-interaction {
+    padding: 62px 34px 52px;
+  }
+
+  .chapter-interaction__halo {
+    width: 520px;
+    height: 520px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .ramayana-scene--last {
+    padding-bottom: 34px;
+  }
+
+  .ramayana-chapter-detail__scenes {
+    padding-bottom: 24px !important;
+  }
+
+  .ramayana-chapter-detail__end {
+    padding: 52px 20px 58px !important;
+  }
+
+  .chapter-interaction {
+    margin: 48px auto;
+    padding: 56px 22px 46px;
+  }
+
+  .chapter-interaction::before { inset: 9px; }
+  .chapter-interaction::after { inset: 14px; }
+
+  .chapter-interaction__corner { width: 20px; height: 20px; }
+  .chapter-interaction__corner--tl { top: 19px; left: 19px; }
+  .chapter-interaction__corner--tr { top: 19px; right: 19px; }
+  .chapter-interaction__corner--bl { bottom: 19px; left: 19px; }
+  .chapter-interaction__corner--br { bottom: 19px; right: 19px; }
+
+  .chapter-interaction__halo {
+    width: 380px;
+    height: 380px;
+  }
+
+  .chapter-interaction__eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+  }
+
+  .chapter-interaction__title {
+    font-size: clamp(36px, 10vw, 48px);
+  }
+
+  .chapter-interaction__text {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .chapter-interaction__button {
+    width: 100%;
+    max-width: 330px;
+    min-width: 0;
+    padding: 0 20px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .chapter-interaction__footer {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+  }
+}
+
+@media (max-width: 600px) {
+  .ramayana-chapter-detail__header {
+    height: 74px;
+    padding: 0 18px;
+  }
+
+  .ramayana-chapter-detail__brand {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+  }
+
+  .ramayana-chapter-detail__back {
+    gap: 7px;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+
+  .ramayana-chapter-detail__chapter-number {
+    font-size: 7px;
+    letter-spacing: 0.13em;
+  }
+
+  .ramayana-chapter-detail__hero {
+    min-height: calc(100vh - 74px);
+    padding: 70px 20px 100px;
+  }
+
+  .ramayana-chapter-detail__kanda {
+    gap: 12px;
+    margin-bottom: 26px;
+    font-size: 8px;
+    letter-spacing: 0.28em;
+  }
+
+  .ramayana-chapter-detail__kanda::before,
+  .ramayana-chapter-detail__kanda::after {
+    width: 45px;
+  }
+
+  .ramayana-chapter-detail__hero h1 {
+    font-size: clamp(44px, 12vw, 68px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .ramayana-chapter-detail__ornament {
+    width: 210px;
+    margin-top: 30px;
+  }
+
+  .ramayana-chapter-detail__hero p {
+    max-width: 92%;
+    margin-top: 28px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .ramayana-chapter-detail__corner {
+    width: 45px;
+    height: 45px;
+  }
+
+  .ramayana-chapter-detail__corner--tl { top: 20px; left: 20px; }
+  .ramayana-chapter-detail__corner--tr { top: 20px; right: 20px; }
+  .ramayana-chapter-detail__corner--bl { bottom: 20px; left: 20px; }
+  .ramayana-chapter-detail__corner--br { bottom: 20px; right: 20px; }
+
+  .ramayana-chapter-detail__theme {
+    padding: 70px 25px 80px;
+  }
+
+  .ramayana-chapter-detail__theme p {
+    font-size: 21px;
+  }
+
+  .ramayana-chapter-detail__scenes {
+    width: 90vw;
+    padding-top: 20px;
+  }
+
+  .ramayana-scene {
+    margin-bottom: 100px;
+    padding-bottom: 80px;
+  }
+
+  .ramayana-scene__image-wrap {
+    padding: 0;
+  }
+
+  .ramayana-scene__image-frame {
+    padding: 7px;
+  }
+
+  .ramayana-scene__content {
+    width: 94%;
+    margin-top: 40px;
+  }
+
+  .ramayana-scene__content h2 {
+    font-size: 38px;
+    margin-bottom: 24px;
+  }
+
+  .ramayana-scene__text p {
+    font-size: 16px;
+    line-height: 1.85;
+  }
+}
+
+@media (max-width: 400px) {
+  .ramayana-chapter-detail__hero h1 {
+    font-size: 40px;
+  }
+
+  .ramayana-chapter-detail__kanda::before,
+  .ramayana-chapter-detail__kanda::after {
+    width: 28px;
+  }
+
+  .chapter-interaction__title {
+    font-size: 34px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-interaction__halo::before {
+    animation: none;
+  }
+
+  .chapter-interaction__button,
+  .chapter-interaction__button::after,
+  .chapter-interaction__button svg {
+    transition: none;
+  }
+}

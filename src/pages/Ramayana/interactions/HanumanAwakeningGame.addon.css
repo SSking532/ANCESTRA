@@ -1,0 +1,41 @@
+/* 3D canvas sits behind all UI */
+.hg-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+.hg-vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(10, 5, 2, 0.55)); }
+
+/* 3D tumbling cards */
+.hg-card-field { perspective: 900px; }
+@keyframes hg-card-float {
+  0% { transform: translate(-50%, -50%) rotateY(-35deg) rotate(-7deg) translateY(0); }
+  50% { transform: translate(-50%, -50%) rotateY(30deg) rotate(5deg) translateY(-23px); }
+  100% { transform: translate(-50%, -50%) rotateY(-10deg) rotate(-3deg) translateY(15px); }
+}
+
+/* Cinematic timing: text follows the 3D action */
+@keyframes hg-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hg-fade-out { from { opacity: 1; } to { opacity: 0; } }
+.hg-awakening-copy { animation: hg-fade-out 1s 5s both; }
+.hg-awakening-mantra { animation: hg-mantra-rise 2s ease both, hg-fade-out 1s 5s both; }
+.hg-awakening-chant { animation-delay: 5s; }
+.hg-leap-button { animation-delay: 6.5s; }
+
+/* Clean cinematic frame while he leaps */
+.hg-topbar { transition: opacity 0.8s ease; }
+.hanuman-game--complete .hg-topbar { opacity: 0; }
+
+/* White flash after the jump */
+.hg-flash {
+  position: absolute; inset: 0; z-index: 40; pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #fff0c8 55%, #ffc468 100%);
+  animation: hg-flash-in 0.9s cubic-bezier(0.5, 0, 0.9, 0.5) both;
+}
+@keyframes hg-flash-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Closing screen: white fades to black */
+.hg-closed {
+  position: absolute; inset: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; text-align: center; background: #0a0503; animation: hg-white-to-black 2.2s ease both;
+}
+.hg-closed > * { animation: hg-fade 1.6s 1.4s both; }
+.hg-closed h2 { margin: 0; color: #fff0d5; font-family: "Cinzel", serif; font-size: clamp(34px, 6vw, 72px); letter-spacing: 6px; text-shadow: 0 0 30px rgba(255, 214, 148, 0.5); }
+.hg-complete-mantra { color: #f1cc8f; font-family: "Noto Serif Devanagari", serif; font-size: 22px; margin: 0 0 20px; }
+@keyframes hg-white-to-black { from { background: #fff7e0; } to { background: #0a0503; } }

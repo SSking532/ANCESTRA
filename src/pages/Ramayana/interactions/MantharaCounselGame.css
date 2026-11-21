@@ -1,0 +1,605 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* =========================================
+   MAIN EXPERIENCE
+========================================= */
+
+.manthara-game {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 650px;
+  overflow: hidden;
+  background: #100d0a;
+  color: #f0e5d2;
+  font-family: 'Inter', sans-serif;
+}
+
+.mc-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.015);
+}
+
+.mc-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(13, 9, 7, 0.91) 0%,
+      rgba(13, 9, 7, 0.76) 40%,
+      rgba(13, 9, 7, 0.25) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(10, 7, 5, 0.88) 0%,
+      transparent 55%,
+      rgba(10, 7, 5, 0.38) 100%
+    );
+}
+
+/* =========================================
+   INTRO
+========================================= */
+
+.mc-intro,
+.mc-complete {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 650px;
+  height: 100%;
+  overflow: hidden;
+  background: #100d0a;
+}
+
+.mc-intro__content {
+  position: relative;
+  z-index: 2;
+  width: min(720px, 86%);
+  padding: 65px 0 65px 9%;
+}
+
+.mc-ornament {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 190px;
+  margin-bottom: 27px;
+  color: #c9a66c;
+}
+
+.mc-ornament span {
+  flex: 1;
+  height: 1px;
+  background: rgba(201, 166, 108, 0.55);
+}
+
+.mc-ornament i {
+  font-size: 15px;
+  font-style: normal;
+}
+
+.mc-kicker {
+  margin: 0 0 20px;
+  color: #c9a66c;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+}
+
+.mc-intro h1 {
+  margin: 0;
+  color: #f1e6d4;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 6.2vw, 76px);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.mc-intro h1 em,
+.mc-complete h2 em {
+  color: #d4b174;
+  font-weight: 400;
+}
+
+.mc-intro__subtitle {
+  margin: 22px 0 0;
+  color: rgba(238, 220, 190, 0.8);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(19px, 2.2vw, 24px);
+}
+
+.mc-rule {
+  width: 170px;
+  margin: 27px 0;
+  text-align: center;
+  color: #c9a66c;
+  font-size: 12px;
+}
+
+.mc-rule::before,
+.mc-rule::after {
+  display: inline-block;
+  width: 65px;
+  height: 1px;
+  vertical-align: middle;
+  content: "";
+  background: rgba(201, 166, 108, 0.42);
+}
+
+.mc-rule span {
+  padding: 0 10px;
+}
+
+.mc-intro__description {
+  max-width: 550px;
+  margin: 0;
+  color: rgba(238, 225, 204, 0.76);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.mc-intro__meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0 30px;
+  color: rgba(224, 199, 160, 0.65);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+}
+
+.mc-intro__meta i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #c9a66c;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.mc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 46px;
+  padding: 13px 18px;
+  border: 1px solid rgba(212, 177, 116, 0.55);
+  background: rgba(91, 65, 35, 0.25);
+  color: #e5c994;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.mc-button:hover {
+  border-color: #e1c18b;
+  background: rgba(151, 112, 59, 0.25);
+  color: #fff0d2;
+}
+
+.mc-button--secondary {
+  border-color: rgba(218, 190, 148, 0.28);
+  background: rgba(20, 15, 11, 0.2);
+  color: rgba(235, 220, 196, 0.75);
+}
+
+.mc-button--secondary:hover {
+  border-color: rgba(218, 190, 148, 0.65);
+  background: rgba(70, 52, 33, 0.3);
+}
+
+/* =========================================
+   STORY FRAME
+========================================= */
+
+.mc-story {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 650px;
+  height: 100%;
+  overflow: hidden;
+  background: #100d0a;
+}
+
+.mc-header {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 27px 5.5%;
+}
+
+.mc-brand {
+  color: #d7b77d;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  letter-spacing: 0.3em;
+}
+
+.mc-brand span {
+  display: block;
+  margin-top: 6px;
+  color: rgba(238, 220, 187, 0.6);
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.27em;
+}
+
+.mc-frame-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  padding-top: 3px;
+}
+
+.mc-frame-counter > span {
+  color: rgba(226, 204, 169, 0.55);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+}
+
+.mc-frame-counter strong {
+  color: #d7b77d;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+
+.mc-frame-counter i {
+  color: rgba(226, 204, 169, 0.45);
+  font-size: 13px;
+  font-style: normal;
+}
+
+/* =========================================
+   SCENE LABEL
+========================================= */
+
+.mc-scene-label {
+  position: absolute;
+  z-index: 3;
+  top: 27%;
+  left: 9%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c9a66c;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+}
+
+.mc-scene-label span {
+  width: 25px;
+  height: 1px;
+  background: rgba(201, 166, 108, 0.7);
+}
+
+/* =========================================
+   DIALOGUE
+========================================= */
+
+.mc-dialogue {
+  position: relative;
+  z-index: 3;
+  width: min(820px, 82%);
+  margin: auto 0;
+  padding: 35px 0 50px 9%;
+}
+
+.mc-speaker {
+  margin: 0 0 17px;
+  color: #d1ae73;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+}
+
+.mc-dialogue h2 {
+  max-width: 790px;
+  min-height: 120px;
+  margin: 0;
+  color: #f1e6d4;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(25px, 3.2vw, 43px);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  overflow-wrap: break-word;
+}
+
+.mc-cursor {
+  display: inline-block;
+  margin-left: 4px;
+  color: #d4b174;
+  animation: mc-cursor-blink 0.8s infinite;
+}
+
+@keyframes mc-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =========================================
+   FOOTER AND PROGRESS
+========================================= */
+
+.mc-footer {
+  position: relative;
+  z-index: 3;
+  padding: 0 5.5% 25px;
+}
+
+.mc-progress {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 17px;
+  background: rgba(224, 203, 169, 0.2);
+}
+
+.mc-progress span {
+  display: block;
+  height: 100%;
+  background: #c9a66c;
+  transition: width 0.6s ease;
+}
+
+.mc-footer__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mc-footer__row > span {
+  color: rgba(232, 213, 182, 0.55);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+}
+
+.mc-footer__row button {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  color: #d7b77d;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.mc-footer__row button:hover {
+  color: #fff0d2;
+}
+
+/* =========================================
+   COMPLETION
+========================================= */
+
+.mc-complete {
+  justify-content: center;
+  text-align: center;
+}
+
+.mc-complete__shade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgba(12, 9, 7, 0.84);
+  backdrop-filter: blur(5px);
+}
+
+.mc-complete__content {
+  position: relative;
+  z-index: 2;
+  width: min(700px, 88%);
+  margin: auto;
+  padding: 55px 20px;
+}
+
+.mc-complete__content .mc-ornament {
+  margin: 0 auto 28px;
+}
+
+.mc-complete h2 {
+  margin: 0;
+  color: #f1e5d1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(43px, 6vw, 70px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.mc-complete__copy {
+  max-width: 520px;
+  margin: 25px auto 0;
+  color: rgba(232, 215, 188, 0.76);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.mc-complete__motto {
+  margin: 0;
+  color: #d9bb88;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  line-height: 1.5;
+}
+
+.mc-complete__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 32px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+  .manthara-game,
+  .mc-intro,
+  .mc-story,
+  .mc-complete {
+    min-height: 600px;
+  }
+
+  .mc-intro__content {
+    width: 88%;
+    padding: 50px 0 50px 7%;
+  }
+
+  .mc-intro h1 {
+    font-size: clamp(43px, 10vw, 62px);
+  }
+
+  .mc-intro__description {
+    font-size: 17px;
+  }
+
+  .mc-header {
+    padding: 22px 6%;
+  }
+
+  .mc-brand {
+    font-size: 20px;
+  }
+
+  .mc-scene-label {
+    top: 25%;
+    left: 7%;
+    gap: 8px;
+    font-size: 8px;
+    letter-spacing: 0.17em;
+  }
+
+  .mc-scene-label span {
+    width: 16px;
+  }
+
+  .mc-dialogue {
+    width: 88%;
+    padding: 25px 0 35px 7%;
+  }
+
+  .mc-dialogue h2 {
+    min-height: 150px;
+    font-size: clamp(24px, 5.4vw, 34px);
+    line-height: 1.3;
+  }
+
+  .mc-speaker {
+    font-size: 8px;
+  }
+
+  .mc-footer {
+    padding: 0 6% 20px;
+  }
+
+  .mc-footer__row > span {
+    max-width: 50%;
+    font-size: 7px;
+    line-height: 1.5;
+  }
+
+  .mc-footer__row button {
+    font-size: 8px;
+  }
+
+  .mc-complete__content {
+    width: 92%;
+    padding: 40px 10px;
+  }
+
+  .mc-complete h2 {
+    font-size: clamp(39px, 9vw, 55px);
+  }
+
+  .mc-complete__copy {
+    font-size: 18px;
+  }
+
+  .mc-complete__motto {
+    font-size: 19px;
+  }
+
+  .mc-complete__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mc-complete__actions .mc-button {
+    width: min(280px, 100%);
+  }
+}
+
+@media (max-height: 700px) and (min-width: 701px) {
+  .mc-header {
+    padding-top: 18px;
+  }
+
+  .mc-scene-label {
+    top: 23%;
+  }
+
+  .mc-dialogue {
+    padding-top: 20px;
+    padding-bottom: 25px;
+  }
+
+  .mc-dialogue h2 {
+    min-height: 90px;
+    font-size: clamp(24px, 2.8vw, 36px);
+  }
+
+  .mc-footer {
+    padding-bottom: 16px;
+  }
+
+  .mc-intro__content {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manthara-game *,
+  .manthara-game *::before,
+  .manthara-game *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

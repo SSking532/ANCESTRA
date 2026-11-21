@@ -1,0 +1,1754 @@
+/* =========================================================
+   ANCESTRA — RAMAYANA
+   CHAPTER III
+   TATAKA — FIRST GREAT TRIAL
+   FINAL COMBAT CSS
+========================================================= */
+
+.tataka-game {
+  --ivory: #eee7d8;
+  --gold: #c9a45c;
+  --gold-bright: #e6c981;
+
+  position: relative;
+
+  width: 100%;
+  min-height: min(900px, 92vh);
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  background: #060805;
+
+  color: var(--ivory);
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* =========================================================
+   WORLD
+========================================================= */
+
+.tataka-world {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -10;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+
+  transform: scale(1.02);
+
+  filter:
+    brightness(0.51)
+    saturate(0.78)
+    contrast(1.12);
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.tataka-game--intro .tataka-world,
+.tataka-game--tutorial .tataka-world {
+  filter:
+    brightness(0.64)
+    saturate(0.8)
+    contrast(1.04);
+}
+
+.tataka-game__world-shade {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -9;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 5, 3, 0.5),
+      rgba(3, 5, 3, 0.04) 38%,
+      rgba(3, 5, 3, 0.18) 61%,
+      rgba(3, 5, 3, 0.84)
+    );
+
+  pointer-events: none;
+}
+
+.tataka-game__world-mist {
+  position: absolute;
+
+  inset: -10%;
+
+  z-index: -8;
+
+  background:
+    radial-gradient(
+      ellipse at 17% 67%,
+      rgba(219, 206, 176, 0.09),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 80% 42%,
+      rgba(198, 167, 104, 0.07),
+      transparent 28%
+    );
+
+  pointer-events: none;
+}
+
+.tataka-game__vignette {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -7;
+
+  box-shadow:
+    inset 0 0 155px
+      rgba(0, 0, 0, 0.83);
+
+  pointer-events: none;
+}
+
+.tataka-game__grain {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 45;
+
+  opacity: 0.045;
+
+  background-image:
+    radial-gradient(
+      rgba(255, 255, 255, 0.23) 0.5px,
+      transparent 0.7px
+    );
+
+  background-size: 4px 4px;
+
+  mix-blend-mode: soft-light;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   TATAKA
+========================================================= */
+
+.tataka-character {
+  position: absolute;
+
+  left: -1%;
+
+  bottom: 1%;
+
+  z-index: 9;
+
+  width:
+    clamp(
+      500px,
+      52vw,
+      780px
+    );
+
+  max-height: 84%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  pointer-events: none;
+  user-select: none;
+
+  transform-origin: center bottom;
+
+  filter:
+    drop-shadow(
+      0 34px 46px
+      rgba(0, 0, 0, 0.53)
+    );
+
+  transition:
+    filter 0.25s ease,
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.tataka-character--hit {
+  filter:
+    drop-shadow(
+      0 0 36px
+      rgba(228, 199, 127, 0.58)
+    )
+    drop-shadow(
+      0 30px 42px
+      rgba(0, 0, 0, 0.5)
+    );
+}
+
+.tataka-character--defeated {
+  opacity: 0.32;
+
+  transform:
+    translateY(30px)
+    scale(0.97);
+
+  filter:
+    brightness(0.65)
+    drop-shadow(
+      0 30px 44px
+      rgba(0, 0, 0, 0.6)
+    );
+}
+
+/* =========================================================
+   RAMA
+========================================================= */
+
+.rama-character {
+  position: absolute;
+
+  bottom: 2.5%;
+
+  z-index: 20;
+
+  width:
+    clamp(
+      190px,
+      17vw,
+      270px
+    );
+
+  max-height: 44%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events: none;
+  user-select: none;
+
+  filter:
+    drop-shadow(
+      0 18px 26px
+      rgba(0, 0, 0, 0.46)
+    );
+
+  transition:
+    filter 0.25s ease;
+}
+
+.rama-character--ready {
+  filter:
+    drop-shadow(
+      0 0 30px
+      rgba(228, 199, 127, 0.55)
+    )
+    drop-shadow(
+      0 18px 26px
+      rgba(0, 0, 0, 0.46)
+    );
+}
+
+/* =========================================================
+   HUD
+========================================================= */
+
+.tataka-hud {
+  position: absolute;
+
+  top: 18px;
+  left: 21px;
+  right: 21px;
+
+  z-index: 31;
+
+  min-height: 54px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  padding:
+    8px 16px;
+
+  border:
+    1px solid
+    rgba(228, 211, 176, 0.14);
+
+  background:
+    rgba(7, 9, 6, 0.43);
+
+  backdrop-filter:
+    blur(11px);
+}
+
+.tataka-hud__left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color:
+    rgba(238, 231, 216, 0.62);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.17em;
+}
+
+.tataka-hud__left svg {
+  color: var(--gold);
+}
+
+.tataka-hud__center {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 2px;
+
+  text-align: center;
+}
+
+.tataka-hud__center small {
+  color:
+    rgba(201, 164, 92, 0.65);
+
+  font-size: 7px;
+
+  letter-spacing: 0.18em;
+}
+
+.tataka-hud__center strong {
+  color:
+    rgba(238, 231, 216, 0.93);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.06em;
+}
+
+.tataka-hud__right {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  color:
+    rgba(238, 231, 216, 0.62);
+
+  font-size: 8px;
+
+  letter-spacing: 0.16em;
+}
+
+.rama-health {
+  display: flex;
+
+  gap: 5px;
+}
+
+.rama-health i {
+  width: 23px;
+  height: 3px;
+
+  background:
+    rgba(238, 231, 216, 0.13);
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.rama-health i.is-active {
+  background:
+    var(--gold-bright);
+
+  box-shadow:
+    0 0 11px
+    rgba(228, 199, 127, 0.28);
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.tataka-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 27;
+
+  display: grid;
+
+  place-items: center;
+
+  padding:
+    75px 25px 35px;
+}
+
+.tataka-overlay--intro {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 5, 3, 0.06),
+      rgba(3, 5, 3, 0.23)
+    );
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.tataka-intro {
+  width:
+    min(590px, 100%);
+
+  margin:
+    0 auto;
+
+  text-align:
+    center;
+}
+
+.tataka-intro > span {
+  display: block;
+
+  color:
+    rgba(201, 164, 92, 0.84);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.3em;
+}
+
+.tataka-intro__ornament {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin: 16px 0;
+}
+
+.tataka-intro__ornament i {
+  width: 68px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 164, 92, 0.5)
+    );
+}
+
+.tataka-intro__ornament i:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(201, 164, 92, 0.5),
+      transparent
+    );
+}
+
+.tataka-intro__ornament b {
+  color:
+    var(--gold-bright);
+
+  font-size: 10px;
+}
+
+.tataka-intro h1 {
+  margin:
+    0 0 8px;
+
+  color:
+    rgba(238, 231, 216, 0.97);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      48px,
+      6vw,
+      76px
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    0.9;
+}
+
+.tataka-intro p {
+  margin:
+    0 0 10px;
+
+  color:
+    rgba(232, 222, 204, 0.83);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      20px,
+      2.2vw,
+      29px
+    );
+
+  line-height:
+    1.15;
+}
+
+.tataka-intro small {
+  display: block;
+
+  width:
+    min(470px, 100%);
+
+  margin:
+    0 auto 24px;
+
+  color:
+    rgba(220, 211, 195, 0.6);
+
+  font-size:
+    10px;
+
+  line-height:
+    1.7;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.tataka-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 185px;
+
+  padding:
+    12px 18px;
+
+  border:
+    1px solid
+    rgba(228, 199, 127, 0.55);
+
+  background:
+    rgba(24, 22, 15, 0.55);
+
+  color:
+    rgba(238, 231, 216, 0.95);
+
+  cursor:
+    pointer;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.tataka-button:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    var(--gold-bright);
+
+  background:
+    rgba(201, 164, 92, 0.12);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.25);
+}
+
+.tataka-button svg {
+  color:
+    var(--gold-bright);
+}
+
+/* =========================================================
+   TUTORIAL
+========================================================= */
+
+.tataka-overlay--tutorial {
+  background:
+    rgba(3, 5, 3, 0.46);
+}
+
+.tataka-tutorial {
+  width:
+    min(620px, 100%);
+
+  padding:
+    26px;
+
+  border:
+    1px solid
+    rgba(228, 211, 176, 0.15);
+
+  background:
+    rgba(8, 10, 7, 0.74);
+
+  backdrop-filter:
+    blur(14px);
+
+  text-align:
+    center;
+
+  box-shadow:
+    0 25px 80px
+    rgba(0, 0, 0, 0.25);
+}
+
+.tataka-tutorial > svg {
+  color:
+    var(--gold-bright);
+}
+
+.tataka-tutorial h2 {
+  margin:
+    8px 0 9px;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    33px;
+
+  font-weight:
+    500;
+}
+
+.tataka-tutorial > p {
+  width:
+    min(520px, 100%);
+
+  margin:
+    0 auto 17px;
+
+  color:
+    rgba(221, 212, 195, 0.63);
+
+  font-size:
+    11px;
+
+  line-height:
+    1.7;
+}
+
+.tutorial-controls {
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  margin:
+    17px 0;
+
+  border:
+    1px solid
+    rgba(228, 211, 176, 0.1);
+}
+
+.tutorial-controls > div {
+  min-width:
+    120px;
+
+  padding:
+    11px 13px;
+
+  border-right:
+    1px solid
+    rgba(228, 211, 176, 0.1);
+
+  text-align:
+    center;
+}
+
+.tutorial-controls > div:last-child {
+  border-right:
+    0;
+}
+
+.tutorial-controls b {
+  display:
+    block;
+
+  color:
+    rgba(238, 231, 216, 0.92);
+
+  font-size:
+    12px;
+
+  letter-spacing:
+    0.08em;
+}
+
+.tutorial-controls span {
+  display:
+    block;
+
+  margin-top:
+    4px;
+
+  color:
+    rgba(201, 164, 92, 0.62);
+
+  font-size:
+    7px;
+
+  letter-spacing:
+    0.12em;
+}
+
+.tutorial-note {
+  color:
+    rgba(228, 199, 127, 0.82) !important;
+
+  font-size:
+    9px !important;
+
+  letter-spacing:
+    0.1em;
+}
+
+/* =========================================================
+   BATTLE
+========================================================= */
+
+.tataka-battle {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    15;
+}
+
+/* =========================================================
+   TATAKA HP
+========================================================= */
+
+.tataka-hp {
+  position:
+    absolute;
+
+  left:
+    7%;
+
+  top:
+    17%;
+
+  z-index:
+    30;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    5px;
+}
+
+.tataka-hp > span {
+  color:
+    rgba(238, 231, 216, 0.9);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    16px;
+
+  letter-spacing:
+    0.08em;
+}
+
+.tataka-hp > div {
+  display:
+    flex;
+
+  gap:
+    4px;
+}
+
+.tataka-hp i {
+  width:
+    28px;
+
+  height:
+    4px;
+
+  background:
+    rgba(238, 231, 216, 0.12);
+}
+
+.tataka-hp i.alive {
+  background:
+    var(--gold-bright);
+
+  box-shadow:
+    0 0 10px
+    rgba(228, 199, 127, 0.25);
+}
+
+.tataka-hp i.empty {
+  background:
+    rgba(102, 53, 37, 0.35);
+}
+
+.tataka-hp small {
+  color:
+    rgba(201, 164, 92, 0.6);
+
+  font-size:
+    7px;
+
+  letter-spacing:
+    0.12em;
+}
+
+/* =========================================================
+   IMPACT CIRCLE
+   SMALLER THAN BEFORE
+========================================================= */
+
+.impact-zone {
+  position:
+    absolute;
+
+  bottom:
+    6%;
+
+  z-index:
+    18;
+
+  width:
+    96px;
+
+  height:
+    48px;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events:
+    none;
+}
+
+.impact-zone div {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  border:
+    2px solid
+    rgba(232, 179, 63, 0.9);
+
+  border-radius:
+    50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(228, 164, 44, 0.15),
+      rgba(190, 72, 35, 0.04) 52%,
+      transparent 72%
+    );
+
+  box-shadow:
+    0 0 20px
+    rgba(228, 171, 55, 0.28);
+}
+
+.impact-zone span {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  bottom:
+    -18px;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    rgba(228, 199, 127, 0.84);
+
+  font-size:
+    7px;
+
+  letter-spacing:
+    0.18em;
+}
+
+/* =========================================================
+   FIREBALL
+========================================================= */
+
+.fireball {
+  position:
+    absolute;
+
+  z-index:
+    25;
+
+  width:
+    58px;
+
+  height:
+    58px;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events:
+    none;
+}
+
+.fireball-glow {
+  position:
+    absolute;
+
+  inset:
+    -12px;
+
+  border-radius:
+    50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(246, 184, 68, 0.35),
+      transparent 68%
+    );
+
+  filter:
+    blur(8px);
+}
+
+.fireball-flame {
+  position:
+    absolute;
+
+  inset:
+    6px;
+
+  border-radius:
+    50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #fff3b8 0 16%,
+      #ffb34e 29%,
+      rgba(218, 68, 27, 0.64) 57%,
+      transparent 77%
+    );
+
+  box-shadow:
+    0 0 28px
+    rgba(239, 112, 39, 0.6);
+}
+
+.fireball-core {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    50%;
+
+  width:
+    12px;
+
+  height:
+    12px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius:
+    50%;
+
+  background:
+    #fff4c2;
+
+  box-shadow:
+    0 0 20px
+    rgba(255, 239, 184, 0.96);
+}
+
+/* =========================================================
+   RAMA ARROW
+   EXACT LEFT-FACING SHAPE
+   <---------
+========================================================= */
+
+.rama-arrow {
+  position:
+    absolute;
+
+  top:
+    55%;
+
+  z-index:
+    32;
+
+  width:
+    165px;
+
+  height:
+    20px;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events:
+    none;
+}
+
+/*
+  No visible blur-trail attached to the
+  arrowhead. This prevents the old
+  --<-- appearance.
+*/
+.arrow-trail {
+  display:
+    none;
+}
+
+.arrow-shaft {
+  position:
+    absolute;
+
+  left:
+    15px;
+
+  top:
+    9px;
+
+  width:
+    140px;
+
+  height:
+    2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 246, 205, 0),
+      #eadcac 12%,
+      #fff3bf 70%,
+      #fff3bf 100%
+    );
+
+  box-shadow:
+    0 0 10px
+    rgba(228, 199, 127, 0.5);
+}
+
+.arrow-head {
+  position:
+    absolute;
+
+  left:
+    0;
+
+  top:
+    2px;
+
+  width:
+    0;
+
+  height:
+    0;
+
+  border-top:
+    8px solid transparent;
+
+  border-bottom:
+    8px solid transparent;
+
+  border-right:
+    17px solid
+    #f1e4b3;
+
+  filter:
+    drop-shadow(
+      0 0 5px
+      rgba(228, 199, 127, 0.48)
+    );
+}
+
+/* =========================================================
+   OBJECTIVE
+========================================================= */
+
+.battle-objective {
+  position:
+    absolute;
+
+  left:
+    23px;
+
+  bottom:
+    23px;
+
+  z-index:
+    30;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+}
+
+.battle-objective small {
+  color:
+    rgba(201, 164, 92, 0.62);
+
+  font-size:
+    7px;
+
+  letter-spacing:
+    0.16em;
+}
+
+.battle-objective strong {
+  color:
+    rgba(238, 231, 216, 0.87);
+
+  font-size:
+    8px;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.1em;
+}
+
+/* =========================================================
+   SHOOT BUTTON
+========================================================= */
+
+.shoot-button {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  bottom:
+    17px;
+
+  z-index:
+    32;
+
+  transform:
+    translateX(-50%);
+
+  min-width:
+    205px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    9px 14px;
+
+  border:
+    1px solid
+    rgba(228, 211, 176, 0.1);
+
+  background:
+    rgba(7, 9, 6, 0.4);
+
+  color:
+    rgba(238, 231, 216, 0.32);
+
+  cursor:
+    default;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.shoot-button.is-ready {
+  border-color:
+    rgba(228, 199, 127, 0.74);
+
+  background:
+    rgba(201, 164, 92, 0.14);
+
+  color:
+    rgba(238, 231, 216, 0.96);
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    0 0 28px
+    rgba(228, 199, 127, 0.12);
+}
+
+.shoot-button.is-ready:hover {
+  background:
+    rgba(201, 164, 92, 0.2);
+
+  transform:
+    translateX(-50%)
+    translateY(-1px);
+}
+
+.shoot-button svg {
+  color:
+    var(--gold-bright);
+}
+
+.shoot-button span {
+  font-size:
+    8px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.15em;
+}
+
+.shoot-button small {
+  color:
+    rgba(201, 164, 92, 0.6);
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    0.11em;
+}
+
+/* =========================================================
+   MOVEMENT HINT
+========================================================= */
+
+.movement-hint {
+  position:
+    absolute;
+
+  right:
+    23px;
+
+  bottom:
+    23px;
+
+  z-index:
+    30;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+}
+
+.movement-hint span {
+  color:
+    rgba(238, 231, 216, 0.72);
+
+  font-size:
+    7px;
+
+  letter-spacing:
+    0.08em;
+}
+
+.movement-hint small {
+  color:
+    rgba(201, 164, 92, 0.58);
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    0.11em;
+}
+
+/* =========================================================
+   BATTLE MESSAGE
+========================================================= */
+
+.battle-message {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    78%;
+
+  z-index:
+    33;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  gap:
+    4px;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events:
+    none;
+
+  text-align:
+    center;
+}
+
+.battle-message strong {
+  color:
+    rgba(238, 231, 216, 0.96);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    23px;
+
+  font-weight:
+    500;
+}
+
+.battle-message span {
+  color:
+    rgba(201, 164, 92, 0.73);
+
+  font-size:
+    7px;
+
+  letter-spacing:
+    0.17em;
+}
+
+/* =========================================================
+   END SCREENS
+========================================================= */
+
+.end-screen {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    36;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    35px;
+
+  text-align:
+    center;
+
+  background:
+    rgba(4, 6, 4, 0.72);
+}
+
+.end-screen > svg {
+  color:
+    var(--gold-bright);
+
+  margin-bottom:
+    13px;
+}
+
+.end-screen > span {
+  color:
+    rgba(201, 164, 92, 0.75);
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    0.22em;
+}
+
+.end-screen h2 {
+  width:
+    min(620px, 100%);
+
+  margin:
+    13px 0;
+
+  color:
+    rgba(238, 231, 216, 0.96);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      34px,
+      4.3vw,
+      58px
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1.03;
+}
+
+.end-screen p {
+  width:
+    min(530px, 100%);
+
+  margin:
+    0 0 22px;
+
+  color:
+    rgba(221, 212, 195, 0.62);
+
+  font-size:
+    11px;
+
+  line-height:
+    1.78;
+}
+
+.end-screen blockquote {
+  margin:
+    0 0 24px;
+
+  padding:
+    11px 22px;
+
+  border-left:
+    1px solid
+    rgba(201, 164, 92, 0.45);
+
+  border-right:
+    1px solid
+    rgba(201, 164, 92, 0.45);
+
+  color:
+    rgba(228, 199, 127, 0.84);
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    0.18em;
+
+  line-height:
+    1.7;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .tataka-hud {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .tataka-hud__center {
+    grid-column:
+      1 / -1;
+
+    grid-row:
+      2;
+  }
+
+  .tataka-intro {
+    margin:
+      0 auto;
+  }
+
+  .tataka-character {
+    left:
+      -6%;
+
+    width:
+      57vw;
+  }
+
+  .rama-character {
+    width:
+      23vw;
+  }
+
+  .tataka-hp {
+    left:
+      5%;
+  }
+}
+
+@media (max-width: 680px) {
+  .tataka-hud {
+    top:
+      10px;
+
+    left:
+      10px;
+
+    right:
+      10px;
+  }
+
+  .tataka-tutorial {
+    max-height:
+      84vh;
+
+    overflow:
+      auto;
+  }
+
+  .tutorial-controls {
+    flex-direction:
+      column;
+  }
+
+  .tutorial-controls > div {
+    border-right:
+      0;
+
+    border-bottom:
+      1px solid
+      rgba(228, 211, 176, 0.1);
+  }
+
+  .tutorial-controls > div:last-child {
+    border-bottom:
+      0;
+  }
+
+  .tataka-character {
+    left:
+      -13%;
+
+    width:
+      70vw;
+  }
+
+  .rama-character {
+    width:
+      29vw;
+  }
+
+  .shoot-button {
+    bottom:
+      56px;
+  }
+
+  .battle-objective,
+  .movement-hint {
+    bottom:
+      18px;
+  }
+
+  .battle-message {
+    top:
+      72%;
+  }
+
+  .tataka-hp {
+    top:
+      25%;
+  }
+}
+
+@media (max-width: 470px) {
+  .tataka-character {
+    left:
+      -19%;
+
+    width:
+      77vw;
+  }
+
+  .rama-character {
+    width:
+      33vw;
+  }
+
+  .shoot-button {
+    min-width:
+      165px;
+  }
+
+  .shoot-button small {
+    display:
+      none;
+  }
+
+  .impact-zone {
+    width:
+      86px;
+
+    height:
+      43px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.tataka-button:focus-visible,
+.shoot-button:focus-visible {
+  outline:
+    1px solid
+    rgba(228, 199, 127, 0.95);
+
+  outline-offset:
+    3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .tataka-game *,
+  .tataka-game *::before,
+  .tataka-game *::after {
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+}

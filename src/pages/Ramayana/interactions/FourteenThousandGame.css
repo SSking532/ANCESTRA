@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+.fourteen-game {
+  --gold: #f2cf86;
+  --saffron: #e8821e;
+  --maroon: #5a1f12;
+  --ink: #3a2a14;
+  --mx: 50vw; --my: 54vh;
+  position: fixed; inset: 0; z-index: 9999; overflow: hidden; isolation: isolate;
+  color: #fff6e0; background: #9ec9e8; font-family: Inter, system-ui, sans-serif;
+}
+.fourteen-game *, .fourteen-game *::before, .fourteen-game *::after { box-sizing: border-box; }
+.fourteen-game.is-battle, .fourteen-game.is-battle canvas { cursor: none; }
+.fourteen-game button { font-family: inherit; }
+
+/* ---------- World + atmosphere layers ---------- */
+.fourteen-game__world { position: absolute; inset: 0; z-index: 0; }
+.fourteen-game__world canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+
+.fourteen-game__sun {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 24% 14%, rgba(255,240,190,.55) 0, rgba(255,226,150,.22) 18%, transparent 42%),
+    repeating-conic-gradient(from 196deg at 24% -10%, rgba(255,240,190,.10) 0 3deg, transparent 3deg 9deg);
+  -webkit-mask-image: radial-gradient(ellipse at 24% 0%, #000 0, transparent 75%);
+          mask-image: radial-gradient(ellipse at 24% 0%, #000 0, transparent 75%);
+}
+.fourteen-game__vignette {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(28,20,8,.38), transparent 16%, transparent 76%, rgba(24,18,8,.45)),
+    radial-gradient(ellipse at center, transparent 55%, rgba(20,24,8,.32) 100%);
+}
+.fourteen-game__grain {
+  position: absolute; inset: 0; z-index: 2; opacity: .05; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+.fourteen-game__hurt {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(200,20,10,.75) 100%);
+  animation: ft-hurt .7s ease-out;
+}
+@keyframes ft-hurt { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ---------- Top bar ---------- */
+.fourteen-game__top {
+  position: absolute; z-index: 5; top: 0; left: 0; right: 0; padding: 20px 34px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(180deg, rgba(24,16,6,.55), transparent);
+}
+.fourteen-game__brand { display: flex; align-items: center; gap: 14px; text-shadow: 0 2px 10px rgba(0,0,0,.6); }
+.fourteen-game__brand span { font: 700 21px 'Cormorant Garamond', serif; letter-spacing: .22em; color: var(--gold); }
+.fourteen-game__brand i { height: 18px; width: 1px; background: rgba(242,207,134,.7); }
+.fourteen-game__brand small { color: #fff1d2; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.fourteen-game__top-actions { display: flex; gap: 10px; }
+.fourteen-game__top-actions button {
+  width: 42px; height: 42px; display: grid; place-items: center; color: #fff1d2; cursor: pointer;
+  border: 1px solid rgba(242,207,134,.45); background: rgba(40,28,12,.55); backdrop-filter: blur(8px);
+  border-radius: 50%; transition: background .2s, transform .2s;
+}
+.fourteen-game__top-actions button:hover { background: rgba(120,70,20,.8); transform: scale(1.08); }
+.fourteen-game__top-actions svg { width: 18px; height: 18px; }
+
+/* ---------- HUD ---------- */
+.fourteen-game__hud {
+  position: absolute; z-index: 4; top: 84px; left: 34px; right: 34px;
+  display: flex; gap: 14px; pointer-events: none;
+}
+.fourteen-game__hud-stat {
+  display: flex; flex-direction: column; gap: 4px; min-width: 112px; padding: 10px 18px 11px;
+  background: linear-gradient(160deg, rgba(58,38,16,.62), rgba(30,20,8,.62));
+  border: 1px solid rgba(242,207,134,.38); border-radius: 10px; backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.fourteen-game__hud-stat--end { margin-left: auto; align-items: flex-end; }
+.fourteen-game__hud-stat small { color: #f2d79a; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
+.fourteen-game__hud-stat strong { color: #fff6e0; font: 700 28px/1 'Cormorant Garamond', serif; letter-spacing: .04em; }
+.fourteen-game__hud-stat strong em { color: #e4d2a4; font-size: 15px; font-style: normal; }
+.fourteen-game__hearts { display: flex; gap: 6px; }
+.fourteen-game__hearts svg { width: 20px; height: 20px; color: #ff6a4a; filter: drop-shadow(0 0 6px rgba(255,90,50,.6)); }
+.fourteen-game__foebar { height: 4px; border-radius: 4px; background: rgba(255,255,255,.18); overflow: hidden; margin-top: 2px; }
+.fourteen-game__foebar i { display: block; height: 100%; background: linear-gradient(90deg, #f4b13d, #e8821e); transition: width .3s; }
+
+/* ---------- Reticle ---------- */
+.fourteen-game__reticle {
+  position: absolute; z-index: 6; left: var(--mx); top: var(--my); width: 46px; height: 46px;
+  transform: translate(-50%, -50%); border: 2px solid rgba(255,244,205,.95); border-radius: 50%;
+  pointer-events: none; box-shadow: 0 0 0 1px rgba(60,30,0,.45), 0 0 18px rgba(255,200,90,.5);
+  transition: width .12s, height .12s, border-color .12s;
+}
+.fourteen-game__reticle::before, .fourteen-game__reticle::after { content: ""; position: absolute; background: rgba(255,244,205,.98); box-shadow: 0 0 0 1px rgba(60,30,0,.35); }
+.fourteen-game__reticle::before { left: 50%; top: -10px; bottom: -10px; width: 2px; transform: translateX(-50%); clip-path: polygon(0 0,100% 0,100% 28%,0 28%,0 72%,100% 72%,100% 100%,0 100%); }
+.fourteen-game__reticle::after { top: 50%; left: -10px; right: -10px; height: 2px; transform: translateY(-50%); clip-path: polygon(0 0,28% 0,28% 100%,0 100%,72% 100%,72% 0,100% 0,100% 100%); }
+.fourteen-game.is-aiming .fourteen-game__reticle { width: 58px; height: 58px; border-color: #ff5a3c; box-shadow: 0 0 0 1px rgba(60,0,0,.5), 0 0 24px rgba(255,70,40,.7); }
+.fourteen-game.is-aiming .fourteen-game__reticle::before, .fourteen-game.is-aiming .fourteen-game__reticle::after { background: #ff5a3c; }
+
+/* ---------- Combo, instruction, banner, notice ---------- */
+.fourteen-game__combo {
+  position: absolute; z-index: 5; left: 0; right: 0; top: 66%; text-align: center; pointer-events: none;
+  color: #ffe3a0; font: 700 34px 'Cormorant Garamond', serif; letter-spacing: .06em;
+  text-shadow: 0 0 22px rgba(255,150,40,.8), 0 2px 10px rgba(0,0,0,.8); animation: ft-pop .35s ease-out;
+}
+@keyframes ft-pop { from { transform: scale(1.5); opacity: 0; } }
+.fourteen-game__instruction {
+  position: absolute; z-index: 4; bottom: 60px; left: 0; right: 0; text-align: center; pointer-events: none;
+  color: #fff3d6; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  text-shadow: 0 2px 12px rgba(0,0,0,.8);
+}
+.fourteen-game__banner {
+  position: absolute; z-index: 6; left: 0; right: 0; top: 24%; text-align: center; pointer-events: none;
+  text-shadow: 0 4px 28px rgba(0,0,0,.75);
+}
+.fourteen-game__banner span { display: block; margin-bottom: 10px; color: var(--gold); font-size: 14px; letter-spacing: .26em; text-transform: uppercase; font-weight: 700; }
+.fourteen-game__banner strong { font: 700 clamp(34px, 6vw, 68px)/1.1 'Cormorant Garamond', serif; letter-spacing: .03em; color: #fff6e0; }
+.fourteen-game__notice {
+  position: absolute; z-index: 6; top: 20%; left: 0; right: 0; margin: 0 auto; width: max-content; max-width: min(92%, 520px);
+  text-align: center; color: #fff0c8; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600;
+  background: rgba(40,26,10,.7); border: 1px solid rgba(242,207,134,.4); padding: 11px 22px; border-radius: 999px; backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+/* ---------- Cards: centered by the stage, never by transforms ---------- */
+.fourteen-game__stage {
+  position: absolute; inset: 0; z-index: 7; display: grid; place-items: center;
+  padding: 84px 16px 56px; pointer-events: none;
+}
+.fourteen-game__story-card {
+  pointer-events: auto; width: min(640px, 100%); max-height: 100%; min-height: 0; overflow-y: auto;
+  text-align: center; padding: 44px 54px 38px; border-radius: 14px; color: var(--ink);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(255,255,255,.55), transparent 60%),
+    linear-gradient(165deg, #fbf1d9, #efdcae);
+  border: 1px solid rgba(154,106,28,.55);
+  box-shadow: 0 30px 90px rgba(30,16,0,.5), inset 0 0 0 6px rgba(255,255,255,.18), inset 0 0 60px rgba(160,110,40,.25);
+}
+.fourteen-game__eyebrow { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; color: #9a5f12; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+.fourteen-game__roman { margin-top: 20px; color: #8b6a34; font: 600 15px 'Cormorant Garamond', serif; letter-spacing: .2em; text-transform: uppercase; }
+.fourteen-game__story-card h1 { margin: 8px 0 18px; color: var(--maroon); font: 700 clamp(40px, 7vw, 62px)/1.02 'Cormorant Garamond', serif; letter-spacing: .01em; }
+.fourteen-game__story-card h1 em { color: #c2761a; font-style: normal; }
+.fourteen-game__story-card h2 { margin: 20px 0 14px; color: var(--maroon); font: 700 clamp(28px, 4.4vw, 38px)/1.15 'Cormorant Garamond', serif; }
+.fourteen-game__story-card p { max-width: 480px; margin: 0 auto; color: #4a3822; font: 400 15px/1.85 Inter, sans-serif; text-wrap: pretty; }
+.fourteen-game__divider { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 24px 0; color: #b0762a; font-size: 12px; }
+.fourteen-game__divider i { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #b0762a); }
+.fourteen-game__divider i:last-child { transform: rotate(180deg); }
+.fourteen-game__primary {
+  min-height: 52px; padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  color: #2a1306; background: linear-gradient(110deg, #f8c25a, #e8821e); border: 0; border-radius: 999px;
+  font: 700 13px Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+  box-shadow: 0 10px 24px rgba(160,70,0,.35), inset 0 1px 0 rgba(255,255,255,.5);
+  transition: transform .2s, filter .2s;
+}
+.fourteen-game__primary:hover { transform: translateY(-2px); filter: brightness(1.07); }
+.fourteen-game__primary:focus-visible, .fourteen-game__top-actions button:focus-visible, .fourteen-game__pause button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.fourteen-game__story-card > small { display: block; margin-top: 20px; color: #8b6a34; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.fourteen-game__scoreline { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px; margin: 22px 0 26px; color: #7a5a2c; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+.fourteen-game__scoreline strong { color: var(--maroon); font: 700 34px 'Cormorant Garamond', serif; }
+
+.fourteen-game__pause {
+  position: absolute; z-index: 8; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  background: rgba(30,20,8,.55); backdrop-filter: blur(8px); color: #fff3d6; letter-spacing: .14em; font-size: 15px; text-transform: uppercase; cursor: default; font-weight: 600;
+}
+.fourteen-game__pause button { display: flex; align-items: center; gap: 10px; border: 1px solid #f2cf86; border-radius: 999px; padding: 13px 26px; color: #fff3d6; background: rgba(120,70,20,.5); cursor: pointer; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+
+.fourteen-game__bottom {
+  position: absolute; z-index: 5; bottom: 0; left: 0; right: 0; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 6px 14px;
+  padding: 14px 12px; color: rgba(255,243,214,.92); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; text-align: center; pointer-events: none;
+  background: linear-gradient(0deg, rgba(24,16,6,.55), transparent); text-shadow: 0 1px 8px rgba(0,0,0,.7);
+}
+.fourteen-game__bottom i { color: var(--gold); font-style: normal; }
+
+@media (max-width: 650px) {
+  .fourteen-game__top { padding: 14px 16px; }
+  .fourteen-game__brand small { display: none; }
+  .fourteen-game__hud { top: 68px; left: 14px; right: 14px; gap: 8px; flex-wrap: wrap; }
+  .fourteen-game__hud-stat { min-width: 0; padding: 8px 12px; }
+  .fourteen-game__hud-stat strong { font-size: 22px; }
+  .fourteen-game__hud-stat--end { margin-left: 0; align-items: flex-start; }
+  .fourteen-game__stage { padding: 70px 12px 48px; }
+  .fourteen-game__story-card { padding: 30px 22px 26px; }
+  .fourteen-game__story-card p { font-size: 14px; }
+  .fourteen-game__banner { top: 34%; }
+  .fourteen-game__instruction { bottom: 56px; font-size: 11px; }
+  .fourteen-game__bottom { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fourteen-game__hurt, .fourteen-game__combo { animation: none; }
+}

@@ -1,0 +1,1041 @@
+/* =========================================================
+   ANCESTRA — RAMAYANA CHARACTERS
+   RAMAYANA — SACRED PARCHMENT EDITION
+   LIGHT IVORY • DARK BROWN • EARTH • ANTIQUE GOLD
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.ramayana-characters-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% 8%,
+      rgba(184, 132, 70, 0.13),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 10% 45%,
+      rgba(151, 94, 43, 0.06),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(151, 94, 43, 0.06),
+      transparent 28%
+    ),
+    #f3ead9;
+
+  color: #3d2618;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   SUBTLE PARCHMENT TEXTURE
+========================================================= */
+
+.ramayana-characters-page::before {
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  opacity: 0.35;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(91, 57, 31, 0.018) 0px,
+      rgba(91, 57, 31, 0.018) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  mix-blend-mode: multiply;
+}
+
+
+/* =========================================================
+   ATMOSPHERE
+========================================================= */
+
+.ramayana-characters-page__atmosphere {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle at 15% 30%,
+      rgba(180, 126, 61, 0.09),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 65%,
+      rgba(157, 91, 43, 0.07),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(119, 70, 37, 0.05),
+      transparent 35%
+    );
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.ramayana-characters-nav {
+  position: relative;
+
+  height: 90px;
+
+  padding: 0 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  z-index: 10;
+
+  border-bottom:
+    1px solid
+    rgba(92, 55, 29, 0.18);
+
+  background:
+    rgba(243, 234, 217, 0.72);
+
+  backdrop-filter: blur(10px);
+}
+
+
+.ramayana-characters-nav__back {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color:
+    rgba(61, 38, 24, 0.68);
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  letter-spacing: 0.25em;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.ramayana-characters-nav__back:hover {
+  color: #8b542d;
+
+  transform: translateX(-3px);
+}
+
+
+.ramayana-characters-nav__brand {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  color: #70421f;
+
+  font-size: 14px;
+
+  letter-spacing: 0.35em;
+}
+
+
+.ramayana-characters-nav__label {
+  color:
+    rgba(112, 66, 31, 0.72);
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.ramayana-characters-intro {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 950px;
+
+  margin: 110px auto 90px;
+
+  padding: 0 30px;
+
+  text-align: center;
+}
+
+
+.ramayana-characters-intro__eyebrow {
+  display: block;
+
+  margin-bottom: 25px;
+
+  color: #9a6838;
+
+  font-size: 10px;
+
+  letter-spacing: 0.5em;
+}
+
+
+.ramayana-characters-intro h1 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(65px, 8vw, 125px);
+
+  line-height: 0.86;
+
+  font-weight: 400;
+
+  color: #3d2618;
+
+  letter-spacing: 0.01em;
+}
+
+
+.ramayana-characters-intro h1 span {
+  display: block;
+
+  color: #8b542d;
+
+  font-style: italic;
+}
+
+
+/* =========================================================
+   INTRO DECORATIVE LINE
+========================================================= */
+
+.ramayana-characters-intro__line {
+  width: 180px;
+
+  height: 1px;
+
+  margin: 42px auto 30px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #a8753f,
+      transparent
+    );
+}
+
+
+.ramayana-characters-intro p {
+  margin: 0;
+
+  color:
+    rgba(61, 38, 24, 0.62);
+
+  font-size: 13px;
+
+  line-height: 2;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   GROUP CONTAINER
+========================================================= */
+
+.ramayana-characters-groups {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   GROUP SECTION
+========================================================= */
+
+.ramayana-character-group {
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding:
+    80px
+    45px
+    30px;
+}
+
+
+.ramayana-character-group:first-child {
+  padding-top: 20px;
+}
+
+
+.ramayana-character-group
++ .ramayana-character-group {
+  margin-top: 35px;
+}
+
+
+/* =========================================================
+   GROUP HEADER
+========================================================= */
+
+.ramayana-character-group__header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 40px;
+
+  margin-bottom: 25px;
+}
+
+
+.ramayana-character-group__heading {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+.ramayana-character-group__subtitle {
+  color: #986438;
+
+  font-size: 9px;
+
+  letter-spacing: 0.4em;
+}
+
+
+.ramayana-character-group__heading h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(42px, 5vw, 72px);
+
+  line-height: 0.95;
+
+  font-weight: 400;
+
+  letter-spacing: -0.035em;
+
+  color: #3d2618;
+}
+
+
+.ramayana-character-group__count {
+  flex-shrink: 0;
+
+  padding-bottom: 7px;
+
+  color:
+    rgba(61, 38, 24, 0.42);
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   GROUP LINE
+========================================================= */
+
+.ramayana-character-group__line {
+  width: 100%;
+
+  height: 1px;
+
+  margin-bottom: 35px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(139, 84, 45, 0.48),
+      rgba(139, 84, 45, 0.15),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.ramayana-characters-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 35px;
+}
+
+
+/* =========================================================
+   CHARACTER CARD
+========================================================= */
+
+.ramayana-character-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 720px;
+
+  overflow: hidden;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 252, 244, 0.96),
+      rgba(235, 219, 193, 0.72)
+    );
+
+  border:
+    1px solid
+    rgba(105, 63, 32, 0.28);
+
+  box-shadow:
+    0 12px 35px
+    rgba(74, 43, 22, 0.07);
+
+  transition:
+    transform 0.6s
+      cubic-bezier(.16,1,.3,1),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+
+.ramayana-character-card:hover {
+  transform: translateY(-10px);
+
+  border-color:
+    rgba(139, 84, 45, 0.62);
+
+  box-shadow:
+    0 30px 65px
+    rgba(74, 43, 22, 0.14),
+    0 0 35px
+    rgba(174, 124, 66, 0.08);
+}
+
+
+/* =========================================================
+   IMAGE AREA
+========================================================= */
+
+.ramayana-character-card__visual {
+  position: relative;
+
+  /* Match the portrait character artwork */
+  aspect-ratio: 2 / 3;
+
+  width: 100%;
+  height: auto;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e9d9bd,
+      #f5ecdd
+    );
+}
+
+
+/* =========================================================
+   BLURRED BACKGROUND IMAGE
+========================================================= */
+
+.ramayana-character-card__blur {
+  position: absolute;
+
+  inset: -25px;
+
+  width: calc(100% + 50px);
+  height: calc(100% + 50px);
+
+  object-fit: cover;
+
+  filter:
+    blur(25px)
+    saturate(0.7)
+    brightness(1.08);
+
+  transform: scale(1.12);
+
+  opacity: 0.25;
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   IMAGE FRAME
+========================================================= */
+
+.ramayana-character-card__image-frame {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  z-index: 2;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN CHARACTER IMAGE
+========================================================= */
+
+.ramayana-character-card__image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  /*
+    IMPORTANT:
+    Cover fills the entire portrait frame.
+  */
+  object-fit: cover;
+
+  /*
+    Keep the character centered.
+  */
+  object-position: center center;
+
+  transition:
+    transform 0.8s
+    cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.ramayana-character-card:hover
+.ramayana-character-card__image {
+  transform: scale(1.025);
+}
+
+
+/* =========================================================
+   IMAGE SHADE
+========================================================= */
+
+.ramayana-character-card__image-shade {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 249, 236, 0.02) 0%,
+      transparent 48%,
+      rgba(94, 54, 27, 0.05) 70%,
+      rgba(69, 39, 20, 0.30) 100%
+    );
+}
+
+
+/* =========================================================
+   IMAGE DECORATIVE FRAME
+========================================================= */
+
+.ramayana-character-card__visual::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 14px;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  border:
+    1px solid
+    rgba(123, 76, 38, 0.18);
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.ramayana-character-card__number {
+  position: absolute;
+
+  top: 25px;
+
+  right: 25px;
+
+  z-index: 5;
+
+  color:
+    rgba(67, 40, 23, 0.78);
+
+  font-size: 9px;
+
+  letter-spacing: 0.35em;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.ramayana-character-card__content {
+  position: relative;
+
+  z-index: 5;
+
+  min-height: 300px;
+
+  padding:
+    30px
+    35px
+    28px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f4ead9,
+      #ead8bd
+    );
+
+  border-top:
+    1px solid
+    rgba(104, 62, 32, 0.14);
+}
+
+
+/* =========================================================
+   ROLE
+========================================================= */
+
+.ramayana-character-card__role {
+  margin-bottom: 12px;
+
+  color: #986438;
+
+  font-size: 9px;
+
+  letter-spacing: 0.4em;
+}
+
+
+/* =========================================================
+   CHARACTER NAME
+========================================================= */
+
+.ramayana-character-card h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(26px, 2.2vw, 40px);
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.025em;
+
+  color: #3d2618;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   CARD RULE
+========================================================= */
+
+.ramayana-character-card__rule {
+  width: 100%;
+
+  height: 1px;
+
+  margin:
+    25px
+    0
+    20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(139, 84, 45, 0.42),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.ramayana-character-card p {
+  margin: 0;
+
+  max-width: 430px;
+
+  color:
+    rgba(61, 38, 24, 0.64);
+
+  font-size: 13px;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.ramayana-character-card__footer {
+  margin-top: auto;
+
+  padding-top: 25px;
+
+  border-top:
+    1px solid
+    rgba(105, 63, 32, 0.15);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: #8b542d;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+
+  transition:
+    letter-spacing 0.4s ease,
+    color 0.4s ease;
+}
+
+
+.ramayana-character-card:hover
+.ramayana-character-card__footer {
+  letter-spacing: 0.4em;
+
+  color: #6e3f20;
+}
+
+
+/* =========================================================
+   FOOTER ARROW
+========================================================= */
+
+.ramayana-character-card__footer svg {
+  transition:
+    transform 0.4s ease;
+}
+
+
+.ramayana-character-card:hover
+.ramayana-character-card__footer svg {
+  transform: translateX(7px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.ramayana-characters-footer {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1310px;
+
+  margin: 0 auto;
+
+  padding:
+    25px
+    0
+    40px;
+
+  border-top:
+    1px solid
+    rgba(105, 63, 32, 0.16);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color:
+    rgba(61, 38, 24, 0.42);
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .ramayana-characters-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .ramayana-character-group {
+    padding-left: 30px;
+
+    padding-right: 30px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .ramayana-characters-nav {
+    padding: 0 20px;
+
+    height: 75px;
+  }
+
+
+  .ramayana-characters-nav__brand {
+    display: none;
+  }
+
+
+  .ramayana-characters-nav__label {
+    font-size: 8px;
+  }
+
+
+  .ramayana-characters-intro {
+    margin-top: 80px;
+
+    margin-bottom: 60px;
+  }
+
+
+  .ramayana-characters-intro h1 {
+    font-size: 58px;
+  }
+
+
+  .ramayana-character-group {
+    padding:
+      65px
+      20px
+      20px;
+  }
+
+
+  .ramayana-character-group:first-child {
+    padding-top: 10px;
+  }
+
+
+  .ramayana-character-group__header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+
+  .ramayana-character-group__heading h2 {
+    font-size: 43px;
+  }
+
+
+  .ramayana-character-group__count {
+    padding-bottom: 0;
+  }
+
+
+  .ramayana-character-group__line {
+    margin-bottom: 25px;
+  }
+
+
+  .ramayana-characters-grid {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+
+  .ramayana-character-card {
+    min-height: 680px;
+  }
+
+
+  .ramayana-character-card__visual {
+    height: 390px;
+  }
+
+
+  .ramayana-character-card__content {
+    min-height: 290px;
+
+    padding: 28px;
+  }
+
+
+  .ramayana-character-card h2 {
+    font-size:
+      clamp(30px, 9vw, 42px);
+  }
+
+
+  .ramayana-characters-footer {
+    margin: 0 20px;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .ramayana-characters-intro h1 {
+    font-size: 48px;
+  }
+
+
+  .ramayana-character-group__heading h2 {
+    font-size: 38px;
+  }
+
+
+  .ramayana-character-card__visual {
+    height: 350px;
+  }
+
+
+  .ramayana-character-card {
+    min-height: 640px;
+  }
+
+
+  .ramayana-character-card__content {
+    padding: 25px;
+  }
+
+}

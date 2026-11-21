@@ -1,0 +1,852 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap");
+
+/* =========================================================
+   ANCESTRA — THE FOREST LISTENS  (v2)
+   Palette: moss-black #0a0d08 · lamp gold #d6ae5a
+            parchment #efe7d5 · ember #ffe08c
+========================================================= */
+
+.forestlisten-game {
+  --gold: #d6ae5a;
+  --gold-soft: rgba(214, 174, 90, 0.4);
+  --ink: #efe7d5;
+  --serif: "Cormorant Garamond", Georgia, serif;
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, #2c2d22, #0a0c08 70%);
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  isolation: isolate;
+  z-index: 99999;
+}
+
+.forestlisten-frame {
+  --mx: 0;
+  --my: 0;
+  --lx: 50%;
+  --ly: 50%;
+  position: relative;
+  width: min(96vw, 1600px);
+  height: min(92vh, 900px);
+  overflow: hidden;
+  background: #0b0e09;
+  border: 1px solid rgba(206, 170, 91, 0.5);
+  box-shadow: 0 0 0 6px rgba(206, 170, 91, 0.05),
+    0 40px 120px rgba(0, 0, 0, 0.7);
+  animation: forestlisten-open 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes forestlisten-open {
+  from { opacity: 0; transform: scale(0.97); filter: brightness(0.3); }
+}
+
+/* ---------------------------------------------------------
+   3D WORLD
+--------------------------------------------------------- */
+.forestlisten-world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  z-index: 1;
+}
+
+.forestlisten-camera {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 2.8s cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+.forestlisten-frame[data-phase="intro"] .forestlisten-camera { transform: translateZ(-140px); }
+.forestlisten-frame[data-phase="observe"] .forestlisten-camera { transform: translateZ(0); }
+.forestlisten-frame[data-phase="complete"] .forestlisten-camera { transform: translateZ(80px); }
+
+.forestlisten-stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--mx) * 5deg)) rotateX(calc(var(--my) * -3.5deg));
+  will-change: transform;
+}
+
+.forestlisten-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+.forestlisten-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+/* each layer sits at its own depth; scale cancels perspective shrink */
+.forestlisten-layer--bg {
+  transform: translateZ(-260px) scale(1.34);
+}
+.forestlisten-layer--bg img { filter: brightness(0.8) saturate(0.9); }
+
+.forestlisten-layer--mid {
+  transform: translateZ(-130px) scale(1.18);
+}
+.forestlisten-layer--mid img { opacity: 0.9; filter: brightness(0.85); }
+
+.forestlisten-layer--fg {
+  transform: translateZ(0) scale(1.06);
+  animation: forestlisten-sway 9s ease-in-out infinite alternate;
+}
+.forestlisten-layer--fg img { opacity: 0.8; filter: brightness(0.78); }
+
+.forestlisten-layer--animals {
+  transform: translateZ(60px) scale(1);
+}
+.forestlisten-layer--animals img {
+  object-fit: contain;
+  filter: saturate(1.05) contrast(1.04) drop-shadow(0 18px 24px rgba(0, 0, 0, 0.5));
+  animation: forestlisten-breathe 6s ease-in-out infinite;
+}
+
+.forestlisten-layer--light {
+  transform: translateZ(110px) scale(0.96);
+  mix-blend-mode: screen;
+}
+.forestlisten-layer--light img { opacity: 0.36; }
+
+/* ORIGINAL CAMERA MOMENT — each layer slides against the cursor,
+   deeper layers less, nearer layers more (same values as v1).
+   Uses the independent `translate` property so it stacks with the
+   3D tilt, depth and sway animations. */
+.forestlisten-layer--bg      { translate: calc(var(--mx) * -7px)  calc(var(--my) * -4px); }
+.forestlisten-layer--mid     { translate: calc(var(--mx) * -13px) calc(var(--my) * -8px); }
+.forestlisten-layer--fg      { translate: calc(var(--mx) * -20px) calc(var(--my) * -11px); }
+.forestlisten-layer--animals { translate: calc(var(--mx) * -24px) calc(var(--my) * -14px); }
+.forestlisten-layer--light   { translate: calc(var(--mx) * -9px)  calc(var(--my) * -6px); }
+/* hotspots ride with the animal layer so they stay on their creatures */
+.forestlisten-point          { translate: calc(var(--mx) * -24px) calc(var(--my) * -14px); }
+
+@media (max-width: 760px), (prefers-reduced-motion: reduce) {
+  .forestlisten-layer, .forestlisten-point { translate: none; }
+}
+
+@keyframes forestlisten-sway {
+  from { transform: translateZ(0) scale(1.06) rotate(-0.25deg); }
+  to   { transform: translateZ(0) scale(1.08) rotate(0.25deg); }
+}
+@keyframes forestlisten-breathe {
+  50% { transform: translateY(-4px) scale(1.006); }
+}
+
+/* ---------------------------------------------------------
+   ATMOSPHERE
+--------------------------------------------------------- */
+.forestlisten-fireflies {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.forestlisten-rays {
+  position: absolute;
+  inset: -20%;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  background: repeating-conic-gradient(
+    from 195deg at 72% -12%,
+    rgba(255, 228, 150, 0.17) 0deg 2.5deg,
+    transparent 2.5deg 9deg
+  );
+  mask-image: linear-gradient(180deg, #000, transparent 78%);
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 78%);
+  animation: forestlisten-rays 14s ease-in-out infinite alternate;
+}
+@keyframes forestlisten-rays {
+  from { transform: rotate(-2deg); opacity: 0.35; }
+  to   { transform: rotate(2deg); opacity: 0.65; }
+}
+
+.forestlisten-mist {
+  position: absolute;
+  left: -30%;
+  width: 160%;
+  z-index: 3;
+  pointer-events: none;
+  filter: blur(26px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(210, 220, 190, 0.2),
+    transparent 65%
+  );
+}
+.forestlisten-mist--a { bottom: -6%; height: 38%; animation: forestlisten-drift 38s linear infinite alternate; }
+.forestlisten-mist--b { bottom: 12%; height: 26%; opacity: 0.6; animation: forestlisten-drift 55s linear infinite alternate-reverse; }
+@keyframes forestlisten-drift {
+  from { transform: translateX(-8%); }
+  to   { transform: translateX(8%); }
+}
+
+/* the cursor carries a soft lantern light */
+.forestlisten-lantern {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background: radial-gradient(
+    circle 260px at var(--lx) var(--ly),
+    rgba(255, 226, 150, 0.55),
+    transparent 70%
+  );
+}
+
+.forestlisten-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(3, 5, 3, 0.7) 100%),
+    linear-gradient(180deg, rgba(5, 7, 4, 0.5), transparent 22%, transparent 74%, rgba(5, 7, 4, 0.6));
+}
+.forestlisten-frame[data-phase="intro"] .forestlisten-vignette {
+  background:
+    linear-gradient(90deg, rgba(5, 7, 4, 0.75), rgba(5, 7, 4, 0.15) 55%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(3, 5, 3, 0.65) 100%);
+}
+
+.forestlisten-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* sound ripple on click */
+.forestlisten-ripple {
+  position: absolute;
+  z-index: 20;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.forestlisten-ripple::before,
+.forestlisten-ripple::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 206, 120, 0.8);
+  transform: translate(-50%, -50%);
+  animation: forestlisten-ripple 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.forestlisten-ripple::after { animation-delay: 0.25s; border-color: rgba(240, 206, 120, 0.45); }
+@keyframes forestlisten-ripple {
+  from { width: 0; height: 0; opacity: 1; }
+  to   { width: 360px; height: 360px; opacity: 0; }
+}
+
+/* ---------------------------------------------------------
+   TOP BAR
+--------------------------------------------------------- */
+.forestlisten-top {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 76px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 34px;
+  border-bottom: 1px solid rgba(216, 183, 103, 0.16);
+  background: linear-gradient(180deg, rgba(7, 9, 6, 0.8), rgba(7, 9, 6, 0));
+  backdrop-filter: blur(5px);
+}
+
+.forestlisten-chapter {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.forestlisten-chapter span { color: var(--gold); }
+.forestlisten-chapter i { width: 34px; height: 1px; background: var(--gold-soft); }
+.forestlisten-chapter strong { font-weight: 500; color: rgba(239, 231, 213, 0.7); }
+
+.forestlisten-progress {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: forestlisten-fade 0.8s both;
+}
+.forestlisten-progress b {
+  width: 9px;
+  height: 9px;
+  rotate: 45deg;
+  border: 1px solid var(--gold-soft);
+  transition: all 0.6s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+.forestlisten-progress b.on {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 14px rgba(240, 206, 120, 0.8);
+  scale: 1.25;
+}
+.forestlisten-progress span {
+  margin-left: 8px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(239, 231, 213, 0.6);
+}
+
+.forestlisten-sound {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(239, 231, 213, 0.6);
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.forestlisten-sound:hover { color: var(--gold); border-color: var(--gold-soft); }
+
+/* ---------------------------------------------------------
+   PANELS
+--------------------------------------------------------- */
+.forestlisten-panel {
+  position: absolute;
+  inset: 76px 0 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  animation: forestlisten-fade 1.2s 0.4s both;
+}
+.forestlisten-panel--intro { padding-left: clamp(50px, 10vw, 170px); }
+.forestlisten-panel--complete { justify-content: center; }
+
+@keyframes forestlisten-fade { from { opacity: 0; } }
+
+.forestlisten-card {
+  position: relative;
+  width: min(540px, 43vw);
+  padding: 36px 40px 40px;
+  background: linear-gradient(135deg, rgba(11, 14, 9, 0.78), rgba(11, 14, 9, 0.5));
+  border: 1px solid rgba(211, 176, 94, 0.3);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(9px);
+}
+/* gilded corner brackets */
+.forestlisten-card::before,
+.forestlisten-card::after,
+.forestlisten-dialog::before,
+.forestlisten-dialog::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--gold);
+  pointer-events: none;
+}
+.forestlisten-card::before, .forestlisten-dialog::before { top: -5px; left: -5px; border-right: 0; border-bottom: 0; }
+.forestlisten-card::after, .forestlisten-dialog::after { bottom: -5px; right: -5px; border-left: 0; border-top: 0; }
+
+.forestlisten-card--center { width: min(660px, calc(100% - 60px)); text-align: center; }
+.forestlisten-card--center .forestlisten-title em { margin-left: 0; }
+.forestlisten-card--center .forestlisten-rule { margin-inline: auto; }
+.forestlisten-card--center p { margin-inline: auto; }
+
+.forestlisten-glyph {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+  color: var(--gold);
+  border: 1px solid rgba(211, 176, 94, 0.55);
+  animation: forestlisten-glow 4s ease-in-out infinite;
+}
+.forestlisten-card--center .forestlisten-glyph { margin-inline: auto; border-radius: 50%; }
+@keyframes forestlisten-glow {
+  50% { box-shadow: 0 0 30px rgba(240, 206, 120, 0.35); }
+}
+
+.forestlisten-halo { position: relative; }
+.forestlisten-halo::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  translate: -50% -50%;
+  border: 1px solid rgba(240, 206, 120, 0.7);
+  animation: forestlisten-halo 3.4s ease-out infinite;
+}
+@keyframes forestlisten-halo {
+  from { scale: 1; opacity: 0.9; }
+  to   { scale: 5; opacity: 0; }
+}
+
+.forestlisten-eyebrow {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.forestlisten-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(58px, 6vw, 94px);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  color: #f2ead8;
+}
+.forestlisten-title span,
+.forestlisten-title em {
+  display: block;
+  animation: forestlisten-rise 1.4s var(--d, 0.1s) cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.forestlisten-title em {
+  margin-left: 34px;
+  font-style: italic;
+  color: var(--gold);
+  background: linear-gradient(100deg, #b98c3c 20%, #ffe9a8 45%, #b98c3c 70%) 0 / 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: forestlisten-rise 1.4s var(--d, 0.1s) cubic-bezier(0.2, 0.8, 0.2, 1) both,
+    forestlisten-shine 6s 1.6s ease-in-out infinite;
+}
+.forestlisten-title--sm { font-size: clamp(52px, 5.4vw, 80px); text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7); }
+@keyframes forestlisten-rise {
+  from { opacity: 0; transform: translateY(26px); filter: blur(8px); }
+}
+@keyframes forestlisten-shine {
+  50% { background-position: 100% 0; }
+}
+
+.forestlisten-rule {
+  width: 180px;
+  margin: 26px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.forestlisten-rule--center { margin-inline: auto; width: 150px; }
+.forestlisten-rule span { flex: 1; height: 1px; background: var(--gold-soft); }
+.forestlisten-rule b { color: var(--gold); font-size: 10px; font-weight: 400; animation: forestlisten-spin 12s linear infinite; }
+@keyframes forestlisten-spin { to { rotate: 360deg; } }
+
+.forestlisten-card p {
+  max-width: 480px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.55;
+  color: rgba(237, 229, 211, 0.82);
+}
+
+/* ---------------------------------------------------------
+   BUTTONS
+--------------------------------------------------------- */
+.forestlisten-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-width: 250px;
+  height: 54px;
+  margin-top: 28px;
+  padding: 0 22px;
+  border: 1px solid rgba(211, 176, 94, 0.65);
+  background: rgba(19, 21, 15, 0.65);
+  color: #f1e8d3;
+  font: 600 11px Inter, sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.forestlisten-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 228, 150, 0.28), transparent 70%);
+  translate: -120% 0;
+  transition: translate 0.8s;
+}
+.forestlisten-btn:hover { transform: translateY(-2px); border-color: #ecc978; box-shadow: 0 0 34px rgba(214, 174, 90, 0.25); }
+.forestlisten-btn:hover::before { translate: 120% 0; }
+.forestlisten-btn svg { transition: transform 0.3s; }
+.forestlisten-btn:hover svg { transform: translateX(5px); }
+.forestlisten-btn--sm { height: 50px; min-width: 230px; }
+
+.forestlisten-game button:focus-visible { outline: 2px solid #ffe08c; outline-offset: 4px; }
+
+/* ---------------------------------------------------------
+   OBSERVE UI
+--------------------------------------------------------- */
+.forestlisten-observe-title {
+  position: absolute;
+  z-index: 30;
+  left: clamp(55px, 7vw, 120px);
+  top: clamp(120px, 16vh, 165px);
+  width: 420px;
+  pointer-events: none;
+  animation: forestlisten-fade 1.2s 0.3s both;
+}
+.forestlisten-line { width: 82px; height: 1px; margin-top: 24px; background: var(--gold); }
+.forestlisten-subtle {
+  margin: 16px 0 0;
+  max-width: 280px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.4;
+  color: rgba(237, 229, 211, 0.65);
+}
+
+.forestlisten-footer {
+  position: absolute;
+  left: 34px;
+  bottom: 22px;
+  z-index: 45;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+.forestlisten-footer span { color: var(--gold); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+.forestlisten-footer p { margin: 0; font-family: var(--serif); font-size: 18px; color: rgba(237, 229, 211, 0.7); }
+
+/* ---------------------------------------------------------
+   HOTSPOTS — sit at the animals' depth, so they parallax with them
+--------------------------------------------------------- */
+.forestlisten-point {
+  --near: 0;
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold);
+  cursor: pointer;
+  transform: translateZ(90px) scale(calc(0.9 + var(--near) * 0.35));
+  opacity: calc(0.42 + var(--near) * 0.58);
+  transition: opacity 0.2s;
+  animation: forestlisten-pop 0.9s calc(var(--i) * 0.15s + 0.8s) cubic-bezier(0.3, 1.6, 0.5, 1) backwards;
+}
+@keyframes forestlisten-pop { from { scale: 0; opacity: 0; } }
+
+.forestlisten-point__ring,
+.forestlisten-point__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+.forestlisten-point__ring {
+  border: 1px solid rgba(225, 187, 100, 0.85);
+  box-shadow: 0 0 calc(10px + var(--near) * 34px) rgba(240, 206, 120, calc(0.15 + var(--near) * 0.5));
+}
+.forestlisten-point__pulse {
+  border: 1px solid rgba(240, 206, 120, 0.6);
+  animation: forestlisten-ping 2.8s ease-out infinite;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+.forestlisten-point.is-hint .forestlisten-point__pulse { animation-duration: 1.4s; border-width: 2px; }
+@keyframes forestlisten-ping {
+  from { scale: 1; opacity: 0.8; }
+  to   { scale: 2.4; opacity: 0; }
+}
+.forestlisten-point__icon {
+  position: absolute;
+  inset: 6px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(12, 15, 10, 0.75);
+  border: 1px solid rgba(215, 179, 94, 0.45);
+  backdrop-filter: blur(5px);
+  transition: background 0.3s;
+}
+.forestlisten-point:hover .forestlisten-point__icon { background: rgba(214, 174, 90, 0.25); }
+
+.forestlisten-point__check {
+  position: absolute;
+  right: -4px;
+  bottom: -3px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #11130e;
+  animation: forestlisten-pop 0.6s cubic-bezier(0.3, 1.8, 0.5, 1);
+}
+.forestlisten-point__tag {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 10px);
+  translate: -50% 0;
+  padding: 4px 10px;
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #efe3c4;
+  background: rgba(9, 12, 8, 0.8);
+  border: 1px solid rgba(211, 176, 94, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.forestlisten-point:hover .forestlisten-point__tag,
+.forestlisten-point:focus-visible .forestlisten-point__tag,
+.forestlisten-point.is-found .forestlisten-point__tag { opacity: calc(0.3 + var(--near)); }
+.forestlisten-point.is-found { opacity: 0.95; }
+.forestlisten-point.is-found .forestlisten-point__ring { border-color: #f0cf84; }
+
+/* ---------------------------------------------------------
+   FINISH BAR
+--------------------------------------------------------- */
+.forestlisten-finish {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 11px 12px 11px 20px;
+  background: rgba(12, 15, 10, 0.9);
+  border: 1px solid rgba(211, 176, 94, 0.5);
+  backdrop-filter: blur(10px);
+  animation: forestlisten-finish 1s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+@keyframes forestlisten-finish {
+  from { opacity: 0; transform: translate(-50%, 30px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+.forestlisten-finish span { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(239, 229, 208, 0.75); }
+.forestlisten-finish button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 16px;
+  background: rgba(211, 176, 94, 0.12);
+  border: 1px solid rgba(211, 176, 94, 0.6);
+  color: #efd391;
+  font: 600 10px Inter, sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  animation: forestlisten-glow 2.4s infinite;
+}
+
+/* ---------------------------------------------------------
+   COMPLETE
+--------------------------------------------------------- */
+.forestlisten-seen {
+  list-style: none;
+  margin: 0 auto 22px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 22px;
+  max-width: 460px;
+  text-align: left;
+}
+.forestlisten-seen li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--serif);
+  font-size: 17px;
+  color: rgba(239, 229, 208, 0.85);
+  animation: forestlisten-fade 0.9s calc(0.9s + var(--i) * 0.25s) both;
+}
+.forestlisten-seen svg { color: var(--gold); flex: none; }
+
+/* ---------------------------------------------------------
+   DIALOG
+--------------------------------------------------------- */
+.forestlisten-dialog-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  background: rgba(4, 6, 4, 0.55);
+  backdrop-filter: blur(7px);
+  perspective: 1200px;
+  animation: forestlisten-fade 0.4s both;
+}
+.forestlisten-dialog {
+  --tx: 0deg;
+  --ty: 0deg;
+  position: relative;
+  width: min(640px, 100%);
+  padding: 46px 52px 44px;
+  text-align: center;
+  background: linear-gradient(145deg, rgba(22, 26, 17, 0.98), rgba(9, 12, 8, 0.98));
+  border: 1px solid rgba(213, 177, 94, 0.6);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), 0 0 80px rgba(214, 174, 90, 0.08);
+  transform: rotateX(var(--tx)) rotateY(var(--ty));
+  transition: transform 0.25s ease-out;
+  animation: forestlisten-dialog 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+@keyframes forestlisten-dialog {
+  from { opacity: 0; translate: 0 40px; scale: 0.92; rotate: x 18deg; }
+}
+.forestlisten-dialog-num {
+  position: absolute;
+  left: 25px;
+  top: 22px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(210, 174, 90, 0.6);
+}
+.forestlisten-dialog-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--gold);
+  border: 1px solid rgba(213, 177, 94, 0.6);
+  background: rgba(213, 177, 94, 0.07);
+  animation: forestlisten-glow 3s infinite;
+}
+.forestlisten-dialog h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 3.8vw, 52px);
+  line-height: 1;
+  color: #f2ead8;
+}
+.forestlisten-dialog p {
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.52;
+  color: rgba(234, 226, 208, 0.8);
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE + MOTION
+--------------------------------------------------------- */
+@media (max-width: 1050px) {
+  .forestlisten-frame { width: 97vw; height: 94vh; }
+  .forestlisten-observe-title { left: 48px; }
+  .forestlisten-card { width: min(540px, 60vw); }
+}
+
+@media (max-width: 760px) {
+  .forestlisten-frame { width: 100vw; height: 100dvh; border: 0; }
+  .forestlisten-top { height: 64px; padding: 0 18px; }
+  .forestlisten-sound span, .forestlisten-chapter i { display: none; }
+  .forestlisten-panel { inset: 64px 0 0; padding: 22px; }
+  .forestlisten-card, .forestlisten-card--center { width: 100%; padding: 28px 24px 30px; }
+  .forestlisten-card p { font-size: 19px; }
+  .forestlisten-observe-title { left: 24px; top: 92px; width: calc(100% - 48px); }
+  .forestlisten-subtle { display: none; }
+  .forestlisten-progress { top: 100%; margin-top: 4px; }
+  .forestlisten-footer { left: 24px; bottom: 16px; }
+  .forestlisten-finish { width: calc(100% - 32px); justify-content: space-between; gap: 10px; }
+  .forestlisten-finish span { font-size: 9px; }
+  .forestlisten-dialog-bg { padding: 16px; }
+  .forestlisten-dialog { padding: 40px 24px 30px; }
+  .forestlisten-dialog h2 { font-size: 36px; }
+  .forestlisten-dialog p { font-size: 18px; }
+  .forestlisten-seen { grid-template-columns: 1fr; }
+  .forestlisten-stage { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forestlisten-game *, .forestlisten-game *::before, .forestlisten-game *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .forestlisten-stage { transform: none; }
+}
+
+/* ---------------------------------------------------------
+   FALLBACK FOREST + EXIT BUTTON
+--------------------------------------------------------- */
+.forestlisten-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.forestlisten-fallback svg { width: 100%; height: 100%; display: block; }
+
+.forestlisten-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.forestlisten-close {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: rgba(239, 231, 213, 0.85);
+  background: rgba(12, 15, 10, 0.6);
+  border: 1px solid rgba(211, 176, 94, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s;
+}
+.forestlisten-close:hover {
+  color: #11130e;
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: rotate(90deg);
+}

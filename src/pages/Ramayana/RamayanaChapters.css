@@ -1,0 +1,867 @@
+/* =========================================================
+   ANCESTRA
+   RAMAYANA CHAPTERS
+   CINEMATIC PARCHMENT EDITION
+========================================================= */
+
+.ramayana-chapters {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 8%,
+      rgba(188, 143, 72, 0.18),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 55%,
+      rgba(145, 102, 53, 0.08),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(121, 82, 39, 0.07),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      #eee2c9 0%,
+      #e7d7b9 42%,
+      #dcc8a4 100%
+    );
+
+  color: #3d2b1d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  padding-bottom: 90px;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   PAPER GRAIN
+========================================================= */
+
+.ramayana-chapters::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.16;
+
+  background-image:
+    radial-gradient(
+      rgba(80, 53, 28, 0.16) 0.6px,
+      transparent 0.6px
+    );
+
+  background-size: 5px 5px;
+
+  mix-blend-mode: multiply;
+
+  z-index: -3;
+}
+
+
+/* =========================================================
+   ATMOSPHERIC GLOW
+========================================================= */
+
+.ramayana-chapters__glow {
+  position: absolute;
+
+  left: 50%;
+  top: 10%;
+
+  width: 700px;
+  height: 700px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(193, 143, 63, 0.2),
+      rgba(193, 143, 63, 0.07) 38%,
+      transparent 70%
+    );
+
+  filter: blur(20px);
+
+  pointer-events: none;
+
+  z-index: -2;
+}
+
+
+/* =========================================================
+   SACRED GEOMETRY
+========================================================= */
+
+.ramayana-chapters__geometry {
+  position: absolute;
+
+  left: 50%;
+  top: 5%;
+
+  width: min(1000px, 90vw);
+  aspect-ratio: 1;
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+
+  opacity: 0.42;
+
+  z-index: -1;
+}
+
+.ramayana-chapters__geometry span {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  border: 1px solid rgba(118, 80, 35, 0.15);
+
+  transform: translate(-50%, -50%);
+}
+
+.ramayana-chapters__geometry span:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.ramayana-chapters__geometry span:nth-child(2) {
+  width: 72%;
+  height: 72%;
+  border-radius: 50%;
+}
+
+.ramayana-chapters__geometry span:nth-child(3) {
+  width: 42%;
+  height: 42%;
+  border-radius: 50%;
+}
+
+.ramayana-chapters__geometry span:nth-child(4) {
+  width: 58%;
+  height: 58%;
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+
+  border-radius: 2px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ramayana-chapters__header {
+  position: relative;
+
+  width: 100%;
+  min-height: 82px;
+
+  padding: 0 5vw;
+
+  box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  border-bottom:
+    1px solid rgba(111, 76, 37, 0.2);
+
+  background:
+    rgba(239, 228, 204, 0.42);
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.ramayana-chapters__back {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  width: fit-content;
+
+  color: #6f4c2a;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  letter-spacing: 0.2em;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.ramayana-chapters__back:hover {
+  color: #2f2117;
+
+  transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.ramayana-chapters__brand {
+  color: #6d4923;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.45em;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   HEADER LABEL
+========================================================= */
+
+.ramayana-chapters__label {
+  justify-self: end;
+
+  color: #927148;
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.ramayana-chapters__intro {
+  position: relative;
+
+  width: min(900px, 90vw);
+
+  margin:
+    105px auto 60px;
+
+  text-align: center;
+}
+
+.ramayana-chapters__intro > span {
+  display: block;
+
+  color: #927044;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.48em;
+}
+
+.ramayana-chapters__intro h1 {
+  margin:
+    18px 0 25px;
+
+  color: #382619;
+
+  font-size:
+    clamp(
+      52px,
+      8vw,
+      108px
+    );
+
+  font-weight: 500;
+
+  letter-spacing: 0.08em;
+
+  line-height: 0.95;
+}
+
+.ramayana-chapters__intro p {
+  margin-top: 25px;
+
+  color: #755a38;
+
+  font-size: 14px;
+
+  letter-spacing: 0.08em;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   ORNAMENT
+========================================================= */
+
+.ramayana-chapters__ornament {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 16px;
+
+  width: 360px;
+
+  max-width: 72vw;
+
+  margin: 0 auto;
+}
+
+.ramayana-chapters__ornament i {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(137, 96, 43, 0.65)
+    );
+}
+
+.ramayana-chapters__ornament i:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(137, 96, 43, 0.65),
+      transparent
+    );
+}
+
+.ramayana-chapters__ornament span {
+  color: #9a7037;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   KANDA INTRO
+========================================================= */
+
+.ramayana-chapters__kanda-intro {
+  width: min(1050px, 90vw);
+
+  margin:
+    0 auto 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  color: #94744b;
+
+  font-size: 8px;
+
+  letter-spacing: 0.24em;
+
+  text-align: center;
+}
+
+.ramayana-chapters__kanda-line {
+  flex: 1;
+
+  max-width: 180px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(126, 87, 39, 0.35)
+    );
+}
+
+.ramayana-chapters__kanda-line:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(126, 87, 39, 0.35),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   CHAPTER LIST
+========================================================= */
+
+.ramayana-chapters__list {
+  position: relative;
+
+  width: min(1050px, 90vw);
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+
+/* =========================================================
+   CHAPTER CARD
+========================================================= */
+
+.ramayana-chapter-card {
+  position: relative;
+
+  min-height: 154px;
+
+  display: grid;
+
+  grid-template-columns:
+    90px
+    1fr
+    58px;
+
+  align-items: center;
+
+  padding:
+    25px 28px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid rgba(111, 77, 38, 0.22);
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(249, 241, 222, 0.82),
+      rgba(225, 208, 175, 0.52)
+    );
+
+  box-shadow:
+    0 15px 40px rgba(79, 52, 26, 0.08);
+
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.4s ease;
+}
+
+
+/* subtle inner frame */
+
+.ramayana-chapter-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 6px;
+
+  border:
+    1px solid rgba(132, 92, 40, 0.08);
+
+  pointer-events: none;
+}
+
+.ramayana-chapter-card:hover {
+  transform: translateX(7px);
+
+  border-color:
+    rgba(125, 86, 39, 0.45);
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(255, 248, 230, 0.95),
+      rgba(231, 214, 180, 0.72)
+    );
+
+  box-shadow:
+    0 20px 45px rgba(79, 52, 26, 0.13);
+}
+
+
+/* =========================================================
+   CHAPTER NUMBER
+========================================================= */
+
+.ramayana-chapter-card__number {
+  color: #9a7036;
+
+  font-size: 27px;
+
+  letter-spacing: 0.08em;
+
+  text-align: center;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.ramayana-chapter-card__content {
+  padding-left: 28px;
+
+  border-left:
+    1px solid rgba(120, 83, 39, 0.24);
+}
+
+.ramayana-chapter-card__content > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #967244;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.35em;
+}
+
+.ramayana-chapter-card__content h2 {
+  margin: 0;
+
+  color: #3d2a1b;
+
+  font-size:
+    clamp(
+      18px,
+      2vw,
+      27px
+    );
+
+  font-weight: 500;
+
+  letter-spacing: 0.04em;
+
+  line-height: 1.2;
+}
+
+.ramayana-chapter-card__content p {
+  max-width: 720px;
+
+  margin:
+    10px 0 0;
+
+  color: #765d3b;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
+
+.ramayana-chapter-card__button {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+
+  place-items: center;
+
+  justify-self: end;
+
+  border:
+    1px solid rgba(118, 81, 37, 0.32);
+
+  background:
+    rgba(157, 111, 52, 0.07);
+
+  color: #79572d;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.ramayana-chapter-card__button:hover {
+  transform: translateX(4px);
+
+  background:
+    rgba(157, 111, 52, 0.14);
+
+  border-color:
+    rgba(118, 81, 37, 0.52);
+
+  color: #4d3219;
+}
+
+.ramayana-chapter-card:hover
+.ramayana-chapter-card__button {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.ramayana-chapters__footer {
+  width: min(1050px, 90vw);
+
+  margin:
+    85px auto 0;
+
+  padding-top: 24px;
+
+  border-top:
+    1px solid rgba(111, 77, 38, 0.2);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #92754e;
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ramayana-chapters__header {
+    padding: 0 4vw;
+  }
+
+  .ramayana-chapter-card {
+    grid-template-columns:
+      70px
+      1fr
+      52px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .ramayana-chapters {
+    padding-bottom: 60px;
+  }
+
+  .ramayana-chapters__header {
+    min-height: 72px;
+
+    grid-template-columns:
+      1fr
+      auto;
+
+    padding: 0 20px;
+  }
+
+  .ramayana-chapters__label {
+    display: none;
+  }
+
+  .ramayana-chapters__brand {
+    justify-self: end;
+
+    font-size: 10px;
+
+    letter-spacing: 0.32em;
+  }
+
+  .ramayana-chapters__intro {
+    margin:
+      75px auto 50px;
+  }
+
+  .ramayana-chapters__intro > span {
+    font-size: 8px;
+
+    letter-spacing: 0.32em;
+  }
+
+  .ramayana-chapters__intro h1 {
+    margin:
+      16px 0 22px;
+
+    font-size:
+      clamp(
+        43px,
+        14vw,
+        68px
+      );
+
+    letter-spacing: 0.04em;
+  }
+
+  .ramayana-chapters__intro p {
+    font-size: 12px;
+
+    padding: 0 15px;
+  }
+
+  .ramayana-chapters__kanda-intro {
+    width: 88vw;
+
+    font-size: 6px;
+
+    line-height: 1.8;
+
+    gap: 9px;
+  }
+
+  .ramayana-chapters__list {
+    width: 92vw;
+
+    gap: 12px;
+  }
+
+  .ramayana-chapter-card {
+    min-height: 0;
+
+    grid-template-columns:
+      42px
+      1fr
+      40px;
+
+    padding:
+      20px 13px;
+  }
+
+  .ramayana-chapter-card__number {
+    font-size: 20px;
+  }
+
+  .ramayana-chapter-card__content {
+    padding-left: 14px;
+  }
+
+  .ramayana-chapter-card__content > span {
+    font-size: 7px;
+
+    letter-spacing: 0.22em;
+  }
+
+  .ramayana-chapter-card__content h2 {
+    font-size: 17px;
+
+    letter-spacing: 0.02em;
+  }
+
+  .ramayana-chapter-card__content p {
+    font-size: 11px;
+
+    line-height: 1.65;
+  }
+
+  .ramayana-chapter-card__button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ramayana-chapters__footer {
+    width: 88vw;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: center;
+
+    text-align: center;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .ramayana-chapter-card {
+    grid-template-columns:
+      35px
+      1fr
+      35px;
+
+    padding:
+      17px 9px;
+  }
+
+  .ramayana-chapter-card__content {
+    padding-left: 11px;
+  }
+
+  .ramayana-chapter-card__content h2 {
+    font-size: 15px;
+  }
+
+  .ramayana-chapter-card__content p {
+    font-size: 10px;
+  }
+
+  .ramayana-chapter-card__number {
+    font-size: 17px;
+  }
+
+}

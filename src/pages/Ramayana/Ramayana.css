@@ -1,0 +1,2311 @@
+/* =========================================================
+   ANCESTRA — RAMAYANA
+   CINEMATIC DIVINE EDITION
+   LUMINOUS RAMAYANA THEME
+   ANTIQUE PARCHMENT + DARK BROWN SACRED GEOMETRY
+========================================================= */
+
+
+/* =========================================================
+   ROOT PAGE
+========================================================= */
+
+.ramayana {
+  position: relative;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(190, 145, 72, 0.10),
+      transparent 38%
+    ),
+    #f3ead8;
+
+  color: #3a2a1c;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   GLOBAL PARCHMENT FRAME
+========================================================= */
+
+.ramayana::before {
+  content: "";
+
+  position: fixed;
+
+  inset: 18px;
+
+  border:
+    1px solid
+    rgba(91, 58, 29, 0.16);
+
+  pointer-events: none;
+
+  z-index: 50;
+}
+
+.ramayana::after {
+  content: "";
+
+  position: fixed;
+
+  inset: 30px;
+
+  border:
+    1px solid
+    rgba(91, 58, 29, 0.08);
+
+  pointer-events: none;
+
+  z-index: 50;
+}
+
+
+/* =========================================================
+   HERO BACKGROUND
+========================================================= */
+
+.ramayana__background {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(47, 31, 18, 0.58) 0%,
+      rgba(47, 31, 18, 0.30) 45%,
+      rgba(47, 31, 18, 0.08) 100%
+    ),
+    url("/images/epics/ramayana2.jpg");
+
+  background-size: cover;
+
+  background-position: center center;
+
+  background-repeat: no-repeat;
+
+  transform: scale(1.02);
+
+  animation:
+    ramayanaZoom
+    20s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+@keyframes ramayanaZoom {
+
+  from {
+    transform: scale(1.02);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.ramayana__hero {
+  position: relative;
+
+  z-index: 1;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 100px 8vw;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HERO SACRED FRAME
+========================================================= */
+
+.ramayana__hero::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 28px;
+
+  border:
+    1px solid
+    rgba(255, 232, 185, 0.20);
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+
+.ramayana__hero::after {
+  content: "✦";
+
+  position: absolute;
+
+  right: 8%;
+
+  top: 18%;
+
+  color:
+    rgba(255, 224, 158, 0.42);
+
+  font-size: 55px;
+
+  line-height: 1;
+
+  pointer-events: none;
+
+  animation:
+    ramayanaHeroStar
+    6s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes ramayanaHeroStar {
+
+  0%,
+  100% {
+    transform:
+      scale(1)
+      rotate(0deg);
+
+    opacity: 0.35;
+  }
+
+  50% {
+    transform:
+      scale(1.12)
+      rotate(8deg);
+
+    opacity: 0.65;
+  }
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.ramayana__nav {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 90px;
+
+  padding: 0 50px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  z-index: 20;
+}
+
+
+.ramayana__back {
+  color:
+    rgba(255, 248, 235, 0.78);
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  letter-spacing: 0.25em;
+
+  transition:
+    color 0.35s ease,
+    transform 0.35s ease;
+}
+
+
+.ramayana__back:hover {
+  color: #f0c36b;
+
+  transform:
+    translateX(-4px);
+}
+
+
+.ramayana__brand {
+  position: absolute;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  color: #f4d38b;
+
+  font-size: 13px;
+
+  letter-spacing: 0.35em;
+}
+
+
+.ramayana__label {
+  color:
+    rgba(255, 235, 195, 0.72);
+
+  font-size: 9px;
+
+  letter-spacing: 0.25em;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.ramayana__content {
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 850px;
+
+  color: #fff8eb;
+}
+
+
+.ramayana__eyebrow {
+  color: #f2c66d;
+
+  font-size: 10px;
+
+  letter-spacing: 0.4em;
+
+  margin-bottom: 22px;
+}
+
+
+.ramayana__title {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight: 400;
+
+  font-size:
+    clamp(
+      60px,
+      9vw,
+      145px
+    );
+
+  line-height: 0.9;
+
+  letter-spacing: 0.025em;
+
+  color: #fff9ed;
+
+  text-shadow:
+    0 5px 30px rgba(45, 25, 10, 0.35),
+    0 0 80px rgba(255, 210, 120, 0.12);
+}
+
+
+.ramayana__divider {
+  width: 250px;
+
+  height: 1px;
+
+  margin: 35px 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f1c76c,
+      rgba(241, 199, 108, 0)
+    );
+
+  transform-origin: left center;
+}
+
+
+.ramayana__tagline {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      20px,
+      2.2vw,
+      30px
+    );
+
+  font-style: italic;
+
+  color: #fff3dc;
+}
+
+
+.ramayana__description {
+  max-width: 550px;
+
+  margin-top: 22px;
+
+  color:
+    rgba(
+      255,
+      246,
+      229,
+      0.78
+    );
+
+  font-size: 13px;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.03em;
+}
+
+
+/* =========================================================
+   HERO BUTTON
+========================================================= */
+
+.ramayana__button {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 40px;
+
+  padding: 15px 24px;
+
+  border:
+    1px solid
+    rgba(
+      247,
+      205,
+      116,
+      0.65
+    );
+
+  color: #fff7e9;
+
+  text-decoration: none;
+
+  font-size: 9px;
+
+  letter-spacing: 0.25em;
+
+  overflow: hidden;
+
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+.ramayana__button::before {
+  content: "";
+
+  position: absolute;
+
+  left: -100%;
+
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 220, 145, 0.16),
+      transparent
+    );
+
+  transition:
+    left 0.7s ease;
+}
+
+
+.ramayana__button:hover::before {
+  left: 100%;
+}
+
+
+.ramayana__button:hover {
+  background:
+    rgba(
+      247,
+      205,
+      116,
+      0.12
+    );
+
+  border-color:
+    #f5cf7d;
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 10px 35px
+      rgba(55, 31, 10, 0.18),
+    0 0 30px
+      rgba(247, 205, 116, 0.10);
+}
+
+
+/* =========================================================
+   DIVINE SUN GLOW
+========================================================= */
+
+.ramayana__sun-glow {
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  right: -120px;
+  bottom: -180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 214, 123, 0.28),
+      rgba(255, 190, 75, 0.08) 42%,
+      transparent 70%
+    );
+
+  filter: blur(30px);
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   LIGHT RAYS
+========================================================= */
+
+.ramayana__light-rays {
+  position: absolute;
+
+  width: 900px;
+  height: 900px;
+
+  right: -260px;
+  bottom: -360px;
+
+  border-radius: 50%;
+
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255, 215, 130, 0.045) 0deg,
+      transparent 8deg,
+      transparent 18deg
+    );
+
+  opacity: 0.55;
+
+  filter: blur(2px);
+
+  pointer-events: none;
+
+  z-index: 2;
+
+  animation:
+    ramayanaRays
+    24s
+    linear
+    infinite;
+}
+
+
+@keyframes ramayanaRays {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   HERO BOTTOM
+========================================================= */
+
+.ramayana__bottom {
+  position: absolute;
+
+  left: 50px;
+  right: 50px;
+
+  bottom: 30px;
+
+  z-index: 8;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color:
+    rgba(
+      255,
+      241,
+      210,
+      0.68
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.ramayana__scroll {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 28px;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    rgba(
+      248,
+      210,
+      125,
+      0.85
+    );
+
+  z-index: 8;
+}
+
+
+/* =========================================================
+   WORLD SECTION
+========================================================= */
+
+.ramayana__world {
+  position: relative;
+
+  z-index: 10;
+
+  min-height: 100vh;
+
+  padding:
+    150px
+    8vw
+    80px;
+
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(
+        214,
+        163,
+        73,
+        0.12
+      ),
+      transparent 38%
+    ),
+    #f4ecdc;
+
+  color: #3c2a1b;
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 1px 0 rgba(83, 52, 25, 0.14),
+    inset 0 0 120px rgba(91, 58, 29, 0.045);
+}
+
+
+/* =========================================================
+   WORLD SACRED BORDER
+========================================================= */
+
+.ramayana__world::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 25px;
+
+  z-index: 0;
+
+  border:
+    1px solid
+    rgba(
+      91,
+      58,
+      29,
+      0.16
+    );
+
+  background-image:
+    linear-gradient(
+      rgba(
+        91,
+        58,
+        29,
+        0.035
+      ) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(
+        91,
+        58,
+        29,
+        0.035
+      ) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    90px 90px;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   WORLD MANDALA
+========================================================= */
+
+.ramayana__world::after {
+  content: "";
+
+  position: absolute;
+
+  width: 900px;
+  height: 900px;
+
+  left: 50%;
+  top: 48%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle,
+      transparent 0 29%,
+      rgba(78, 48, 24, 0.055) 29.1% 29.3%,
+      transparent 29.4% 40%,
+      rgba(78, 48, 24, 0.045) 40.1% 40.3%,
+      transparent 40.4% 50%,
+      rgba(78, 48, 24, 0.035) 50.1% 50.3%,
+      transparent 50.4%
+    );
+
+  animation:
+    worldMandala
+    40s
+    linear
+    infinite;
+}
+
+
+@keyframes worldMandala {
+
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   WORLD INTRO
+========================================================= */
+
+.ramayana-world__intro {
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 850px;
+
+  margin:
+    0 auto
+    110px;
+
+  text-align: center;
+}
+
+
+.ramayana-world__eyebrow {
+  display: block;
+
+  margin-bottom: 25px;
+
+  color: #805322;
+
+  font-size: 9px;
+
+  letter-spacing: 0.45em;
+}
+
+
+.ramayana-world__intro h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      55px,
+      8vw,
+      115px
+    );
+
+  font-weight: 400;
+
+  line-height: 0.88;
+
+  letter-spacing: 0.02em;
+
+  color: #382719;
+}
+
+
+.ramayana-world__intro h2 span {
+  color: #9a6824;
+
+  font-style: italic;
+}
+
+
+.ramayana-world__line {
+  width: 180px;
+
+  height: 1px;
+
+  margin: 40px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #8b5a27,
+      transparent
+    );
+}
+
+
+.ramayana-world__intro p {
+  margin: 0;
+
+  color:
+    rgba(
+      70,
+      51,
+      34,
+      0.62
+    );
+
+  font-size: 13px;
+
+  line-height: 2;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   RAMAYANA PORTALS
+========================================================= */
+
+.ramayana-portal {
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 1250px;
+
+  min-height: 430px;
+
+  margin:
+    0 auto 25px;
+
+  padding:
+    70px 80px;
+
+  border:
+    1px solid
+    rgba(
+      91,
+      58,
+      29,
+      0.34
+    );
+
+  background:
+    radial-gradient(
+      circle at 78% 50%,
+      rgba(
+        155,
+        106,
+        38,
+        0.13
+      ),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 82% 48%,
+      transparent 0 19%,
+      rgba(83, 52, 25, 0.045) 19.1% 19.3%,
+      transparent 19.4% 28%,
+      rgba(83, 52, 25, 0.035) 28.1% 28.3%,
+      transparent 28.4%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(
+        201,
+        164,
+        92,
+        0.055
+      ),
+      rgba(
+        255,
+        255,
+        255,
+        0.25
+      )
+    );
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  box-shadow:
+    inset 0 0 80px
+    rgba(91, 58, 29, 0.025);
+
+  transition:
+    border-color 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+
+.ramayana-portal:hover {
+  border-color:
+    rgba(
+      91,
+      58,
+      29,
+      0.62
+    );
+
+  transform:
+    translateY(-5px);
+
+  box-shadow:
+    0 30px 80px
+      rgba(
+        74,
+        49,
+        25,
+        0.12
+      ),
+    inset 0 0 100px
+      rgba(
+        91,
+        58,
+        29,
+        0.055
+      );
+}
+
+
+/* =========================================================
+   PORTAL OUTER FRAME
+========================================================= */
+
+.ramayana-portal::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 13px;
+
+  border:
+    1px solid
+    rgba(
+      91,
+      58,
+      29,
+      0.24
+    );
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   PORTAL INNER FRAME + CORNER GEOMETRY
+========================================================= */
+
+.ramayana-portal::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 28px;
+
+  border:
+    1px solid
+    rgba(
+      91,
+      58,
+      29,
+      0.15
+    );
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(91, 58, 29, 0.025);
+}
+
+
+/* =========================================================
+   PORTAL CONTENT
+========================================================= */
+
+.ramayana-portal__content {
+  position: relative;
+
+  z-index: 6;
+
+  max-width: 650px;
+}
+
+
+/* =========================================================
+   PORTAL NUMBER
+========================================================= */
+
+.ramayana-portal__number {
+  position: absolute;
+
+  top: 35px;
+  right: 40px;
+
+  color:
+    rgba(
+      91,
+      58,
+      29,
+      0.55
+    );
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 12px;
+
+  letter-spacing: 0.2em;
+
+  z-index: 5;
+}
+
+
+/* =========================================================
+   PORTAL EYEBROW
+========================================================= */
+
+.ramayana-portal__eyebrow {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: #805322;
+
+  font-size: 9px;
+
+  letter-spacing: 0.4em;
+}
+
+
+/* =========================================================
+   PORTAL TITLE
+========================================================= */
+
+.ramayana-portal h3 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      48px,
+      6vw,
+      85px
+    );
+
+  font-weight: 400;
+
+  line-height: 0.9;
+
+  color: #352418;
+
+  position: relative;
+}
+
+
+.ramayana-portal h3 span {
+  color: #9a6824;
+
+  font-style: italic;
+}
+
+
+/* =========================================================
+   PORTAL DESCRIPTION
+========================================================= */
+
+.ramayana-portal p {
+  max-width: 540px;
+
+  margin:
+    30px 0;
+
+  color:
+    rgba(
+      70,
+      51,
+      34,
+      0.65
+    );
+
+  font-size: 13px;
+
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   PORTAL BUTTON
+========================================================= */
+
+.ramayana-portal__button {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding:
+    15px 24px;
+
+  border:
+    1px solid
+    rgba(
+      91,
+      58,
+      29,
+      0.48
+    );
+
+  color: #53371d;
+
+  text-decoration: none;
+
+  font-size: 9px;
+
+  letter-spacing: 0.25em;
+
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+.ramayana-portal__button:hover {
+  background:
+    rgba(
+      194,
+      148,
+      66,
+      0.10
+    );
+
+  border-color:
+    #805322;
+
+  transform:
+    translateX(5px);
+
+  box-shadow:
+    0 10px 30px
+      rgba(
+        74,
+        49,
+        25,
+        0.10
+      );
+}
+
+
+/* =========================================================
+   PORTAL ORNAMENT
+========================================================= */
+
+.ramayana-portal__ornament {
+  position: absolute;
+
+  right: 17%;
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  color:
+    rgba(
+      91,
+      58,
+      29,
+      0.25
+    );
+
+  font-size: 110px;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  animation:
+    ramayanaOrnamentPulse
+    5s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes ramayanaOrnamentPulse {
+
+  0%,
+  100% {
+    opacity: 0.55;
+
+    transform:
+      translateY(-50%)
+      scale(1)
+      rotate(0deg);
+  }
+
+  50% {
+    opacity: 0.85;
+
+    transform:
+      translateY(-50%)
+      scale(1.08)
+      rotate(8deg);
+  }
+}
+
+
+/* =========================================================
+   STORY PORTAL
+========================================================= */
+
+.ramayana-portal--story {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 25px;
+
+  animation:
+    ramayanaPortalBreath
+    8s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes ramayanaPortalBreath {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 0
+      rgba(
+        91,
+        58,
+        29,
+        0
+      );
+  }
+
+  50% {
+    box-shadow:
+      0 0 45px
+      rgba(
+        91,
+        58,
+        29,
+        0.08
+      ),
+      inset 0 0 80px
+      rgba(
+        91,
+        58,
+        29,
+        0.025
+      );
+  }
+}
+
+
+/* =========================================================
+   STORY — LARGE SACRED CIRCLE
+========================================================= */
+
+.ramayana-portal--story
+.ramayana-portal__content::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  left: 455px;
+  top: -255px;
+
+  border:
+    2px solid
+    rgba(
+      76,
+      48,
+      24,
+      0.17
+    );
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  box-shadow:
+    0 0 0 35px
+    rgba(76, 48, 24, 0.025),
+    0 0 0 70px
+    rgba(76, 48, 24, 0.018);
+
+  animation:
+    ramayanaCircleDrift
+    18s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+@keyframes ramayanaCircleDrift {
+
+  from {
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      )
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate3d(
+        -18px,
+        12px,
+        0
+      )
+      rotate(8deg);
+  }
+}
+
+
+/* =========================================================
+   STORY — SECOND SACRED CIRCLE
+========================================================= */
+
+.ramayana-portal--story
+.ramayana-portal__content::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 430px;
+  height: 430px;
+
+  left: 565px;
+  top: -145px;
+
+  border:
+    2px solid
+    rgba(
+      76,
+      48,
+      24,
+      0.15
+    );
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  box-shadow:
+    0 0 0 25px
+    rgba(76, 48, 24, 0.025);
+
+  animation:
+    ramayanaCircleSmall
+    13s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+@keyframes ramayanaCircleSmall {
+
+  from {
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      )
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate3d(
+        15px,
+        -10px,
+        0
+      )
+      rotate(-10deg);
+  }
+}
+
+
+/* =========================================================
+   STORY — SACRED DIAMOND
+========================================================= */
+
+.ramayana-portal--story
+.ramayana-portal__eyebrow::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  left: 575px;
+  top: 70px;
+
+  border:
+    2px solid
+    rgba(
+      76,
+      48,
+      24,
+      0.18
+    );
+
+  transform:
+    rotate(45deg);
+
+  pointer-events: none;
+
+  animation:
+    ramayanaDiamond
+    24s
+    linear
+    infinite;
+}
+
+
+@keyframes ramayanaDiamond {
+
+  from {
+    transform:
+      rotate(45deg);
+  }
+
+  to {
+    transform:
+      rotate(405deg);
+  }
+}
+
+
+/* =========================================================
+   STORY — SECOND DIAMOND
+========================================================= */
+
+.ramayana-portal--story
+.ramayana-portal__eyebrow::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 125px;
+  height: 125px;
+
+  left: 623px;
+  top: 118px;
+
+  border:
+    1px solid
+    rgba(
+      76,
+      48,
+      24,
+      0.13
+    );
+
+  transform:
+    rotate(45deg);
+
+  pointer-events: none;
+
+  animation:
+    ramayanaDiamondInner
+    18s
+    linear
+    infinite reverse;
+}
+
+
+@keyframes ramayanaDiamondInner {
+
+  from {
+    transform:
+      rotate(45deg);
+  }
+
+  to {
+    transform:
+      rotate(405deg);
+  }
+}
+
+
+/* =========================================================
+   STORY — SACRED STAR
+========================================================= */
+
+.ramayana-portal--story
+.ramayana-portal__number::after {
+
+  content: "✦";
+
+  position: absolute;
+
+  left: -350px;
+  top: 90px;
+
+  color:
+    rgba(
+      76,
+      48,
+      24,
+      0.30
+    );
+
+  font-size: 72px;
+
+  line-height: 1;
+
+  pointer-events: none;
+
+  animation:
+    ramayanaStar
+    5s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes ramayanaStar {
+
+  0%,
+  100% {
+    opacity: 0.35;
+
+    transform:
+      scale(1)
+      rotate(0deg);
+  }
+
+  50% {
+    opacity: 0.75;
+
+    transform:
+      scale(1.10)
+      rotate(8deg);
+  }
+}
+
+
+/* =========================================================
+   STORY — ORBITING DOTS
+========================================================= */
+
+.ramayana-portal--story
+.ramayana-portal__number::before {
+
+  content: "•     •";
+
+  position: absolute;
+
+  left: -340px;
+  top: 180px;
+
+  color:
+    rgba(
+      76,
+      48,
+      24,
+      0.30
+    );
+
+  font-size: 12px;
+
+  letter-spacing: 25px;
+
+  pointer-events: none;
+
+  animation:
+    ramayanaDots
+    7s
+    ease-in-out
+    infinite alternate;
+}
+
+
+@keyframes ramayanaDots {
+
+  from {
+    transform:
+      translateX(0)
+      rotate(0deg);
+
+    opacity: 0.3;
+  }
+
+  to {
+    transform:
+      translateX(12px)
+      rotate(4deg);
+
+    opacity: 0.65;
+  }
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
+
+.ramayana__philosophy {
+
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 900px;
+
+  margin:
+    120px auto 0;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 20px;
+
+  color:
+    rgba(
+      73,
+      53,
+      35,
+      0.48
+    );
+
+  font-size: 9px;
+
+  letter-spacing: 0.35em;
+}
+
+
+.ramayana__philosophy div {
+
+  width: 60px;
+
+  height: 1px;
+
+  background:
+    rgba(
+      91,
+      58,
+      29,
+      0.55
+    );
+}
+
+
+.ramayana__philosophy strong {
+
+  color: #805322;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.ramayana__footer {
+
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 1250px;
+
+  margin:
+    100px auto 0;
+
+  padding-top: 25px;
+
+  border-top:
+    1px solid
+    rgba(
+      91,
+      58,
+      29,
+      0.22
+    );
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color:
+    rgba(
+      73,
+      53,
+      35,
+      0.42
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ramayana::before {
+    inset: 10px;
+  }
+
+  .ramayana::after {
+    inset: 20px;
+  }
+
+
+  .ramayana-portal {
+    padding:
+      60px 45px;
+  }
+
+
+  .ramayana-portal__ornament {
+    right: 5%;
+
+    opacity: 0.35;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__content::before {
+
+    left: 360px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__content::after {
+
+    left: 430px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__eyebrow::before {
+
+    left: 430px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__eyebrow::after {
+
+    left: 478px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__number::after {
+
+    left: -270px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__number::before {
+
+    left: -260px;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .ramayana::before {
+    inset: 8px;
+  }
+
+  .ramayana::after {
+    inset: 15px;
+  }
+
+
+  .ramayana__hero {
+
+    padding:
+      100px 25px 80px;
+  }
+
+
+  .ramayana__hero::before {
+    inset: 18px;
+  }
+
+
+  .ramayana__nav {
+
+    padding:
+      0 20px;
+  }
+
+
+  .ramayana__brand {
+    display: none;
+  }
+
+
+  .ramayana__title {
+    font-size: 52px;
+  }
+
+
+  .ramayana__bottom {
+
+    left: 20px;
+    right: 20px;
+
+    font-size: 7px;
+  }
+
+
+  .ramayana__world {
+
+    padding:
+      110px 20px 60px;
+  }
+
+
+  .ramayana__world::before {
+    inset: 12px;
+  }
+
+
+  .ramayana__world::after {
+
+    width: 600px;
+    height: 600px;
+  }
+
+
+  .ramayana-world__intro {
+
+    margin-bottom: 70px;
+  }
+
+
+  .ramayana-world__intro h2 {
+
+    font-size: 52px;
+  }
+
+
+  /* -------------------------------------------------------
+     PORTALS
+  ------------------------------------------------------- */
+
+  .ramayana-portal {
+
+    min-height: 470px;
+
+    padding:
+      50px 30px;
+  }
+
+
+  .ramayana-portal h3 {
+
+    font-size: 48px;
+  }
+
+
+  .ramayana-portal__ornament {
+
+    right: -20px;
+
+    top: 35%;
+  }
+
+
+  .ramayana-portal__number {
+
+    top: 25px;
+
+    right: 25px;
+  }
+
+
+  /* -------------------------------------------------------
+     STORY
+  ------------------------------------------------------- */
+
+  .ramayana-portal--story {
+
+    min-height: 470px;
+
+    padding:
+      50px 30px;
+  }
+
+
+  .ramayana-portal--story h3 {
+
+    font-size: 46px;
+  }
+
+
+  .ramayana-portal--story p {
+
+    font-size: 12px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__content::before {
+
+    width: 430px;
+    height: 430px;
+
+    left: 80px;
+    top: 80px;
+
+    border-width: 1px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__content::after {
+
+    width: 290px;
+    height: 290px;
+
+    left: 150px;
+    top: 150px;
+
+    border-width: 1px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__eyebrow::before {
+
+    width: 160px;
+    height: 160px;
+
+    left: 180px;
+    top: 170px;
+
+    border-width: 1px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__eyebrow::after {
+
+    width: 90px;
+    height: 90px;
+
+    left: 215px;
+    top: 205px;
+
+    border-width: 1px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__number::after {
+
+    left: -175px;
+
+    top: 125px;
+
+    font-size: 50px;
+  }
+
+
+  .ramayana-portal--story
+  .ramayana-portal__number::before {
+
+    display: none;
+  }
+
+
+  /* -------------------------------------------------------
+     FOOTER
+  ------------------------------------------------------- */
+
+  .ramayana__footer {
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    font-size: 7px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ramayana__background,
+  .ramayana__light-rays,
+  .ramayana__hero::after,
+  .ramayana__world::after,
+  .ramayana-portal,
+  .ramayana-portal__ornament,
+  .ramayana-portal--story
+  .ramayana-portal__content::before,
+  .ramayana-portal--story
+  .ramayana-portal__content::after,
+  .ramayana-portal--story
+  .ramayana-portal__eyebrow::before,
+  .ramayana-portal--story
+  .ramayana-portal__eyebrow::after,
+  .ramayana-portal--story
+  .ramayana-portal__number::before,
+  .ramayana-portal--story
+  .ramayana-portal__number::after {
+
+    animation: none !important;
+  }
+
+
+  .ramayana-portal,
+  .ramayana-portal h3,
+  .ramayana-portal__button,
+  .ramayana__button {
+
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   HERO SCROLL BUTTON
+========================================================= */
+
+.ramayana__button--scroll {
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: 1px solid rgba(218, 177, 91, 0.7);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(35, 20, 8, 0.72),
+      rgba(18, 10, 5, 0.52)
+    );
+
+  color: #f1dfbd;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+
+  min-width: 250px;
+
+  min-height: 58px;
+
+  padding: 0 24px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.28em;
+
+  line-height: 1;
+
+  text-align: center;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+/* GOLDEN LIGHT SWEEP */
+
+.ramayana__button--scroll::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(230, 193, 111, 0.12),
+      transparent
+    );
+
+  transform: translateX(-100%);
+
+  transition:
+    transform 0.7s ease;
+
+  pointer-events: none;
+}
+
+
+/* HOVER */
+
+.ramayana__button--scroll:hover {
+  border-color: rgba(235, 200, 122, 0.95);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66, 38, 13, 0.82),
+      rgba(28, 15, 7, 0.72)
+    );
+
+  box-shadow:
+    0 0 18px rgba(212, 166, 76, 0.16),
+    inset 0 0 18px rgba(212, 166, 76, 0.05);
+
+  transform: translateY(-2px);
+}
+
+
+.ramayana__button--scroll:hover::before {
+  transform: translateX(100%);
+}
+
+
+/* ARROW */
+
+.ramayana__button--scroll svg {
+  transition:
+    transform 0.35s ease;
+}
+
+
+.ramayana__button--scroll:hover svg {
+  transform: translateY(4px);
+}
+
+
+/* ACTIVE */
+
+.ramayana__button--scroll:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .ramayana__button--scroll {
+    min-width: 220px;
+
+    min-height: 54px;
+
+    padding: 0 18px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.22em;
+
+    gap: 12px;
+  }
+
+}

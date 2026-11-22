@@ -485,99 +485,115 @@ const chapter04 = {
       emotion: "peaceful companionship",
     },
 
-    {
-      id: "scene31",
-      number: "31",
-      eyebrow: "THE ARRIVAL OF PARASHURAMA",
-      title: "The Road Falls Silent",
-      location: "ROAD TO AYODHYA",
-      image: "/images/chapters/scene431.jpg",
-      text: [
-        `The peaceful journey was suddenly interrupted by a powerful presence. The atmosphere changed before the figure himself appeared. The wind became restless, the movement of the travelling party slowed and the sages recognized that someone of immense spiritual and martial reputation was approaching.`,
-        `Parashurama stood before them, carrying the presence of a warrior ascetic whose anger had become legendary. Dasharatha immediately understood the seriousness of the encounter and approached with respect. The sages remained watchful.`,
-        `Parashurama's attention, however, was fixed upon Rama. His voice was firm as he spoke of the breaking of Shiva's bow. Rama remained composed. Sita watched from a distance, her expression becoming concerned, but she did not interfere.`,
-        `Rama's calmness did not disappear. He simply listened.`,
-      ],
-      emotion: "sudden tension",
-    },
+     {
+    id: "scene31",
+    number: "31",
+    eyebrow: "THE ARRIVAL OF PARASHURAMA",
+    title: "The Road Falls Silent",
+    location: "ROAD TO AYODHYA",
+    image: "/images/chapters/scene431.jpg",
+    text: [
+      `The peaceful journey was suddenly interrupted by a powerful presence. The atmosphere changed before the figure himself appeared. The wind became restless, the movement of the travelling party slowed and the sages recognized that someone of immense spiritual and martial reputation was approaching.`,
+      `Parashurama stood before them, carrying the presence of a warrior ascetic whose anger had become legendary. His powerful frame, ascetic appearance and the mighty axe he carried made his identity unmistakable. Dasharatha immediately understood the seriousness of the encounter and approached him with respect. The sages remained watchful.`,
+      `Parashurama's attention, however, was fixed upon Rama. His voice was firm as he spoke of the breaking of Shiva's bow in Mithila. He questioned how a young prince had managed to break an ancient weapon that had stood beyond the strength of generations.`,
+      `Rama remained composed. Sita watched from a distance, her expression becoming concerned, but she did not interfere. Lakshmana stood beside his brother, observing the warrior sage with growing unease.`,
+      `Rama's calmness did not disappear. He simply listened, allowing Parashurama to speak before responding.`
+    ],
+    emotion: "sudden tension"
+  },
 
-    {
-      id: "scene32",
-      number: "32",
-      eyebrow: "PARASHURAMA",
-      title: "The Warrior Sage",
-      location: "ROAD TO AYODHYA",
-      image: "/images/chapters/scene432.jpg",
-      text: [
-        `Parashurama was no ordinary ascetic. He belonged to the lineage of Bhrigu and was the son of the sage Jamadagni and Renuka. His life had been shaped by extraordinary events, severe austerities and a fierce commitment to justice as he understood it.`,
-        `He had become renowned as Parashurama, the warrior who carried the axe, and his reputation had spread throughout the kingdoms. Yet beneath the warrior's identity was an ascetic whose spiritual power had been cultivated through immense discipline.`,
-        `Now he stood before Rama because the ancient bow associated with Shiva had been broken in Mithila. To Parashurama, that event demanded recognition. To Rama, it was simply another moment that required patience and respect.`,
-        `The two stood facing one another while the travelling party waited in silence.`,
-      ],
-      emotion: "immense tension",
-    },
+  {
+    id: "scene32",
+    number: "32",
+    eyebrow: "PARASHURAMA",
+    title: "The Warrior Sage",
+    location: "ROAD TO AYODHYA",
+    image: "/images/chapters/scene432.jpg",
+    text: [
+      `Parashurama was no ordinary ascetic. He belonged to the lineage of Bhrigu and was the son of the sage Jamadagni and Renuka. His life had been shaped by extraordinary events, severe austerities and a fierce commitment to justice as he understood it.`,
+      `He had become renowned as Parashurama, the warrior who carried the axe, and his reputation had spread throughout the kingdoms. He was known not only for his extraordinary martial strength but also for the intensity of his anger whenever he believed that righteousness had been dishonoured.`,
+      `Yet beneath the warrior's identity was an ascetic whose spiritual power had been cultivated through immense discipline. His life had been devoted to austerity, discipline and the preservation of what he believed to be right.`,
+      `Now he stood before Rama because the ancient bow associated with Shiva had been broken in Mithila. To Parashurama, the event demanded an explanation. He could not easily accept that a young prince had accomplished something that had remained impossible for so many.`,
+      `The two stood facing one another while the travelling party waited in silence.`
+    ],
+    emotion: "immense tension"
+  },
 
-    {
-      id: "scene33",
-      number: "33",
-      eyebrow: "THE SECOND BOW",
-      title: "Rama Faces the Challenge",
-      location: "ROAD TO AYODHYA",
-      image: "/images/chapters/scene433.jpg",
-      text: [
-        `Parashurama presented another ancient bow and challenged Rama to demonstrate his strength. Dasharatha became deeply concerned. He had already witnessed the greatness of his son, but he did not wish for confrontation between two figures whose power was beyond ordinary measure.`,
-        `Rama remained respectful. "Revered Bhargava," he said, "I honour your austerity and your lineage. I have no desire to challenge you through pride." His words were calm, but there was an unmistakable strength beneath them.`,
-        `Parashurama continued to test him. Rama accepted the bow and handled it with the same quiet composure he had shown in Mithila. The atmosphere changed instantly. The sages understood that something profound was taking place.`,
-        `Rama's strength was no longer merely the strength of a prince. There was a deeper identity within him that Parashurama began to perceive.`,
-      ],
-      emotion: "divine confrontation",
-    },
+  {
+    id: "scene33",
+    number: "33",
+    eyebrow: "THE SECOND BOW",
+    title: "Rama Faces the Challenge",
+    location: "ROAD TO AYODHYA",
+    image: "/images/chapters/scene433.jpg",
+    text: [
+      `Parashurama's attention remained fixed upon Rama. He spoke of another ancient bow, the sacred bow of Vishnu, which he had brought with him. He declared that if Rama truly possessed the strength that had allowed him to break Shiva's bow, he should demonstrate it before him.`,
+      `Dasharatha became deeply concerned. He had already witnessed the greatness of his son, but he did not wish for a confrontation between two figures whose power was beyond ordinary measure. He approached Parashurama with folded hands, attempting to remind him that Rama was still a young prince who had acted only according to the challenge placed before him in Mithila.`,
+      `Rama remained respectful. "Revered Bhargava, I honour your austerity and your lineage. I have no desire to challenge you through pride. I have acted only according to the circumstances placed before me."`,
+      `Parashurama was not satisfied. He continued questioning Rama, his words becoming increasingly stern. He wanted the prince to accept the challenge and prove whether his strength was truly worthy of the ancient bow.`,
+      `Lakshmana watched the exchange with growing impatience. He could see that Rama had shown nothing but respect, yet Parashurama continued to question him as though his brother had committed some offence. He stepped forward, unable to remain silent any longer.`,
+      `The atmosphere grew heavier. The sages watched carefully, Dasharatha grew anxious, and Rama remained between the anger of the warrior sage and the growing frustration of his younger brother.`
+    ],
+    emotion: "divine confrontation"
+  },
 
-    {
-      id: "scene34",
-      number: "34",
-      eyebrow: "RECOGNITION",
-      title: "The Warrior's Pride Falls Silent",
-      location: "ROAD TO AYODHYA",
-      image: "/images/chapters/scene434.jpg",
-      text: [
-        `As Rama took hold of the sacred bow, Parashurama's expression changed. The certainty with which he had approached the encounter began to give way to recognition. The power before him was not the power of an ambitious warrior seeking fame. It was something far more difficult to comprehend.`,
-        `Parashurama's anger gradually disappeared. He understood that Rama stood before him with a calmness that did not come from ignorance of his own strength. It came from complete absence of pride.`,
-        `For a long moment, the two remained silent. Then Parashurama accepted what he had recognized. The challenge had ended without hatred, because Rama had never entered it seeking victory over another person.`,
-        `Parashurama blessed Rama and withdrew from the path of the royal procession.`,
-      ],
-      emotion: "recognition and surrender",
-    },
+  {
+    id: "scene34",
+    number: "34",
+    eyebrow: "RECOGNITION",
+    title: "The Warrior's Pride Falls Silent",
+    location: "ROAD TO AYODHYA",
+    image: "/images/chapters/scene434.jpg",
+    text: [
+      `Lakshmana stepped forward. "Revered sage, my brother has answered you with humility from the very beginning. He did not break Shiva's bow out of arrogance or disrespect. He simply fulfilled the challenge placed before him in Mithila. Why must he continue to defend himself for something he accomplished without pride?"`,
+      `Parashurama turned towards Lakshmana. His expression hardened. "Young prince, you speak boldly before one whose name has brought mighty kings to their knees. You know little of the power you are questioning."`,
+      `Lakshmana did not step back. "I do not question your greatness, revered one. But my brother has shown you respect from the moment you arrived. He has not insulted you, nor has he claimed superiority over anyone. Must every act of strength be treated as an offence?"`,
+      `The words angered Parashurama further. His grip tightened around his mighty axe. "Enough! Your tongue has carried you beyond the limits of respect. Do not test the patience of one who carries the axe of Bhargava!"`,
+      `Lakshmana remained beside Rama, his loyalty stronger than his fear. Dasharatha anxiously watched the exchange, while the sages understood that the confrontation was moving towards a dangerous moment.`,
+      `Overcome by anger, Parashurama raised his mighty axe and hurled it towards Lakshmana. Before it could reach the young prince, Rama moved swiftly between them and stopped the weapon. The sudden movement left the entire procession stunned.`,
+      `Rama held the axe without displaying anger. He turned towards Parashurama and spoke calmly. "Revered Bhargava, please forgive his words. Lakshmana speaks out of love for his brother. His devotion has made him speak strongly, but he has no intention of insulting you. I request you to let this matter rest."`,
+      `Rama then turned towards Lakshmana and gently asked him to step back. Lakshmana obeyed, though his expression remained troubled. He understood that Rama did not wish for the encounter to become a battle.`,
+      `Parashurama stood motionless. Rama had stopped his attack, yet there was no hatred in his eyes and no pride in his expression. The strength he had witnessed was extraordinary, but the restraint with which Rama had used it was even more remarkable.`,
+      `Rama now turned towards the sacred bow Parashurama had brought. Without displaying any desire to prove himself, he approached it with complete composure. The warrior sage watched him closely, sensing that the encounter was about to reveal something far greater than he had expected.`
+    ],
+    emotion: "anger, loyalty and restraint"
+  },
 
-    {
-      id: "scene35",
-      number: "35",
-      eyebrow: "THE ROAD OPENS AGAIN",
-      title: "Peace After the Storm",
-      location: "ROAD TO AYODHYA",
-      image: "/images/chapters/scene435.jpg",
-      text: [
-        `The tension that had held the travelling party finally dissolved. Dasharatha breathed more freely, the sages returned to their conversations and the horses began moving again. Rama remained quiet after the encounter, as though the extraordinary event had left no desire for self-congratulation within him.`,
-        `Sita watched him from her place in the procession. She had seen his strength before, but what moved her most was the manner in which he had carried it. He could stand before a formidable warrior without arrogance and could possess extraordinary power without needing anyone to praise him for it.`,
-        `When their eyes met again, Rama gave her the faintest reassuring smile. Sita returned it.`,
-        `The road toward Ayodhya stretched ahead beneath the afternoon sky. The city of Mithila had become a memory behind them, but the quiet bond formed there remained with them as they continued onward.`,
-      ],
-      emotion: "relief and warmth",
-    },
+  {
+    id: "scene35",
+    number: "35",
+    eyebrow: "THE ROAD OPENS AGAIN",
+    title: "Peace After the Storm",
+    location: "ROAD TO AYODHYA",
+    image: "/images/chapters/scene435.jpg",
+    text: [
+      `Rama approached the ancient bow of Vishnu and accepted it with reverence. He held the sacred weapon with effortless composure and prepared it as Parashurama had challenged him to do. The moment Rama took hold of the bow, an extraordinary realization began to dawn upon the warrior sage.`,
+      `Parashurama looked upon Rama and gradually understood the truth that had remained hidden beneath the prince's gentle appearance. The power before him was not merely the strength of a remarkable warrior. It was the divine presence he had once known through his own spiritual understanding.`,
+      `He recognized Rama as the incarnation of Lord Vishnu. The realization dissolved the anger with which he had arrived. The prince standing before him was not someone seeking to challenge his greatness. He was the very divine presence whose purpose Parashurama now understood.`,
+      `The warrior sage's expression softened. His pride and anger gave way to reverence. He bowed before Rama, accepting the truth he had finally recognized. The challenge that had begun with anger ended in humility and understanding.`,
+      `Parashurama blessed Rama and withdrew from the path of the royal procession. The ancient bow had revealed what words alone could not. Rama had demonstrated not only extraordinary strength, but also the calmness and compassion that had remained with him throughout the encounter.`,
+      `The tension that had held the travelling party finally dissolved. Dasharatha breathed more freely, the sages returned to their conversations and the horses began moving again.`,
+      `Sita watched Rama from her place in the procession. She had seen his strength before, but what moved her most was the manner in which he had carried it. He could stand before a formidable warrior without arrogance and could possess extraordinary power without needing anyone to praise him for it.`,
+      `When their eyes met again, Rama gave her the faintest reassuring smile. Sita returned it. The road toward Ayodhya stretched ahead beneath the afternoon sky.`
+    ],
+    emotion: "recognition and relief"
+  },
 
-    {
-      id: "scene36",
-      number: "36",
-      eyebrow: "MITHILA",
-      title: "What Began in Silence",
-      location: "ROAD TO AYODHYA",
-      image: "/images/chapters/scene436.jpg",
-      text: [
-        `The journey continued peacefully. Behind them remained the sacred halls of Mithila, the ancient garden where two strangers had first looked upon one another, the broken bow of Shiva and the wedding fire before which two lives had been joined.`,
-        `Rama travelled without pride, carrying the memory of Janaka's blessing and Sita's quiet smile. Sita travelled with the same calm dignity that had marked her life in Mithila, carrying within her the warmth of a home she loved and the beginning of a new chapter beside Rama.`,
-        `Neither of them needed to speak constantly. Their connection had begun not through grand declarations, but through small moments — a glance beneath flowering trees, a respectful greeting, a shared silence and finally a sacred vow before the fire.`,
-        `The road moved beneath their feet, the sky widened above them, and the newly joined families continued toward Ayodhya.`,
-      ],
+  {
+    id: "scene36",
+    number: "36",
+    eyebrow: "MITHILA",
+    title: "What Began in Silence",
+    location: "ROAD TO AYODHYA",
+    image: "/images/chapters/scene436.jpg",
+    text: [
+      `The journey continued peacefully. Behind them remained the sacred halls of Mithila, the ancient garden where two strangers had first looked upon one another, the broken bow of Shiva and the wedding fire before which two lives had been joined.`,
+      `The encounter with Parashurama had become another extraordinary moment in Rama's journey, yet he carried no pride from it. He travelled quietly, carrying the memory of Janaka's blessing and Sita's quiet smile.`,
+      `Sita travelled with the same calm dignity that had marked her life in Mithila, carrying within her the warmth of a home she loved and the beginning of a new chapter beside Rama.`,
+      `Neither of them needed to speak constantly. Their connection had begun not through grand declarations, but through small moments — a glance beneath flowering trees, a respectful greeting, a shared silence and finally a sacred vow before the fire.`,
+      `The families continued towards Ayodhya, carrying the joy of the wedding celebrations and the blessings of the sages. Ahead lay a new home, new responsibilities and a life that Rama and Sita would begin together.`,
+      `The road moved beneath their feet, the sky widened above them, and the newly joined families continued their journey towards Ayodhya.`
+    ],
       emotion: "serene completion",
     },
   ],

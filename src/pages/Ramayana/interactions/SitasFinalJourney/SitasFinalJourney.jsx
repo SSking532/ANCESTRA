@@ -20,6 +20,9 @@ import {
  * ANCESTRA · Chapter XXVI · Game 2 — Sita's Final Journey
  * A witnessed, non-interactive cinematic. The only controls are Continue, Skip and Replay.
  *
+ * NEW: everything (all scene images + the music file) is loaded and decoded FIRST.
+ * The Begin button only appears once the loading bar reaches 100%.
+ *
  * Props
  *  onComplete  called by the ending screen's CONTINUE (return to the chapter so Scene 18 can conclude)
  *  onClose     called by the small ✕ (optional; falls back for CONTINUE if onComplete is missing)
@@ -28,6 +31,10 @@ import {
 
 const TAU = Math.PI * 2;
 const PETAL_COLORS = ['#f2c6a8', '#f6dcc5', '#e9a98b', '#fff0d6', '#d9b36a'];
+const ASSET_TIMEOUT = 45000; // max wait per image before we move on
+const AUDIO_TIMEOUT = 15000; // max wait for the music file
+
+const withTimeout = (p, ms) => Promise.race([p, new Promise((r) => setTimeout(r, ms))]);
 
 const Icon = {
   replay: (
@@ -103,6 +110,7 @@ function CineLayer({ scene, focus, active, fade, instant, reduced }) {
             src={scene.image}
             alt=""
             draggable="false"
+            decoding="sync"
             onError={() => {
               // eslint-disable-next-line no-console
               console.warn('[SitasFinalJourney] image failed to load:', scene.image);
@@ -122,6 +130,8 @@ export default function SitasFinalJourney({ onComplete, onClose, sound = true })
   const reduced = usePrefersReducedMotion();
 
   const [phase, setPhase] = useState('overture'); // overture | play | ending
+  const [loaded, setLoaded] = useState(false); // all images + audio ready?
+  const [progress, setProgress] = useState(0); // 0 → 1
   const [layers, setLayers] = useState([]);
   const [cursor, setCursorState] = useState({ s: 0, l: 0 });
   const [panelOn, setPanelOn] = useState(false);
@@ -157,6 +167,7 @@ export default function SitasFinalJourney({ onComplete, onClose, sound = true })
   const audioRef = useRef(null);
   const mutedRef = useRef(!sound);
   const apiRef = useRef({});
+  const imgCache = useRef([]); // keeps decoded images referenced so they stay cached
 
   const getAudio = () => {
     if (!audioRef.current) audioRef.current = createSitaAudio();
@@ -193,15 +204,11 @@ export default function SitasFinalJourney({ onComplete, onClose, sound = true })
     clearTimeout(autoRef.current);
   };
 
-  /* lifecycle: mount / unmount safety, scroll lock, image preload */
+  /* lifecycle: mount / unmount safety, scroll lock */
   useEffect(() => {
     aliveRef.current = true;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    SCENES.forEach((sc) => {
-      const im = new Image();
-      im.src = sc.image;
-    });
     return () => {
       aliveRef.current = false;
       timers.current.forEach(clearTimeout);
@@ -211,6 +218,58 @@ export default function SitasFinalJourney({ onComplete, onClose, sound = true })
       audioRef.current = null;
       document.body.style.overflow = prevOverflow;
     };
+  }, []);
+
+  /* ─────────── PRELOAD: load + decode every scene image and buffer the music, THEN unlock Begin */
+  useEffect(() => {
+    let alive = true;
+    const total = SCENES.length + 1; // all images + music
+    let done = 0;
+    const bump = () => {
+      done += 1;
+      if (alive) setProgress(Math.min(1, done / total));
+    };
+
+    const loadImage = (src) =>
+      new Promise((resolve) => {
+        const attempt = (retries) => {
+          const im = new Image();
+          im.decoding = 'async';
+          im.onload = async () => {
+            try {
+              await im.decode(); // fully decoded before we continue
+            } catch (e) {
+              /* decode is best-effort */
+            }
+            imgCache.current.push(im);
+            resolve();
+          };
+          im.onerror = () => {
+            if (retries > 0) attempt(retries - 1);
+            else {
+              // eslint-disable-next-line no-console
+              console.warn('[SitasFinalJourney] image failed to load:', src);
+              resolve();
+            }
+          };
+          im.src = src;
+        };
+        attempt(1);
+      });
+
+    const jobs = SCENES.map((sc) => withTimeout(loadImage(sc.image), ASSET_TIMEOUT).then(bump));
+    jobs.push(withTimeout(getAudio().preload(AUDIO_TIMEOUT), AUDIO_TIMEOUT + 1000).then(bump));
+
+    Promise.all(jobs).then(() => {
+      if (!alive) return;
+      setProgress(1);
+      setLoaded(true);
+    });
+
+    return () => {
+      alive = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* ─────────── effects: audio / visual cues attached to scenes and lines */
@@ -738,7 +797,7 @@ export default function SitasFinalJourney({ onComplete, onClose, sound = true })
       {/* fade-from / to black */}
       {fade.mode !== 'none' && <div key={`black-${fade.key}`} className={`sfj-black ${fade.mode}`} />}
 
-      {/* overture */}
+      {/* overture (with loading gate) */}
       {phase === 'overture' && (
         <div className="sfj-overture">
           <div className="sfj-overture-in">
@@ -747,10 +806,22 @@ export default function SitasFinalJourney({ onComplete, onClose, sound = true })
             <h1>Sita’s Final Journey</h1>
             <span className="sfj-rule" />
             <p>You will witness what happened. Nothing here can be changed.</p>
-            <button type="button" className="sfj-begin" onClick={startSequence} autoFocus>
-              Begin
-            </button>
-            <small className="sfj-hint">Headphones recommended</small>
+
+            {loaded ? (
+              <>
+                <button type="button" className="sfj-begin" onClick={startSequence} autoFocus>
+                  Begin
+                </button>
+                <small className="sfj-hint">Headphones recommended</small>
+              </>
+            ) : (
+              <div className="sfj-loading" role="status" aria-live="polite">
+                <div className="sfj-loadbar">
+                  <div className="sfj-loadbar-fill" style={{ transform: `scaleX(${progress})` }} />
+                </div>
+                <small className="sfj-hint sfj-loadtext">Preparing the scenes… {Math.round(progress * 100)}%</small>
+              </div>
+            )}
           </div>
         </div>
       )}

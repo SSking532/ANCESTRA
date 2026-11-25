@@ -4,6 +4,8 @@ import './LuvKushGame.css';
 
 /* ────────────────────────────────────────────────────────────────
    LUV & KUSH — pure cinematic slideshow, zero text.
+   • Every image is loaded + decoded and the audio is buffered
+     BEFORE playback starts (loader with progress bar)
    • 91 images × 2s = 182s, locked to the audio clock (3:02)
    • 11 different 3D transitions (cube, flip, door, iris, shutter…)
    • Ken-Burns camera move on every image
@@ -12,13 +14,15 @@ import './LuvKushGame.css';
    ──────────────────────────────────────────────────────────────── */
 
 const SLIDE_SEC = 2;
-const PRELOAD_AHEAD = 5;
+const PARALLEL_LOADS = 6;
 const KB_VARIANTS = 6;
 const TX = ['cubeL', 'zoom', 'iris', 'cubeU', 'door', 'shutter', 'flip', 'diag', 'cubeR', 'depth', 'spin'];
 const txFor = (i) => (i === 0 ? 'intro' : TX[(i * 7) % TX.length]);
 
 /* every image is shown in full (never cropped) over a blurred copy of itself */
 const decideFit = () => 'contain';
+
+const withTimeout = (p, ms) => Promise.race([p, new Promise((r) => setTimeout(r, ms))]);
 
 /* ───────── single slide ───────── */
 function Slide({ src, idx, role, tx, fit, onFit, onBad, onDone }) {
@@ -121,6 +125,8 @@ export default function LuvKushGame({ onComplete, onExit, images = [], audioSrc 
   const [phase, setPhase] = useState('loading'); // loading | ready | playing | ended
   const [s, setS] = useState({ cur: 0, prev: null });
   const [fits, setFits] = useState({});
+  const [broken, setBroken] = useState({});
+  const [progress, setProgress] = useState(0); // 0 → 1
   const [run, setRun] = useState(0);
   const [paused, setPaused] = useState(false);
   const [outro, setOutro] = useState(false);
@@ -135,7 +141,7 @@ export default function LuvKushGame({ onComplete, onExit, images = [], audioSrc 
   const anRef = useRef(null);
   const gainRef = useRef(null);
   const dataRef = useRef(null);
-  const loadedRef = useRef(new Map());
+  const loadedRef = useRef(new Map()); // keeps every decoded image referenced (cached)
   const goodRef = useRef(null); // last image that loaded OK (fallback for broken files)
   const idxRef = useRef(0);
   const clockRef = useRef(0);
@@ -150,24 +156,6 @@ export default function LuvKushGame({ onComplete, onExit, images = [], audioSrc 
   onCompleteRef.current = onComplete;
   onExitRef.current = onExit;
 
-  /* preload window — keeps memory low even with 91 big images */
-  const ensureAhead = useCallback(
-    (idx) => {
-      const map = loadedRef.current;
-      for (let k = idx; k <= Math.min(n - 1, idx + PRELOAD_AHEAD); k++) {
-        if (!map.has(k)) {
-          const im = new Image();
-          im.decoding = 'async';
-          im.src = images[k];
-          map.set(k, im);
-        }
-      }
-      for (const key of map.keys()) if (key < idx - 1) map.delete(key);
-    },
-    [images, n]
-  );
-
-  const [broken, setBroken] = useState({});
   const onBad = useCallback((i, src) => {
     // a missing file must never show a broken-image icon: reuse the last good image
     if (goodRef.current && src !== goodRef.current) setBroken((b) => (b[i] ? b : { ...b, [i]: true }));
@@ -251,21 +239,73 @@ export default function LuvKushGame({ onComplete, onExit, images = [], audioSrc 
     [setupAnalyser]
   );
 
-  /* boot: preload first frames, then try autoplay */
+  /* boot: load + DECODE every image and buffer the audio, THEN start */
   useEffect(() => {
     let alive = true;
-    ensureAhead(0);
-    const first = [0, 1, 2].map((i) => loadedRef.current.get(i)).filter(Boolean);
-    const waits = first.map(
-      (im) =>
-        new Promise((res) => {
-          if (im.complete) res();
-          else im.onload = im.onerror = res;
-        })
-    );
-    Promise.race([Promise.all(waits), new Promise((r) => setTimeout(r, 6000))]).then(() => {
-      if (alive) startPlayback(false);
+    const map = loadedRef.current;
+    const total = n + 1; // all images + audio
+    let done = 0;
+    const bump = () => {
+      done += 1;
+      if (alive) setProgress(Math.min(1, done / total));
+    };
+
+    const loadImage = (i) =>
+      new Promise((resolve) => {
+        const attempt = (retries) => {
+          const im = new Image();
+          im.decoding = 'async';
+          im.onload = async () => {
+            try {
+              await im.decode(); // fully decoded before we continue
+            } catch (e) {
+              /* decode is best-effort */
+            }
+            if (!goodRef.current) goodRef.current = images[i];
+            map.set(i, im); // keep a reference so it stays cached
+            resolve(true);
+          };
+          im.onerror = () => {
+            if (retries > 0) attempt(retries - 1);
+            else {
+              if (alive) setBroken((b) => ({ ...b, [i]: true }));
+              resolve(false);
+            }
+          };
+          im.src = images[i];
+        };
+        attempt(1);
+      });
+
+    // load a few at a time so the network isn't flooded
+    let next = 0;
+    const worker = async () => {
+      while (alive && next < n) {
+        const i = next++;
+        await withTimeout(loadImage(i), 30000);
+        bump();
+      }
+    };
+
+    const loadAudio = new Promise((resolve) => {
+      const a = audioRef.current;
+      if (!a) return resolve();
+      if (a.readyState >= 4) return resolve();
+      a.addEventListener('canplaythrough', resolve, { once: true });
+      a.addEventListener('error', resolve, { once: true });
+      a.load();
     });
+
+    Promise.all([
+      ...Array.from({ length: Math.min(PARALLEL_LOADS, Math.max(n, 1)) }, worker),
+      withTimeout(loadAudio, 30000).then(bump),
+    ]).then(() => {
+      if (alive) {
+        setProgress(1);
+        startPlayback(false); // autoplay if allowed, otherwise shows the Play button
+      }
+    });
+
     if (n === 0) console.warn('[LuvKushGame] No images were passed in via the `images` prop.');
     return () => {
       alive = false;
@@ -304,7 +344,6 @@ export default function LuvKushGame({ onComplete, onExit, images = [], audioSrc 
       if (idx !== idxRef.current) {
         idxRef.current = idx;
         setS((st) => (st.cur === idx ? st : { cur: idx, prev: st.cur }));
-        ensureAhead(idx);
       }
 
       let raw;
@@ -335,7 +374,7 @@ export default function LuvKushGame({ onComplete, onExit, images = [], audioSrc 
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [phase, n, ensureAhead]);
+  }, [phase, n]);
 
   /* controls */
   const togglePause = useCallback(() => {
@@ -490,8 +529,11 @@ export default function LuvKushGame({ onComplete, onExit, images = [], audioSrc 
 
       {/* gate: loader / play / replay (icons only) */}
       {phase === 'loading' && (
-        <div className="lk-gate">
+        <div className="lk-gate lk-gate--loading">
           <div className="lk-loader" />
+          <div className="lk-loadbar">
+            <div className="lk-loadbar__fill" style={{ transform: `scaleX(${progress})` }} />
+          </div>
         </div>
       )}
       {phase === 'ready' && (

@@ -1,7 +1,10 @@
 // Procedural cinematic sound for Sita's Final Journey.
-// No audio files are used: soft wind, assembly murmur, earth rumble, a tanpura-like drone,
+// No audio files are used for the ambience: soft wind, assembly murmur, earth rumble, a tanpura-like drone,
 // a warm pad and a sparse bansuri-style phrase (raga Bhoopali in D), all through a shared reverb.
 // Everything is quiet by design. If WebAudio is unavailable, every call is a safe no-op.
+//
+// NEW: api.preload() buffers the background music file BEFORE the game starts,
+// so the music never stutters or starts late.
 
 const LEVEL = 0.85;
 
@@ -119,17 +122,23 @@ export function createSitaAudio() {
     }, 50);
   };
 
+  // creates the music element once (this also starts downloading the file)
+  const ensureTrack = () => {
+    if (!track) {
+      track = new Audio(TRACK_URL);
+      track.loop = true;
+      track.preload = 'auto';
+      track.addEventListener('error', () => {
+        trackOn = false;
+        if (ctx) api.mood(curName, 1);
+      });
+    }
+    return track;
+  };
+
   const startTrack = () => {
     try {
-      if (!track) {
-        track = new Audio(TRACK_URL);
-        track.loop = true;
-        track.preload = 'auto';
-        track.addEventListener('error', () => {
-          trackOn = false;
-          if (ctx) api.mood(curName, 1);
-        });
-      }
+      ensureTrack();
       track.muted = muted;
       if (track.paused) {
         track.volume = 0;
@@ -314,6 +323,33 @@ export function createSitaAudio() {
   }
 
   const api = {
+    /**
+     * Buffers the background music file. Resolves when it can play through,
+     * on error, or after `timeoutMs` (so a stubborn browser can never hang the loader).
+     */
+    preload(timeoutMs = 15000) {
+      return new Promise((resolve) => {
+        let finished = false;
+        const done = () => {
+          if (finished) return;
+          finished = true;
+          clearTimeout(timer);
+          resolve();
+        };
+        const timer = setTimeout(done, timeoutMs);
+        try {
+          const t = ensureTrack();
+          if (t.readyState >= 4) {
+            done();
+            return;
+          }
+          t.addEventListener('canplaythrough', done, { once: true });
+          t.addEventListener('error', done, { once: true });
+        } catch (e) {
+          done();
+        }
+      });
+    },
     start() {
       startTrack();
       if (ctx) {
